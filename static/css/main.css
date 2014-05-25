@@ -99,19 +99,62 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+/* Typography
+*/
+
+@font-face {
+	  font-family: 'Comme Regular';
+	  src: local('Comme Regular'), url('/fonts/CommeSans/Comme-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	  font-family: 'Comme Thin';
+	  src: local('Comme Thin'), url('/fonts/CommeSans/Comme-Thin.ttf') format('truetype');
+}
+
+@font-face {
+	  font-family: 'Comme Bold';
+	  src: local('Comme Bold'), url('/fonts/CommeSans/Comme-Bold.ttf') format('truetype');
+}
+
+body {
+		font-family: 'Comme Regular', DejaVu Sans, Arial, sans-serif;
+		line-height: 1.4;
+}
+
+h1 {  font-size: 2.25em;  font-family: 'Comme Thin';  }
+h2 {  font-size: 2em;     font-family: 'Comme Thin';  }
+h3 {  font-size: 1.625em; font-family: 'Comme Thin';  }
+h4 {  font-size: 1.375em; font-family: 'Comme Bold';  }
+h5 {  font-size: 1.25em;  font-family: 'Comme Thin';	}
+h6 {  font-size: 1.125em; font-family: 'Comme Thin';  }
+
+.nav,
+.footer,
+small {
+		font-size: 0.75em;
+}
+
+
 /* Colours
 */
 
+body {
+		background: #f7f8f2;
+		color: #2c373a;
+}
+
 a {
-		color: red;
+		color: #de1b1b;
 		text-decoration: none;
 }
 
 /* Layout
 */
 
-
-.row:before, .row:after {
+.row:before, .row:after,
+.header:before, .header:after,
+.nav:before, .nav:after {
     content: " ";
     display: table;
 }
@@ -120,16 +163,13 @@ a {
     -moz-box-sizing: border-box;
 }
 
-.row:after {
+.row:after,
+.header:after
+.nav:after  {
     clear: both;
 }
 
-.row > div {
-		margin: 20px 0;
-}
-
 .nav li {
-		font-size: 0.785em;
 		text-transform: uppercase;
 }
 
@@ -137,6 +177,14 @@ a {
 		display: block;
 		width: 100%;
 		height: auto;
+}
+
+.header .description {
+		line-height: 1.2;
+}
+
+.header .description > h3 {
+		margin-bottom: .5em;
 }
 
 
@@ -152,11 +200,36 @@ a {
 @media only screen and (min-width: 900px) {
 
 		.row > div {
-				margin: 0 8%;
+				width: 86%;
+				margin: 2.325em auto;
 		}
-		
-		.nav {
-				background: #eee;
+
+		.header > div {
+				width: 86%;
+				margin: .5em auto 2.325em;
+		}
+
+		.header > div h1 {
+				float: left;
+				width: 4.25em;
+				padding-top: 1.6em;
+		}
+
+		.header .description {
+				padding-top: 2em;
+				padding-left: 15%;
+				line-height: 1.2;
+		}
+
+		.nav > div {
+				width: 86%;
+				margin: 0 auto;
+		}
+
+		.nav > div > ul {
+				float: right;
+				width: 70%;
+				text-align: right;
 		}
 
 		.nav li {
@@ -165,12 +238,7 @@ a {
 
 		.nav li a {
 				display: block;
-				padding: .5em;
-		}
-
-		.header h1 {
-				float: left;
-				width: 14%;
+				padding: .75em .5em;
 		}
 
 
