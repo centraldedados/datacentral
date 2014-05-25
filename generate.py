@@ -44,6 +44,7 @@ os.mkdir(os.path.join(output_dir, "files"))
 shutil.copytree("static/css", os.path.join(output_dir, "css"))
 shutil.copytree("static/js", os.path.join(output_dir, "js"))
 shutil.copytree("static/img", os.path.join(output_dir, "img"))
+shutil.copytree("static/fonts", os.path.join(output_dir, "fonts"))
 
 def create_index_page(packages):
     '''Accepts a list of pkg_info dicts.'''
@@ -65,7 +66,7 @@ def create_dataset_page(pkg_info):
     context = {"title": pkg_info["title"],
                "description": pkg_info["description"],
                "readme": pkg_info["readme"],
-               "datasets": pkg_info["datasets"],
+               "datafiles": pkg_info["datafiles"],
               }
     contents = template.render(**context)
 
@@ -99,7 +100,7 @@ def process_datapackage(pkg_name):
     for r in metadata['resources']:
         r['path'] = os.path.join(pkg_dir, "data/", r['name'] + '.' + r['format'])
         r['basename'] = os.path.basename(r['path'])
-    pkg_info['datasets'] = metadata['resources']
+    pkg_info['datafiles'] = metadata['resources']
     return pkg_info    
 
 def generate():
@@ -124,8 +125,8 @@ def generate():
         pkg_info = process_datapackage(s)
         packages.append(pkg_info)
         create_dataset_page(pkg_info)
-        datasets = pkg_info['datasets']
-        for d in datasets:
+        datafiles = pkg_info['datafiles']
+        for d in datafiles:
             logging.info("Copying %s to the output/files dir." % d)
             target = os.path.join(output_dir, 'files/', os.path.basename(d['path']))
             shutil.copyfile(d['path'], target)
