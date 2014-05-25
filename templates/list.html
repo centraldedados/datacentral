@@ -1,6 +1,8 @@
+{% extends "base.html" %}
 
+{% block content %}
 {% for d in datapackages %}
   <a href="datasets/{{ d }}.html">{{ d }}</a>
 {% endfor %}
-
+{% endblock content %}
 
