@@ -26,11 +26,15 @@ config_file = "datasets.conf"
 
 output_dir = "_output"
 template_dir = "templates"
+repo_dir = "repos"
 # env = Environment(loader=PackageLoader('datacentral', 'templates'))
 
 if os.path.exists(output_dir):
     shutil.rmtree(output_dir)
 os.mkdir(output_dir)
+
+if not os.path.exists(repo_dir):
+    os.mkdir(repo_dir)
 
 os.mkdir(os.path.join(output_dir, "datasets"))
 os.mkdir(os.path.join(output_dir, "files"))
@@ -69,7 +73,7 @@ def create_dataset_page(pkg_info):
 
 def process_datapackage(pkg_dir):
     pkg_info = {}
-    metadata = json.loads(open(os.path.join(pkg_dir, "datapackage.json")).read())
+    metadata = json.loads(open(os.path.join(repo_dir, pkg_dir, "datapackage.json")).read())
 
     pkg_info['name'] = pkg_dir
     pkg_info['title'] = metadata['title']
@@ -99,7 +103,7 @@ def generate():
     parser.read(config_file)
     packages = []
     for s in parser.sections():
-        dir_name = s
+        dir_name = os.path.join(repo_dir, s)
         remote_url = parser.get(s, 'url')
         if os.path.isdir(dir_name):
             # repo exists
