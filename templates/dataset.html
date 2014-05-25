@@ -11,8 +11,8 @@
 <ul>
   <li>Nome: {{ d.name }}</li>
   <li>Nome do ficheiro: {{ d.basename }}</li>
-  <li>URL: {{ d.url }}</li>
   <li>Formato: {{ d.format }}</li>
+  <li><a href="/files/{{ d.basename }}">Download</a></li>
 </ul>
 {% endfor %}
 {% endblock content %}
