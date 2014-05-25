@@ -5,15 +5,16 @@
 Options:
 
  -c Clear cache
+ -o Offline, don't clone or pull remote repos
 
 TODO:
-- copy dataset files to /datasets/
+- copy dataset files to /files/
 - read scripts/ dir and run the to_* scripts
 
 '''
 
 from ConfigParser import SafeConfigParser
-from jinja2 import Environment, PackageLoader, Template
+import jinja2
 import git, os, shutil
 import logging
 import markdown
@@ -26,8 +27,9 @@ config_file = "datasets.conf"
 
 output_dir = "_output"
 template_dir = "templates"
+env = jinja2.Environment(loader=jinja2.FileSystemLoader([template_dir]))
+
 repo_dir = "repos"
-# env = Environment(loader=PackageLoader('datacentral', 'templates'))
 
 if os.path.exists(output_dir):
     shutil.rmtree(output_dir)
@@ -45,7 +47,7 @@ shutil.copytree("static/img", os.path.join(output_dir, "img"))
 
 def create_index_page(packages):
     '''Accepts a list of pkg_info dicts.'''
-    template = Template(open('templates/list.html', 'r').read())
+    template = env.get_template("list.html")
     target = "index.html"
     datapackages = [p['name'] for p in packages]
     contents = template.render(datapackages=datapackages)
@@ -56,7 +58,7 @@ def create_index_page(packages):
     logging.info("Created index.html.")
 
 def create_dataset_page(pkg_info):
-    template = Template(open('templates/dataset.html', 'r').read())
+    template = env.get_template("dataset.html")
     name = pkg_info["name"]
     target = os.path.join("datasets/", name+".html")
     context = {"title": pkg_info["title"],
@@ -88,7 +90,7 @@ def process_datapackage(pkg_dir):
     else:
         logging.info("README.md file found.")
         contents = open(readme_path, 'r').read()
-        readme = markdown.markdown(contents, output_format="html5")
+        readme = markdown.markdown(contents, output_format="html5", encoding="UTF-8")
     pkg_info['readme'] = readme
 
     datasets = []
