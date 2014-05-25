@@ -47,13 +47,13 @@ def create_index_page(packages):
     '''Accepts a list of pkg_info dicts.'''
     template = Template(open('templates/list.html', 'r').read())
     target = "index.html"
-    pprint(packages)
     datapackages = [p['name'] for p in packages]
     contents = template.render(datapackages=datapackages)
 
     f = open(os.path.join(output_dir, target), 'w')
     f.write(contents)
     f.close()
+    logging.info("Created index.html.")
 
 def create_dataset_page(pkg_info):
     template = Template(open('templates/dataset.html', 'r').read())
@@ -69,6 +69,7 @@ def create_dataset_page(pkg_info):
     f = codecs.open(os.path.join(output_dir, target), 'w', 'utf-8')
     f.write(contents)
     f.close()
+    logging.info("Created %s." % target)
 
 
 def process_datapackage(pkg_dir):
@@ -81,7 +82,7 @@ def process_datapackage(pkg_dir):
     pkg_info['description'] = metadata['description']
 
     readme = ""
-    readme_path = os.path.join(pkg_dir, "README.md")
+    readme_path = os.path.join(repo_dir, pkg_dir, "README.md")
     if not os.path.exists(readme_path):
         logging.warn("No README.md file found in the data package.")
     else:
