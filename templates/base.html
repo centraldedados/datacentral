@@ -1,17 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>{% block title %}Central de dados{% endblock %}</title>
-<meta charset="utf-8"> 
-</head>
-
-<body>
-<div class="container">
-  <h1>Central de Dados</h1>
-
-  {% block content %}{% endblock %}
-
-</div>
-</body>
-
+	<head>
+			<meta charset="utf-8"> 
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+			<title>{% block title %}Central de dados{% endblock %}</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="/css/main.css">
+	</head>
+	<body>
+		<nav class="nav row">
+			<div>
+				<ul>
+				  <li><a href="#">Acerca</a></li>
+				  <li><a href="#">FAQ</a></li>
+				</ul>
+			</div>
+		</nav>
+		<header class="header row">
+			<div>
+				<h1><img src="media/img/centraldedados.png" alt="Central de Dados" /></h1>
+				<p>A Central de Dados é um sítio lorem ipsum sit amet e por aí adiante.</p>
+			</div>
+		</header>
+		<section class="row">
+			<div>
+				{% block content %}{% endblock %}
+			</div>
+		</section>
+		<footer class="footer row">
+			<div>
+				<ul>
+					<li><h4><a rel="external" href="#">Transparência Hackday</a></h4> com</a></li>
+					<li><h4>Apoio:</h4> <a rel="external" href="#">Journalism++</a></li>
+					<li><h4>Parceiros:</h4> <a rel="external" href="#">AMA, Agência para a Modernização</a></li>
+				</ul>
+			</div>
+		</footer>
+		<script src="/js/vendor/jquery-1.11.0.min.js"></script>
+	</body>
 </html>
