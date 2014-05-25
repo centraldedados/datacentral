@@ -52,7 +52,7 @@ def create_index_page(packages):
     datapackages = [p['name'] for p in packages]
     contents = template.render(datapackages=datapackages)
 
-    f = open(os.path.join(output_dir, target), 'w')
+    f = codecs.open(os.path.join(output_dir, target), 'w', 'utf-8')
     f.write(contents)
     f.close()
     logging.info("Created index.html.")
@@ -61,6 +61,7 @@ def create_dataset_page(pkg_info):
     template = env.get_template("dataset.html")
     name = pkg_info["name"]
     target = os.path.join("datasets/", name+".html")
+
     context = {"title": pkg_info["title"],
                "description": pkg_info["description"],
                "readme": pkg_info["readme"],
@@ -74,17 +75,18 @@ def create_dataset_page(pkg_info):
     logging.info("Created %s." % target)
 
 
-def process_datapackage(pkg_dir):
+def process_datapackage(pkg_name):
+    pkg_dir = os.path.join(repo_dir, pkg_name)
     pkg_info = {}
-    metadata = json.loads(open(os.path.join(repo_dir, pkg_dir, "datapackage.json")).read())
+    metadata = json.loads(open(os.path.join(pkg_dir, "datapackage.json")).read())
 
-    pkg_info['name'] = pkg_dir
+    pkg_info['name'] = pkg_name
     pkg_info['title'] = metadata['title']
     pkg_info['license'] = metadata['licenses'][0]
     pkg_info['description'] = metadata['description']
 
     readme = ""
-    readme_path = os.path.join(repo_dir, pkg_dir, "README.md")
+    readme_path = os.path.join(pkg_dir, "README.md")
     if not os.path.exists(readme_path):
         logging.warn("No README.md file found in the data package.")
     else:
@@ -95,10 +97,9 @@ def process_datapackage(pkg_dir):
 
     datasets = []
     for r in metadata['resources']:
-        filename = os.path.join(pkg_dir, "data/", r['name'] + '.' + r['format'])
-        datasets.append(filename)
-    pkg_info['datasets'] = datasets
-
+        r['path'] = os.path.join(pkg_dir, "data/", r['name'] + '.' + r['format'])
+        r['basename'] = os.path.basename(r['path'])
+    pkg_info['datasets'] = metadata['resources']
     return pkg_info    
 
 def generate():
@@ -123,6 +124,11 @@ def generate():
         pkg_info = process_datapackage(s)
         packages.append(pkg_info)
         create_dataset_page(pkg_info)
+        datasets = pkg_info['datasets']
+        for d in datasets:
+            logging.info("Copying %s to the output/files dir." % d)
+            target = os.path.join(output_dir, 'files/', os.path.basename(d['path']))
+            shutil.copyfile(d['path'], target)
     create_index_page(packages)
 
 if __name__ == "__main__":
