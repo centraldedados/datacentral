@@ -1,0 +1,5 @@
+# don't track the output dir
+_output/
+
+# repos are automatically cloned, don't track
+repos/
