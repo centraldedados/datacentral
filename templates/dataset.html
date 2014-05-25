@@ -1,0 +1,11 @@
+<h1>{{ title }}</h1>
+
+<h3>{{ description }}</h3>
+
+{{ readme }}
+
+<ul>
+{% for d in datasets %}
+  <li>{{ d }}</li>
+{% endfor %}
+</ul>
