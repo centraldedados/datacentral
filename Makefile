@@ -23,9 +23,12 @@ runserve:
 	python generate.py
 	cd _output && python -m SimpleHTTPServer
 
+run:
+	python generate.py
+
 install:
 	virtualenv venv --no-site-packages --distribute --prompt=datacentral
 	. `pwd`/.env ; pip install -r requirements.txt
 
 upload:
-	rsync --recursive --update _output/* wf:~/webapps/centraldedados/
+	rsync --compress --progress --recursive --update --delete _output/* wf:~/webapps/centraldedados/

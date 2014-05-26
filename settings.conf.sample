@@ -1,0 +1,7 @@
+[keys]
+morph_api_key = your_morph_api_key
+
+[repositories]
+eleicoes_europeias = https://github.com/centraldedados/eleicoes_europeias.git
+parlamento_deputados = https://github.com/centraldedados/parlamento_deputados.git
+
