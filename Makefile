@@ -19,16 +19,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Data Central. If not, see <http://www.gnu.org/licenses/>.
 
-runserve:
-	python generate.py
-	cd _output && python -m SimpleHTTPServer
 
 run:
 	python generate.py
 
+runoffline:
+	python generate.py --offline
+
 install:
 	virtualenv venv --no-site-packages --distribute --prompt=datacentral
 	. `pwd`/.env ; pip install -r requirements.txt
+
+serve:
+	cd _output && python -m SimpleHTTPServer
 
 upload:
 	rsync --compress --progress --recursive --update --delete _output/* wf:~/webapps/centraldedados/

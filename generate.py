@@ -20,6 +20,7 @@ import logging
 import markdown
 import json
 import codecs
+import click
 from pprint import pprint
 
 config_file = "settings.conf"
@@ -105,7 +106,9 @@ def process_datapackage(pkg_name):
 
     return pkg_info    
 
-def generate():
+@click.command()
+@click.option('-o', '--offline', help='Offline mode, do not clone or pull.', is_flag=True, default=False)
+def generate(offline):
     '''Main function that takes care of the whole process.'''
     # set up the output directory
     if os.path.exists(output_dir):
@@ -134,22 +137,30 @@ def generate():
     for r in parser.items('repositories'):
         name, url = r
         dir_name = os.path.join(repo_dir, name)
-        # clone/pull Git repository
+  
+        # do we have a local copy?
         if os.path.isdir(dir_name):
-            logging.info("Repo '%s' already exists, pulling changes..." % name)
-            repo = git.Repo(dir_name)
-            origin = repo.remotes.origin
-            origin.fetch()
-            result = origin.pull()[0]
-            if result.flags & result.HEAD_UPTODATE:
-                logging.info("Repo '%s' is up to date." % name)
+            if not offline:
+                logging.info("Repo '%s' already exists, pulling changes..." % name)
+                repo = git.Repo(dir_name)
+                origin = repo.remotes.origin
+                origin.fetch()
+                result = origin.pull()[0]
+                if result.flags & result.HEAD_UPTODATE:
+                    logging.info("Repo '%s' is up to date." % name)
+                else:
+                    # TODO: figure out the other git-python flags and return more
+                    # informative logging output
+                    logging.info("Repo changed, updating. (returned flags: %d)" % result.flags)
             else:
-                # TODO: figure out the other git-python flags and return more
-                # informative logging output
-                logging.info("Repo changed, updating. (returned flags: %d)" % result.flags)
+                logging.info("Offline mode, using cached version of package %s..." % name)
         else:
-            logging.info("We don't have repo '%s', cloning..." % name)
-            repo = git.Repo.clone_from(url, dir_name)
+            if offline:
+                logging.warn("Package %s specified in settings but no local cache, skipping..." % name)
+                continue
+            else:
+                logging.info("We don't have repo '%s', cloning..." % name)
+                repo = git.Repo.clone_from(url, dir_name)
          
         # get datapackage metadata
         pkg_info = process_datapackage(name)
