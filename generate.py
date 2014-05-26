@@ -56,6 +56,7 @@ def create_dataset_page(pkg_info):
                "description": pkg_info["description"],
                "readme": pkg_info["readme"],
                "datafiles": pkg_info["datafiles"],
+               "last_updated": pkg_info["last_updated"],
               }
     contents = template.render(**context)
 
@@ -154,6 +155,7 @@ def generate(offline):
                     logging.info("Repo changed, updating. (returned flags: %d)" % result.flags)
             else:
                 logging.info("Offline mode, using cached version of package %s..." % name)
+                repo = git.Repo(dir_name)
         else:
             if offline:
                 logging.warn("Package %s specified in settings but no local cache, skipping..." % name)
@@ -164,6 +166,12 @@ def generate(offline):
          
         # get datapackage metadata
         pkg_info = process_datapackage(name)
+        # set last updated time based on last commit, comes in Unix timestamp format so we convert
+        import datetime
+        d = repo.head.commit.committed_date
+        last_updated = datetime.datetime.fromtimestamp(int("1284101485")).strftime('%Y-%m-%d %H:%M:%S')
+        print last_updated
+        pkg_info['last_updated'] = last_updated
         # add it to the packages list for index page generation after the loop ends
         packages.append(pkg_info)
         # generate the dataset HTML page
