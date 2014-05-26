@@ -117,6 +117,11 @@ textarea {
 	  src: local('Comme Bold'), url('/fonts/CommeSans/Comme-Bold.ttf') format('truetype');
 }
 
+@font-face {
+	  font-family: 'Comme Medium';
+	  src: local('Comme Medium'), url('/fonts/CommeSans/Comme-Medium.ttf') format('truetype');
+}
+
 body {
 		font-family: 'Comme Regular', DejaVu Sans, Arial, sans-serif;
 		line-height: 1.4;
@@ -128,6 +133,12 @@ h3 {  font-size: 1.625em; font-family: 'Comme Thin';  }
 h4 {  font-size: 1.375em; font-family: 'Comme Bold';  }
 h5 {  font-size: 1.25em;  font-family: 'Comme Thin';	}
 h6 {  font-size: 1.125em; font-family: 'Comme Thin';  }
+
+strong,
+.datafiles ul > li > a,
+.footer li a {	font-family: 'Comme Bold';	}
+
+.header .description {	font-family: 'Comme Medium';	}
 
 .nav,
 .footer,
@@ -154,7 +165,8 @@ a {
 
 .row:before, .row:after,
 .header:before, .header:after,
-.nav:before, .nav:after {
+.nav:before, .nav:after,
+.datafiles:before, .datafiles:after  {
     content: " ";
     display: table;
 }
@@ -165,7 +177,8 @@ a {
 
 .row:after,
 .header:after
-.nav:after  {
+.nav:after,
+.datafiles:after {
     clear: both;
 }
 
@@ -181,12 +194,35 @@ a {
 
 .header .description {
 		line-height: 1.2;
+		font-size: 0.865em;
 }
 
-.header .description > h3 {
+.header .description img {
 		margin-bottom: .5em;
 }
 
+.datafiles > ul {
+		background: #e0e2e7;
+		padding-top: 20px;
+		padding-bottom: 12px;
+		box-shadow: 5px 5px 5px #d8d6c9;
+}
+
+.datafiles ul > li > a {
+		font-size: 0.75em;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		text-align: center;
+		display: block;
+		background: #b9bdc5;
+		padding: 8px 5px;
+		border-radius: 2px;
+}
+
+.footer > div {
+		border-top: 1px solid #b9bdc5;
+		padding-top: 1em;
+}
 
 
 /* ==========================================================================
@@ -194,6 +230,48 @@ a {
    ========================================================================== */
 
 @media only screen and (max-width: 400px) {
+
+		.row > div {
+				width: 96%;
+				margin: 2.325em auto;
+		}
+
+		.datafiles > ul {
+				display: inline-block;
+				width: 48.95%;
+				margin: 0 1.04%;
+		}
+
+		.datafiles > ul:first-child {
+				margin-left: 0;
+		}
+
+		.datafiles > ul:nth-child(2) {
+				margin-right: 0;
+		}
+
+}
+
+@media only screen and (max-width: 600px) {
+
+		.row > div {
+				width: 92%;
+				margin: 2.325em auto;
+		}
+
+		.datafiles > ul {
+				display: inline-block;
+				width: 23.64%;
+				margin: 0 0.9%;
+		}
+
+		.datafiles > ul:first-child {
+				margin-left: 0;
+		}
+
+		.datafiles > ul:nth-child(4) {
+				margin-right: 0;
+		}
 
 }
 
@@ -206,19 +284,28 @@ a {
 
 		.header > div {
 				width: 86%;
-				margin: .5em auto 2.325em;
+				overflow: auto;
+				clear: both;
+				margin: 0 auto;
+				padding: 1em 0 2.325em;
 		}
 
-		.header > div h1 {
-				float: left;
-				width: 4.25em;
-				padding-top: 1.6em;
+		.header img {
+				max-width: 100%;
 		}
 
 		.header .description {
-				padding-top: 2em;
-				padding-left: 15%;
+				float: left;
+				width: 20%;
+				margin-top: 1.2em;
 				line-height: 1.2;
+				clear: both;
+		}
+
+		.header h1 {
+			margin-left: 21.5%;
+			font-size: 7.6em;
+			line-height: 1;
 		}
 
 		.nav > div {
@@ -241,6 +328,40 @@ a {
 				padding: .75em .5em;
 		}
 
+		.datafiles {
+				display: table
+		}
+
+		.datafiles > ul {
+				display: inline-block;
+				width: 15.79%;
+				margin: 0 0.52%;
+		}
+
+		.datafiles > ul:first-child, .datafiles > ul:nth-child(7) {
+				margin-left: 0;
+		}
+
+		.datafiles > ul:nth-child(6) {
+				margin-right: 0;
+		}
+
+		.datafiles ul > li {				
+				padding: 5px 6.59%;
+		}
+
+		.datafiles ul > li > a {
+		}
+
+		.footer li {
+				display: inline-block;
+				margin: 0 1em 0 0;
+		}
+
+		.footer li a {
+				display: inline-block;
+				padding: .5em .25em;
+		}
 
 }
 
