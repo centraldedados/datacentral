@@ -1,5 +1,7 @@
-[eleicoes_europeias]
-url = https://github.com/centraldedados/eleicoes_europeias.git
+[keys]
+morph_api_key = your_morph_api_key
 
-# [deputados]
-# url = https://github.com/centraldedados/deputados
+[repositories]
+eleicoes_europeias = https://github.com/centraldedados/eleicoes_europeias.git
+parlamento_deputados = https://github.com/centraldedados/parlamento_deputados.git
+
