@@ -271,12 +271,19 @@ a {
 		padding-top: 1em;
 }
 
+.footer h4 {
+		margin-bottom: 1em;
+}
+
+.footer li {
+		margin: 1em 1em 0 0;
+}
+
 .footer div > ul img {
 		display: inline-block;
 		height: 50px;
 		width: auto;
 }
-
 
 
 /* ==========================================================================
@@ -291,19 +298,23 @@ a {
 				margin: 0 1.04% 20px;
 		}
 
-		.datafiles > ul:first-child {
-				margin-left: 0;
-		}
-
-		.datafiles > ul:nth-child(2) {
-				margin-right: 0;
-		}
-
 		.datafiles ul > li {				
 				padding: 5px 6.59%;
 		}
 
 }
+
+@media only screen and (min-width: 400px) and (max-width: 599px) {
+
+		.datafiles > ul:nth-child(odd) {
+				margin-left: 0;
+		}
+
+		.datafiles > ul:nth-child(even) {
+				margin-right: 0;
+		}
+}
+
 
 @media only screen and (min-width: 600px) {
 
@@ -336,18 +347,22 @@ a {
 				margin: 0 0.9%  20px;
 		}
 
-		.datafiles > ul:first-child {
-				margin-left: 0;
-		}
-
-		.datafiles > ul:nth-child(4) {
-				margin-right: 0;
-		}
-
 		.datafiles ul > li {				
 				padding: 5px 6.59%;
 		}
 
+}
+
+@media only screen and (min-width: 600px) and (max-width: 899px) {
+
+		.datafiles > ul:first-child,
+		.datafiles > ul:nth-child(4n+1) {
+				margin-left: 0;
+		}
+
+		.datafiles > ul:nth-child(4n) {
+				margin-right: 0;
+		}
 }
 
 @media only screen and (min-width: 900px) {
@@ -403,11 +418,12 @@ a {
 				margin: 0 0.52%  20px;
 		}
 
-		.datafiles > ul:first-child, .datafiles > ul:nth-child(7) {
+		.datafiles > ul:first-child,
+		.datafiles > ul:nth-child(6n+1) {
 				margin-left: 0;
 		}
 
-		.datafiles > ul:nth-child(6) {
+		.datafiles > ul:nth-child(6n) {
 				margin-right: 0;
 		}
 

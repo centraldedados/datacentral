@@ -4,9 +4,9 @@
   <ul>
     {% for d in datapackages %}
       {% if d.title %}
-      <li><a href="datasets/{{ d.name }}.html">{{ d.title }}</a></li>
+      <li><h3><a href="datasets/{{ d.name }}.html">{{ d.title }}</a><h3></li>
       {% else %}
-      <li><a href="datasets/{{ d.name }}.html">{{ d.name }}</a></li>
+      <li><h3><a href="datasets/{{ d.name }}.html">{{ d.name }}</a></h3></li>
       {% endif %}
     {% endfor %}
   </ul>
