@@ -21,6 +21,7 @@ import markdown
 import json
 import codecs
 import click
+import zipfile
 from pprint import pprint
 
 config_file = "settings.conf"
@@ -89,6 +90,7 @@ def process_datapackage(pkg_name):
     # process README
     readme = ""
     readme_path = os.path.join(pkg_dir, "README.md")
+    pkg_info['readme_path'] = readme_path
     if not os.path.exists(readme_path):
         logging.warn("No README.md file found in the data package.")
     else:
@@ -176,12 +178,20 @@ def generate(offline):
         packages.append(pkg_info)
         # generate the dataset HTML page
         create_dataset_page(pkg_info)
-        # copy the datafiles to the files/ dir for download
+        # copy the datafiles to the files/ dir for download, and make a zip too
         datafiles = pkg_info['datafiles']
+        zipf = zipfile.ZipFile(os.path.join(output_dir, files_dir, name+'.zip'), 'w')
         for d in datafiles:
             logging.info("Copying %s to the %s/%s dir." % (d['basename'], output_dir, files_dir))
             target = os.path.join(output_dir, files_dir, os.path.basename(d['path']))
             shutil.copyfile(os.path.join(dir_name, d['path']), target)
+            zipf.write(os.path.join(dir_name, d['path']), d['basename'])
+        try:
+            zipf.write(pkg_info['readme_path'], 'README.md')
+        except OSError:
+            pass
+        zipf.close()
+
     # generate the HTML index with the list of available packages
     create_index_page(packages)
 
