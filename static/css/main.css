@@ -151,7 +151,7 @@ small {
 */
 
 body {
-		background: #f7f8f2;
+		background: #d8d6c9;
 		color: #2c373a;
 }
 
@@ -182,14 +182,39 @@ a {
     clear: both;
 }
 
+.row > div {
+		width: 96%;
+		margin: 1em auto;
+}
+
+.header, .row {
+		background: #f7f8f2;
+}
+
+.header > div {
+		width: 96%;
+		overflow: auto;
+		clear: both;
+		margin: 0 auto;
+		padding-bottom: 1em;
+}
+
+.header h1 {
+	font-size: 4em;
+	line-height: 1;
+}
+
+.nav > div {
+		width: 96%;
+		margin: 0 auto;
+}
+
 .nav li {
 		text-transform: uppercase;
 }
 
-.header h1 > img {
-		display: block;
-		width: 100%;
-		height: auto;
+.header > div {		
+		border-bottom: 1px solid #b9bdc5;
 }
 
 .header .description {
@@ -198,7 +223,29 @@ a {
 }
 
 .header .description img {
+		display: block;
 		margin-bottom: .5em;
+}
+
+.header h1 > a {
+		color: #2c373a;
+}
+
+.header h1 > a:hover {
+		color: #de1b1b;
+}
+
+.nav > div > ul {
+		text-align: right;
+}
+
+.nav li {
+		display: inline-block;
+}
+
+.nav li a {
+		display: block;
+		padding: .75em .5em;
 }
 
 .datafiles > ul {
@@ -219,27 +266,29 @@ a {
 		border-radius: 2px;
 }
 
-.footer > div {
-		border-top: 1px solid #b9bdc5;
+.footer {
+		background: #d8d6c9;
 		padding-top: 1em;
 }
+
+.footer div > ul img {
+		display: inline-block;
+		height: 50px;
+		width: auto;
+}
+
 
 
 /* ==========================================================================
    Media Queries
    ========================================================================== */
 
-@media only screen and (max-width: 400px) {
-
-		.row > div {
-				width: 96%;
-				margin: 2.325em auto;
-		}
+@media only screen and (min-width: 400px) {
 
 		.datafiles > ul {
 				display: inline-block;
 				width: 48.95%;
-				margin: 0 1.04%;
+				margin: 0 1.04% 20px;
 		}
 
 		.datafiles > ul:first-child {
@@ -250,19 +299,41 @@ a {
 				margin-right: 0;
 		}
 
+		.datafiles ul > li {				
+				padding: 5px 6.59%;
+		}
+
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 600px) {
 
 		.row > div {
 				width: 92%;
-				margin: 2.325em auto;
+				margin: 1em auto;
+		}
+
+		.header > div {
+				width: 92%;
+				overflow: auto;
+				clear: both;
+				margin: 0 auto;
+				padding-bottom: 1em;
+		}
+
+		.header h1 {
+			font-size: 4em;
+			line-height: 1;
+		}
+
+		.nav > div {
+				width: 92%;
+				margin: 0 auto;
 		}
 
 		.datafiles > ul {
 				display: inline-block;
 				width: 23.64%;
-				margin: 0 0.9%;
+				margin: 0 0.9%  20px;
 		}
 
 		.datafiles > ul:first-child {
@@ -273,13 +344,17 @@ a {
 				margin-right: 0;
 		}
 
+		.datafiles ul > li {				
+				padding: 5px 6.59%;
+		}
+
 }
 
 @media only screen and (min-width: 900px) {
 
 		.row > div {
 				width: 86%;
-				margin: 2.325em auto;
+				margin: 1em auto;
 		}
 
 		.header > div {
@@ -287,7 +362,7 @@ a {
 				overflow: auto;
 				clear: both;
 				margin: 0 auto;
-				padding: 1em 0 2.325em;
+				padding-bottom: 1.325em;
 		}
 
 		.header img {
@@ -303,9 +378,9 @@ a {
 		}
 
 		.header h1 {
-			margin-left: 21.5%;
-			font-size: 7.6em;
+			font-size: 7.3em;
 			line-height: 1;
+			margin-left: 21.5%;
 		}
 
 		.nav > div {
@@ -316,16 +391,6 @@ a {
 		.nav > div > ul {
 				float: right;
 				width: 70%;
-				text-align: right;
-		}
-
-		.nav li {
-				display: inline-block;
-		}
-
-		.nav li a {
-				display: block;
-				padding: .75em .5em;
 		}
 
 		.datafiles {
@@ -335,7 +400,7 @@ a {
 		.datafiles > ul {
 				display: inline-block;
 				width: 15.79%;
-				margin: 0 0.52%;
+				margin: 0 0.52%  20px;
 		}
 
 		.datafiles > ul:first-child, .datafiles > ul:nth-child(7) {
