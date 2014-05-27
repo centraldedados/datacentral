@@ -39,7 +39,7 @@ def create_index_page(packages):
     template = env.get_template("list.html")
     target = "index.html"
     datapackages = [p['name'] for p in packages]
-    contents = template.render(datapackages=datapackages)
+    contents = template.render(datapackages=packages)
 
     f = codecs.open(os.path.join(output_dir, target), 'w', 'utf-8')
     f.write(contents)

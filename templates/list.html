@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% for d in datapackages %}
-  <a href="datasets/{{ d }}.html">{{ d }}</a>
-{% endfor %}
+  <ul>
+    {% for d in datapackages %}
+      {% if d.title %}
+      <li><a href="datasets/{{ d.name }}.html">{{ d.title }}</a></li>
+      {% else %}
+      <li><a href="datasets/{{ d.name }}.html">{{ d.name }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
 {% endblock content %}
 

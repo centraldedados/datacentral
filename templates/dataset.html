@@ -9,10 +9,13 @@
 
 <div class="datafiles">
 	{% for d in datafiles %}<ul class="box">
+    <li>{{ d.basename }}</li>
+		<li><a href="/download/{{ d.basename }}">Download</a></li>
+    <!--
 		<li>Nome: {{ d.name }}</li>
 		<li>Nome do ficheiro: {{ d.basename }}</li>
 		<li>Formato: {{ d.format }}</li>
-		<li><a href="/download/{{ d.basename }}">Download</a></li>
+    -->
 	</ul>{% endfor %}
 </div>
 {% endblock content %}
