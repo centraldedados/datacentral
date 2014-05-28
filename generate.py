@@ -191,7 +191,7 @@ def generate(offline):
             logging.info("Copying %s to the %s/%s dir." % (d['basename'], output_dir, files_dir))
             target = os.path.join(output_dir, files_dir, os.path.basename(d['path']))
             shutil.copyfile(os.path.join(dir_name, d['path']), target)
-            zipf.write(os.path.join(dir_name, d['path']), d['basename'])
+            zipf.write(os.path.join(dir_name, d['path']), d['basename'], compress_type=zipfile.ZIP_DEFLATED)
         try:
             zipf.write(pkg_info['readme_path'], 'README.md')
         except OSError:
