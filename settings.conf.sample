@@ -2,6 +2,12 @@
 morph_api_key = your_morph_api_key
 
 [repositories]
-eleicoes_europeias = https://github.com/centraldedados/eleicoes_europeias.git
-parlamento_deputados = https://github.com/centraldedados/parlamento_deputados.git
+eleicoes-autarquicas = https://github.com/centraldedados/eleicoes-autarquicas.git
+eleicoes-europeias = https://github.com/centraldedados/eleicoes-europeias.git
+eleicoes-datas = https://github.com/centraldedados/eleicoes-datas.git
+parlamento-deputados = https://github.com/centraldedados/parlamento-deputados.git
+parlamento-datas_sessoes = https://github.com/centraldedados/parlamento-datas_sessoes.git
+governos = https://github.com/centraldedados/governos.git
+partidos = https://github.com/centraldedados/partidos.git
+contratos_publicos = https://github.com/centraldedados/contratos_publicos.git
 
