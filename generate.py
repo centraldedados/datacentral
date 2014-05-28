@@ -30,6 +30,7 @@ template_dir = "templates"
 repo_dir = "repos"
 files_dir = "download"
 
+
 logging.basicConfig(level=logging.DEBUG)
 env = jinja2.Environment(loader=jinja2.FileSystemLoader([template_dir]))
 
@@ -40,8 +41,8 @@ def create_index_page(packages):
     template = env.get_template("list.html")
     target = "index.html"
     datapackages = [p['name'] for p in packages]
-    contents = template.render(datapackages=packages)
-
+    welcome_text = markdown.markdown(codecs.open("content/welcome_text.md", 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8")
+    contents = template.render(datapackages=packages, welcome_text=welcome_text)
     f = codecs.open(os.path.join(output_dir, target), 'w', 'utf-8')
     f.write(contents)
     f.close()
@@ -60,6 +61,7 @@ def create_dataset_page(pkg_info):
                "datafiles": pkg_info["datafiles"],
                "last_updated": pkg_info["last_updated"],
               }
+    context['welcome_text'] = markdown.markdown(codecs.open("content/welcome_text.md", 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8")
     contents = template.render(**context)
 
     f = codecs.open(os.path.join(output_dir, target), 'w', 'utf-8')
