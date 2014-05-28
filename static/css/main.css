@@ -122,6 +122,11 @@ textarea {
 	  src: local('Comme Medium'), url('/fonts/CommeSans/Comme-Medium.ttf') format('truetype');
 }
 
+@font-face {
+	  font-family: 'Comme Mono';
+	  src: local('Comme Mono'), url('/fonts/CommeSans/CommeMono-Regular.ttf') format('truetype');
+}
+
 body {
 		font-family: 'Comme Regular', DejaVu Sans, Arial, sans-serif;
 		line-height: 1.4;
@@ -140,6 +145,8 @@ strong,
 .footer li a {	font-family: 'Comme Bold';	}
 
 .header .description {	font-family: 'Comme Medium';	}
+
+.datafiles > .box span {	font-family: 'Comme Mono';	}
 
 .nav,
 .footer,
@@ -301,6 +308,7 @@ a {
 */
 
 .readme > h4 {
+		color: #969ba6;
 		line-height: 1.2;
 		margin-bottom: .5em;
 }
@@ -315,9 +323,8 @@ a {
 
 .datafiles > li {
 		overflow: auto;
-		padding: 10px 0;
-		margin-bottom: 10px;
-		border-top: 1px solid #969ba6;
+		padding: 6px 0;
+		border-top: 1px solid #b9bdc5;
 }
 
 .datafiles > li:first-child {
