@@ -127,8 +127,8 @@ body {
 		line-height: 1.4;
 }
 
-h1 {  font-size: 2.25em;  font-family: 'Comme Thin';  }
-h2 {  font-size: 2em;     font-family: 'Comme Thin';  }
+h1 {  font-size: 2.25em;  font-family: 'Comme Thin'; margin-bottom: .5em;  }
+h2 {  font-size: 1.85em;     font-family: 'Comme Thin';  }
 h3 {  font-size: 1.625em; font-family: 'Comme Thin';  }
 h4 {  font-size: 1.375em; font-family: 'Comme Bold';  }
 h5 {  font-size: 1.25em;  font-family: 'Comme Thin';	}
@@ -136,7 +136,7 @@ h6 {  font-size: 1.125em; font-family: 'Comme Thin';  }
 
 strong,
 .datasets h3 > span,
-.datafiles ul > li > a,
+.datafiles > li > a,
 .footer li a {	font-family: 'Comme Bold';	}
 
 .header .description {	font-family: 'Comme Medium';	}
@@ -224,8 +224,9 @@ a {
 
 .header a {
 		display: block;
-		overflow: auto;
+		overflow: hidden;
 		color: #2c373a;
+		padding: .5em 0;
 }
 
 .header a:hover {
@@ -233,8 +234,9 @@ a {
 }
 
 .header h1 {
-	font-size: 4em;
-	line-height: 1;
+		font-size: 4em;
+		line-height: 1;
+		margin: 0;
 }
 
 
@@ -247,7 +249,8 @@ a {
 		padding-top: 1.5em;
 }
 
-.row .description p {
+.description p,
+.main .readme p {
 		margin-bottom: .75em;
 }
 
@@ -285,28 +288,52 @@ a {
 }
 
 .datasets .source {
-		color: #e0e2e7;
+		color: #969ba6;
+}
+
+
+.datasets .source a {
+		color: #969ba6;
+		border-bottom: 1px solid #969ba6;
 }
 
 /* dataset page
 */
 
-.datafiles > ul {
-		background: #e0e2e7;
-		padding-top: 20px;
-		padding-bottom: 12px;
-		box-shadow: 5px 5px 5px #d8d6c9;
+.readme > h4 {
+		line-height: 1.2;
+		margin-bottom: .5em;
 }
 
-.datafiles ul > li > a {
+.readme h2 {
+		margin-top: .5em;
+}
+
+.datafiles {
+		display: block;
+}
+
+.datafiles > li {
+		overflow: auto;
+		padding: 10px 0;
+		margin-bottom: 10px;
+		border-top: 1px solid #969ba6;
+}
+
+.datafiles > li:first-child {
+		padding: 0 0 10px 0;
+		border-top: 0;
+}
+
+.datafiles > li > a {
+		float: right;
+		display: inline-block;
 		font-size: 0.75em;
 		text-transform: uppercase;
 		letter-spacing: 1px;
-		text-align: center;
-		display: block;
-		background: #b9bdc5;
-		padding: 8px 5px;
-		border-radius: 2px;
+		border: 2px solid #de1b1b;
+		padding: 5px 8px;
+		border-radius: 4px;
 }
 
 .footer {
@@ -336,26 +363,13 @@ a {
 @media only screen and (min-width: 400px) {
 
 		.datafiles > ul {
-				display: inline-block;
-				width: 48.95%;
-				margin: 0 1.04% 20px;
-		}
-
-		.datafiles ul > li {				
-				padding: 5px 6.59%;
+				margin: 0 0 20px;
 		}
 
 }
 
 @media only screen and (min-width: 400px) and (max-width: 599px) {
 
-		.datafiles > ul:nth-child(odd) {
-				margin-left: 0;
-		}
-
-		.datafiles > ul:nth-child(even) {
-				margin-right: 0;
-		}
 }
 
 
@@ -388,27 +402,13 @@ a {
 		}
 
 		.datafiles > ul {
-				display: inline-block;
-				width: 23.64%;
-				margin: 0 0.9%  20px;
-		}
-
-		.datafiles ul > li {				
-				padding: 5px 6.59%;
+				margin: 0 0  20px;
 		}
 
 }
 
 @media only screen and (min-width: 600px) and (max-width: 899px) {
 
-		.datafiles > ul:first-child,
-		.datafiles > ul:nth-child(4n+1) {
-				margin-left: 0;
-		}
-
-		.datafiles > ul:nth-child(4n) {
-				margin-right: 0;
-		}
 }
 
 @media only screen and (min-width: 900px) {
@@ -464,27 +464,22 @@ a {
 				width: 78%;
 		}
 
+		.main .readme {
+				width: 66%;
+				margin-right: 4%;
+				float: left;
+		}
+
 		.datafiles {
-				display: table
+				width: 30%;
+				float: left;
 		}
 
 		.datafiles > ul {
-				display: inline-block;
-				width: 15.79%;
-				margin: 0 0.52%  20px;
+				margin: 0 0  20px;
 		}
 
-		.datafiles > ul:first-child,
-		.datafiles > ul:nth-child(6n+1) {
-				margin-left: 0;
-		}
-
-		.datafiles > ul:nth-child(6n) {
-				margin-right: 0;
-		}
-
-		.datafiles ul > li {				
-				padding: 5px 6.59%;
+		.datafiles ul > li {
 		}
 
 		.datafiles ul > li > a {

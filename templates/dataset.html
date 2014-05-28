@@ -3,19 +3,16 @@
 {% block content %}
 <h1>{{ title }}</h1>
 
-<h3>{{ description }}</h3>
+	<div class="readme">		
+		<h4>{{ description }}</h4>
+		{{ readme }}
+	</div>
 
-{{ readme }}
-
-<div class="datafiles">
-	{% for d in datafiles %}<ul class="box">
-    <li>{{ d.basename }}</li>
-		<li><a href="/download/{{ d.basename }}">Download</a></li>
-    <!--
-		<li>Nome: {{ d.name }}</li>
-		<li>Nome do ficheiro: {{ d.basename }}</li>
-		<li>Formato: {{ d.format }}</li>
-    -->
-	</ul>{% endfor %}
-</div>
+	<ul class="datafiles">
+		{% for d in datafiles %}
+			<li class="box">
+		  		<span>{{ d.basename }}</span>
+					<a href="/download/{{ d.basename }}">Download</a>
+			</li>{% endfor %}
+	</ul>
 {% endblock content %}
