@@ -55,6 +55,7 @@ def create_dataset_page(pkg_info):
 
     context = {"title": pkg_info["title"],
                "description": pkg_info["description"],
+               "sources": pkg_info.get("sources"),
                "readme": pkg_info["readme"],
                "datafiles": pkg_info["datafiles"],
                "last_updated": pkg_info["last_updated"],
@@ -87,6 +88,7 @@ def process_datapackage(pkg_name):
     pkg_info['title'] = metadata['title']
     pkg_info['license'] = metadata.get('licenses')
     pkg_info['description'] = metadata['description']
+    pkg_info['sources'] = metadata.get('sources')
     # process README
     readme = ""
     readme_path = os.path.join(pkg_dir, "README.md")
@@ -147,7 +149,11 @@ def generate(offline):
                 logging.info("Repo '%s' already exists, pulling changes..." % name)
                 repo = git.Repo(dir_name)
                 origin = repo.remotes.origin
-                origin.fetch()
+                try:
+                    origin.fetch()
+                except AssertionError:
+                    # usually this fails on the first run, try again
+                    origin.fetch()
                 result = origin.pull()[0]
                 if result.flags & result.HEAD_UPTODATE:
                     logging.info("Repo '%s' is up to date." % name)
