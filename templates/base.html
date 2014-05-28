@@ -19,16 +19,22 @@
 		</nav>
 		<header class="header">
 			<div>
-				<div class="description">
-					<a href="/"><img src="/img/centraldedados.png" alt="Central de Dados" /></a>
-					<p>A Central de Dados é um repositório aberto de datasets <a href="#">Open Data em Portugal</a>. Os dados aqui publicados são provenientes de diversas fontes (sempre indicadas!) e estão sob a curadoria do <a rel="external" href="http://transparenciahackday.org" title="Transparência Hackday">Transparência Hackday</a>.</p>
-				</div>
-				<h1><a href="/">Central de Dados</a></h1>
+				<a href="/">
+					<p><img src="/img/centraldedados.png" alt="Central de Dados" /></p>
+					<h1>Central de Dados</h1>
+				</a>
 			</div>
 		</header>
 		<section class="row">
 			<div>
-				{% block content %}{% endblock %}
+				<div class="description">
+					<p>A Central de Dados é um repositório aberto de datasets <a href="#">Open Data em Portugal</a>. Os dados aqui publicados são provenientes de diversas fontes (sempre indicadas!) e estão sob a curadoria do <a rel="external" href="http://transparenciahackday.org" title="Transparência Hackday">Transparência Hackday</a>.</p>
+					<p>Mais texto Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam scelerisque nibh in tempus. Suspendisse quis fermentum arcu, vitae euismod turpis. Aenean rhoncus felis felis, id scelerisque ligula pretium sit amet. Nulla est mauris, egestas eget consectetur quis, venenatis quis dui. Suspendisse ullamcorper scelerisque quam sed suscipit. Aenean pulvinar ut tellus eu ornare.</p>
+					<p>Etiam convallis enim vitae tellus consectetur, in varius lorem pretium. Etiam imperdiet condimentum magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam non diam ullamcorper, vulputate nulla facilisis, dictum lorem.</p>
+				</div>
+				<div class="main">
+					{% block content %}{% endblock %}
+				</div>
 			</div>
 		</section>
 		<footer class="footer row">

@@ -135,6 +135,7 @@ h5 {  font-size: 1.25em;  font-family: 'Comme Thin';	}
 h6 {  font-size: 1.125em; font-family: 'Comme Thin';  }
 
 strong,
+.datasets h3 > span,
 .datafiles ul > li > a,
 .footer li a {	font-family: 'Comme Bold';	}
 
@@ -187,21 +188,8 @@ a {
 		margin: 1em auto;
 }
 
-.header, .row {
+.nav, .header, .row {
 		background: #f7f8f2;
-}
-
-.header > div {
-		width: 96%;
-		overflow: auto;
-		clear: both;
-		margin: 0 auto;
-		padding-bottom: 1em;
-}
-
-.header h1 {
-	font-size: 4em;
-	line-height: 1;
 }
 
 .nav > div {
@@ -211,28 +199,6 @@ a {
 
 .nav li {
 		text-transform: uppercase;
-}
-
-.header > div {		
-		border-bottom: 1px solid #b9bdc5;
-}
-
-.header .description {
-		line-height: 1.2;
-		font-size: 0.865em;
-}
-
-.header .description img {
-		display: block;
-		margin-bottom: .5em;
-}
-
-.header h1 > a {
-		color: #2c373a;
-}
-
-.header h1 > a:hover {
-		color: #de1b1b;
 }
 
 .nav > div > ul {
@@ -247,6 +213,83 @@ a {
 		display: block;
 		padding: .75em .5em;
 }
+
+.header > div {
+		width: 96%;
+		clear: both;
+		margin: 0 auto 1em;
+		padding-bottom: 1em;
+		border-bottom: 1px solid #b9bdc5;
+}
+
+.header a {
+		display: block;
+		overflow: auto;
+		color: #2c373a;
+}
+
+.header a:hover {
+		color: #de1b1b;
+}
+
+.header h1 {
+	font-size: 4em;
+	line-height: 1;
+}
+
+
+.header img {
+		max-width: 100%;
+}
+
+.row .description {
+		font-size: 0.865em;
+		padding-top: 1.5em;
+}
+
+.row .description p {
+		margin-bottom: .75em;
+}
+
+.row .main {
+		padding-top: 1em;
+}
+
+/* homepage dataset list
+*/
+
+.datasets > li {
+		border-top: 1px solid #b9bdc5;
+		margin-bottom: 1em;
+}
+
+.datasets > li:first-child {
+		border-top: 0;
+}
+
+.datasets h3 {
+		padding-top: .45em;
+}
+
+.datasets h3 > span {
+		display: inline-block;
+		float: right;
+}
+
+.datasets h3 > span a {
+		font-size: 0.5em;
+		display: inline-block;
+		border: 2px solid #de1b1b;
+		padding: 6px 10px;
+		border-radius: 4px;
+}
+
+.datasets .source {
+		color: #e0e2e7;
+}
+
+/* dataset page
+*/
 
 .datafiles > ul {
 		background: #e0e2e7;
@@ -325,15 +368,18 @@ a {
 
 		.header > div {
 				width: 92%;
-				overflow: auto;
-				clear: both;
 				margin: 0 auto;
-				padding-bottom: 1em;
+		}
+
+		.header > div > a p {
+				display: block;
+				float: left;
+				width: 20%;
+				margin-right: 2%;
 		}
 
 		.header h1 {
-			font-size: 4em;
-			line-height: 1;
+				float: left;
 		}
 
 		.nav > div {
@@ -374,28 +420,19 @@ a {
 
 		.header > div {
 				width: 86%;
-				overflow: auto;
-				clear: both;
 				margin: 0 auto;
-				padding-bottom: 1.325em;
 		}
 
-		.header img {
-				max-width: 100%;
-		}
-
-		.header .description {
+		.header > div > a p {
+				display: block;
 				float: left;
 				width: 20%;
-				margin-top: 1.2em;
-				line-height: 1.2;
-				clear: both;
+				margin-right: 2%;
 		}
 
 		.header h1 {
-			font-size: 7.3em;
-			line-height: 1;
-			margin-left: 21.5%;
+				float: left;
+				font-size: 6.5em;
 		}
 
 		.nav > div {
@@ -406,6 +443,25 @@ a {
 		.nav > div > ul {
 				float: right;
 				width: 70%;
+		}
+
+		.header + .row > div {
+				width: 86%;
+				overflow: auto;
+				clear: both;
+				margin: 0 auto;
+				padding-bottom: 1.325em;
+		}
+
+		.row > div > .description {
+				float: left;
+				width: 20%;
+				margin-right: 2%;
+		}
+
+		.row div .main {
+				float: left;
+				width: 78%;
 		}
 
 		.datafiles {
