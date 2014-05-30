@@ -20,10 +20,10 @@
 # along with Data Central. If not, see <http://www.gnu.org/licenses/>.
 
 
-run:
+html:
 	python generate.py
 
-runoffline:
+htmloffline:
 	python generate.py --offline
 
 install:
