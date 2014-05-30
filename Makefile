@@ -42,3 +42,11 @@ serve:
 
 upload:
 	rsync --compress --progress --recursive --update --delete _output/* wf:~/webapps/centraldedados/
+
+clean:
+	rm -fr repos _output
+
+clean-html:
+	rm -fr _output
+
+
