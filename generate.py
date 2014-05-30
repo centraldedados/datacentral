@@ -157,9 +157,6 @@ def generate(offline):
                     # usually this fails on the first run, try again
                     origin.fetch()
                 result = origin.pull()[0]
-                print dir(result)
-                import sys
-                sys.exit()
                 if result.flags & result.HEAD_UPTODATE:
                     logging.info("No new changes in repo '%s'." % name)
                 elif result.flags & result.FAST_FORWARD:
