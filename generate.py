@@ -157,8 +157,15 @@ def generate(offline):
                     # usually this fails on the first run, try again
                     origin.fetch()
                 result = origin.pull()[0]
+                print dir(result)
+                import sys
+                sys.exit()
                 if result.flags & result.HEAD_UPTODATE:
-                    logging.info("Repo '%s' is up to date." % name)
+                    logging.info("No new changes in repo '%s'." % name)
+                elif result.flags & result.FAST_FORWARD:
+                    logging.info("Pulled new changes to repo '%s'." % name)
+                elif result.flags & result.ERROR:
+                    logging.error("Error pulling from repo '%s'!" % name)
                 else:
                     # TODO: figure out the other git-python flags and return more
                     # informative logging output
