@@ -4,3 +4,5 @@ _output/
 repos/
 # settings file is private
 settings.conf
+# virtualenv is local
+.env/

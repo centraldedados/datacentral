@@ -19,16 +19,23 @@
 # You should have received a copy of the GNU General Public License
 # along with Data Central. If not, see <http://www.gnu.org/licenses/>.
 
+# This is *heavily* based on Edouard Richard's excellent Makefiles.
+# See https://github.com/jplusplus/resonate2014/blob/master/Makefile for
+# the basis from where this file was created.
+
+MAIN_SCRIPT = $(wildcard generate.py)
+OFFLINE_FLAG = "--offline"
 
 html:
-	python generate.py
+	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT)
 
-htmloffline:
-	python generate.py --offline
+html-offline:
+	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT) $(OFFLINE_FLAG)
 
+# FIXME: untested
 install:
-	virtualenv venv --no-site-packages --distribute --prompt=datacentral
-	. `pwd`/.env ; pip install -r requirements.txt
+	virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\)
+	. `pwd`/.env/bin/activate; pip install -r requirements.txt
 
 serve:
 	cd _output && python -m SimpleHTTPServer
