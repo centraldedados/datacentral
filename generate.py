@@ -28,6 +28,7 @@ config_file = "settings.conf"
 output_dir = "_output"
 template_dir = "templates"
 repo_dir = "repos"
+datasets_dir = "datasets"
 files_dir = "download"
 
 
@@ -98,7 +99,6 @@ def process_datapackage(pkg_name):
     if not os.path.exists(readme_path):
         logging.warn("No README.md file found in the data package.")
     else:
-        logging.info("README.md file found.")
         contents = codecs.open(readme_path, 'r', 'utf-8').read()
         try:
             readme = markdown.markdown(contents, output_format="html5", encoding="UTF-8")
@@ -118,21 +118,27 @@ def process_datapackage(pkg_name):
 def generate(offline):
     '''Main function that takes care of the whole process.'''
     # set up the output directory
-    if os.path.exists(output_dir):
-        shutil.rmtree(output_dir)
-    os.mkdir(output_dir)
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
     # set up the dir for storing repositories
     if not os.path.exists(repo_dir):
         logging.info("Directory %s doesn't exist, creating it." % repo_dir)
         os.mkdir(repo_dir)
     # create dir for dataset pages
-    os.mkdir(os.path.join(output_dir, "datasets"))
-    # create dir for storing data files for download
-    os.mkdir(os.path.join(output_dir, files_dir))
+    if not os.path.exists(os.path.join(output_dir, datasets_dir)):
+        os.mkdir(os.path.join(output_dir, datasets_dir))
+    # create download dir for zip and csv/json/* dataset files
+    if not os.path.exists(os.path.join(output_dir, files_dir)):
+        os.mkdir(os.path.join(output_dir, files_dir))
     # create static dirs
+    # TODO: only update changed files -- right now we regenerate the whole static dir
+    shutil.rmtree(os.path.join(output_dir, "css"))
     shutil.copytree("static/css", os.path.join(output_dir, "css"))
+    shutil.rmtree(os.path.join(output_dir, "js"))
     shutil.copytree("static/js", os.path.join(output_dir, "js"))
+    shutil.rmtree(os.path.join(output_dir, "img"))
     shutil.copytree("static/img", os.path.join(output_dir, "img"))
+    shutil.rmtree(os.path.join(output_dir, "fonts"))
     shutil.copytree("static/fonts", os.path.join(output_dir, "fonts"))
 
     # read the config file to get the datasets we want to publish
@@ -148,7 +154,7 @@ def generate(offline):
         # do we have a local copy?
         if os.path.isdir(dir_name):
             if not offline:
-                logging.info("Repo '%s' already exists, pulling changes..." % name)
+                logging.info("Checking for changes in repo '%s'..." % name)
                 repo = git.Repo(dir_name)
                 origin = repo.remotes.origin
                 try:
@@ -156,17 +162,26 @@ def generate(offline):
                 except AssertionError:
                     # usually this fails on the first run, try again
                     origin.fetch()
+                except git.exc.GitCommandError:
+                    logging.critical("Error connecting to repository, this dataset will be ignored and not listed in the index!")
                 result = origin.pull()[0]
-                if result.flags & result.HEAD_UPTODATE:
-                    logging.info("No new changes in repo '%s'." % name)
-                elif result.flags & result.FAST_FORWARD:
+                # we get specific flags for the results Git gave us
+                # and we set the "updated" var in order to signal whether to
+                # copy over the new files to the download dir or not 
+                if result.flags & result.FAST_FORWARD:
                     logging.info("Pulled new changes to repo '%s'." % name)
+                    updated = True
+                elif result.flags & result.HEAD_UPTODATE:
+                    logging.info("No new changes in repo '%s'." % name)
+                    updated = False
                 elif result.flags & result.ERROR:
                     logging.error("Error pulling from repo '%s'!" % name)
+                    updated = False
                 else:
                     # TODO: figure out the other git-python flags and return more
                     # informative logging output
                     logging.info("Repo changed, updating. (returned flags: %d)" % result.flags)
+                    updated = True
             else:
                 logging.info("Offline mode, using cached version of package %s..." % name)
                 repo = git.Repo(dir_name)
@@ -184,25 +199,26 @@ def generate(offline):
         import datetime
         d = repo.head.commit.committed_date
         last_updated = datetime.datetime.fromtimestamp(int("1284101485")).strftime('%Y-%m-%d %H:%M:%S')
-        print last_updated
+        logging.debug(last_updated)
         pkg_info['last_updated'] = last_updated
         # add it to the packages list for index page generation after the loop ends
         packages.append(pkg_info)
-        # generate the dataset HTML page
-        create_dataset_page(pkg_info)
-        # copy the datafiles to the files/ dir for download, and make a zip too
-        datafiles = pkg_info['datafiles']
-        zipf = zipfile.ZipFile(os.path.join(output_dir, files_dir, name+'.zip'), 'w')
-        for d in datafiles:
-            logging.info("Copying %s to the %s/%s dir." % (d['basename'], output_dir, files_dir))
-            target = os.path.join(output_dir, files_dir, os.path.basename(d['path']))
-            shutil.copyfile(os.path.join(dir_name, d['path']), target)
-            zipf.write(os.path.join(dir_name, d['path']), d['basename'], compress_type=zipfile.ZIP_DEFLATED)
-        try:
-            zipf.write(pkg_info['readme_path'], 'README.md')
-        except OSError:
-            pass
-        zipf.close()
+        # if repo was updated, 1. generate the dataset HTML page and 2. copy over
+        # CSV/JSON/* and ZIP files to the download dir
+        if updated:
+            create_dataset_page(pkg_info)
+            datafiles = pkg_info['datafiles']
+            zipf = zipfile.ZipFile(os.path.join(output_dir, files_dir, name+'.zip'), 'w')
+            for d in datafiles:
+                logging.info("Copying %s to the %s/%s dir." % (d['basename'], output_dir, files_dir))
+                target = os.path.join(output_dir, files_dir, os.path.basename(d['path']))
+                shutil.copyfile(os.path.join(dir_name, d['path']), target)
+                zipf.write(os.path.join(dir_name, d['path']), d['basename'], compress_type=zipfile.ZIP_DEFLATED)
+            try:
+                zipf.write(pkg_info['readme_path'], 'README.md')
+            except OSError:
+                pass
+            zipf.close()
 
     # generate the HTML index with the list of available packages
     create_index_page(packages)
