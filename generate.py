@@ -9,20 +9,19 @@ Options:
 
 TODO:
 - read scripts/ dir and run the preparation scripts
-- 
 
 '''
 
 from ConfigParser import SafeConfigParser
 import jinja2
 import git, os, shutil
-import logging
 import markdown
 import json
 import codecs
 import click
 import zipfile
-from pprint import pprint
+# instant pretty logs
+from zenlog import log
 
 config_file = "settings.conf"
 output_dir = "_output"
@@ -31,8 +30,7 @@ repo_dir = "repos"
 datasets_dir = "datasets"
 files_dir = "download"
 
-
-logging.basicConfig(level=logging.DEBUG)
+# set up Jinja
 env = jinja2.Environment(loader=jinja2.FileSystemLoader([template_dir]))
 
 def create_index_page(packages):
@@ -47,7 +45,7 @@ def create_index_page(packages):
     f = codecs.open(os.path.join(output_dir, target), 'w', 'utf-8')
     f.write(contents)
     f.close()
-    logging.info("Created index.html.")
+    log.info("Created index.html.")
 
 def create_dataset_page(pkg_info):
     '''Generate a single dataset page.'''
@@ -68,19 +66,22 @@ def create_dataset_page(pkg_info):
     f = codecs.open(os.path.join(output_dir, target), 'w', 'utf-8')
     f.write(contents)
     f.close()
-    logging.info("Created %s." % target)
+    log.info("Created %s." % target)
 
 
 def process_datapackage(pkg_name):
-    '''Reads a data package and returns a dict with its metadata. The items in
-    the dict are:
+    '''Reads a data package and returns a dict with its metadata. The 
+    items in the dict are:
         - name
         - title
         - license
         - description
-        - readme (in HTML, processed with python-markdown from README.md, empty if README.md
-          does not exist)
-        - datafiles (a dict that contains the contents of the "resources" attribute)
+        - readme: in HTML, processed with python-markdown from README.md, 
+          empty if README.md does not exist)
+        - datafiles: a dict that contains the contents of the "resources" 
+          attribute. Each resource also contains the "basename" property,
+          which is the resource base filename (without preceding 
+          directory)
     '''
     pkg_dir = os.path.join(repo_dir, pkg_name)
     pkg_info = {}
@@ -89,7 +90,7 @@ def process_datapackage(pkg_name):
     # get main attributes
     pkg_info['name'] = pkg_name
     pkg_info['title'] = metadata['title']
-    pkg_info['license'] = metadata.get('licenses')
+    pkg_info['license'] = metadata.get('license')
     pkg_info['description'] = metadata['description']
     pkg_info['sources'] = metadata.get('sources')
     # process README
@@ -97,13 +98,13 @@ def process_datapackage(pkg_name):
     readme_path = os.path.join(pkg_dir, "README.md")
     pkg_info['readme_path'] = readme_path
     if not os.path.exists(readme_path):
-        logging.warn("No README.md file found in the data package.")
+        log.warn("No README.md file found in the data package.")
     else:
         contents = codecs.open(readme_path, 'r', 'utf-8').read()
         try:
             readme = markdown.markdown(contents, output_format="html5", encoding="UTF-8")
         except UnicodeDecodeError:
-            logging.critical("README.md has invalid encoding, maybe the datapackage is not UTF-8?")
+            log.critical("README.md has invalid encoding, maybe the datapackage is not UTF-8?")
             raise
     pkg_info['readme'] = readme
     # process resource/datafiles list
@@ -114,15 +115,16 @@ def process_datapackage(pkg_name):
     return pkg_info    
 
 @click.command()
+@click.option('-f', '--fetch-only', help='Only clone or pull repos, do not generate HTML output.', is_flag=True, default=False)
 @click.option('-o', '--offline', help='Offline mode, do not clone or pull.', is_flag=True, default=False)
-def generate(offline):
+def generate(offline, fetch_only):
     '''Main function that takes care of the whole process.'''
     # set up the output directory
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
     # set up the dir for storing repositories
     if not os.path.exists(repo_dir):
-        logging.info("Directory %s doesn't exist, creating it." % repo_dir)
+        log.info("Directory %s doesn't exist, creating it." % repo_dir)
         os.mkdir(repo_dir)
     # create dir for dataset pages
     if not os.path.exists(os.path.join(output_dir, datasets_dir)):
@@ -145,8 +147,8 @@ def generate(offline):
     parser = SafeConfigParser()
     parser.read(config_file)
     packages = []
-    # go through each specified dataset
 
+    # go through each specified dataset
     for r in parser.items('repositories'):
         name, url = r
         dir_name = os.path.join(repo_dir, name)
@@ -154,7 +156,7 @@ def generate(offline):
         # do we have a local copy?
         if os.path.isdir(dir_name):
             if not offline:
-                logging.info("Checking for changes in repo '%s'..." % name)
+                log.info("Checking for changes in repo '%s'..." % name)
                 repo = git.Repo(dir_name)
                 origin = repo.remotes.origin
                 try:
@@ -163,34 +165,47 @@ def generate(offline):
                     # usually this fails on the first run, try again
                     origin.fetch()
                 except git.exc.GitCommandError:
-                    logging.critical("Error connecting to repository, this dataset will be ignored and not listed in the index!")
-                result = origin.pull()[0]
+                    log.critical("Error connecting to repository, this dataset will be ignored and not listed in the index!")
+                    continue
+                # connection errors can also happen if fetch succeeds but pull fails
+                try:
+                    result = origin.pull()[0]
+                except git.exc.GitCommandError:
+                    log.critical("Error connecting to repository, this dataset will be ignored and not listed in the index!")
+                    continue
                 # we get specific flags for the results Git gave us
                 # and we set the "updated" var in order to signal whether to
                 # copy over the new files to the download dir or not 
                 if result.flags & result.FAST_FORWARD:
-                    logging.info("Pulled new changes to repo '%s'." % name)
+                    log.info("Pulled new changes to repo '%s'." % name)
                     updated = True
                 elif result.flags & result.HEAD_UPTODATE:
-                    logging.info("No new changes in repo '%s'." % name)
+                    log.info("No new changes in repo '%s'." % name)
                     updated = False
                 elif result.flags & result.ERROR:
-                    logging.error("Error pulling from repo '%s'!" % name)
+                    log.error("Error pulling from repo '%s'!" % name)
                     updated = False
                 else:
                     # TODO: figure out the other git-python flags and return more
-                    # informative logging output
-                    logging.info("Repo changed, updating. (returned flags: %d)" % result.flags)
+                    # informative log output
+                    log.info("Repo changed, updating. (returned flags: %d)" % result.flags)
                     updated = True
             else:
-                logging.info("Offline mode, using cached version of package %s..." % name)
+                log.info("Offline mode, using cached version of package %s..." % name)
+                # we set updated to True in order to re-generate everything
+                # FIXME: See checksum of CSV files to make sure they're new before
+                # marking updated as true
+                updated = True
                 repo = git.Repo(dir_name)
+            if fetch_only:
+                # if the --fetch-only flag was set, skip to the next dataset
+                continue
         else:
             if offline:
-                logging.warn("Package %s specified in settings but no local cache, skipping..." % name)
+                log.warn("Package %s specified in settings but no local cache, skipping..." % name)
                 continue
             else:
-                logging.info("We don't have repo '%s', cloning..." % name)
+                log.info("We don't have repo '%s', cloning..." % name)
                 repo = git.Repo.clone_from(url, dir_name)
          
         # get datapackage metadata
@@ -199,20 +214,22 @@ def generate(offline):
         import datetime
         d = repo.head.commit.committed_date
         last_updated = datetime.datetime.fromtimestamp(int("1284101485")).strftime('%Y-%m-%d %H:%M:%S')
-        logging.debug(last_updated)
+        log.debug(last_updated)
         pkg_info['last_updated'] = last_updated
         # add it to the packages list for index page generation after the loop ends
         packages.append(pkg_info)
         # if repo was updated, 1. generate the dataset HTML page and 2. copy over
         # CSV/JSON/* and ZIP files to the download dir
-        if updated:
+        # (we always generate them if offline)
+        if updated or offline:
             create_dataset_page(pkg_info)
             datafiles = pkg_info['datafiles']
             zipf = zipfile.ZipFile(os.path.join(output_dir, files_dir, name+'.zip'), 'w')
             for d in datafiles:
-                logging.info("Copying %s to the %s/%s dir." % (d['basename'], output_dir, files_dir))
+                log.info("Copying %s to the %s/%s dir..." % (d['basename'], output_dir, files_dir))
                 target = os.path.join(output_dir, files_dir, os.path.basename(d['path']))
                 shutil.copyfile(os.path.join(dir_name, d['path']), target)
+                log.info("Creating %s.zip in the %s/%s dir..." % (d['name'], output_dir, files_dir))
                 zipf.write(os.path.join(dir_name, d['path']), d['basename'], compress_type=zipfile.ZIP_DEFLATED)
             try:
                 zipf.write(pkg_info['readme_path'], 'README.md')
@@ -222,6 +239,7 @@ def generate(offline):
 
     # generate the HTML index with the list of available packages
     create_index_page(packages)
+
 
 if __name__ == "__main__":
     generate()
