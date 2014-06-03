@@ -134,14 +134,22 @@ def generate(offline, fetch_only):
         os.mkdir(os.path.join(output_dir, files_dir))
     # create static dirs
     # TODO: only update changed files -- right now we regenerate the whole static dir
-    shutil.rmtree(os.path.join(output_dir, "css"))
-    shutil.copytree("static/css", os.path.join(output_dir, "css"))
-    shutil.rmtree(os.path.join(output_dir, "js"))
-    shutil.copytree("static/js", os.path.join(output_dir, "js"))
-    shutil.rmtree(os.path.join(output_dir, "img"))
-    shutil.copytree("static/img", os.path.join(output_dir, "img"))
-    shutil.rmtree(os.path.join(output_dir, "fonts"))
-    shutil.copytree("static/fonts", os.path.join(output_dir, "fonts"))
+    css_dir = os.path.join(output_dir, "css")
+    js_dir = os.path.join(output_dir, "js_dir")
+    img_dir = os.path.join(output_dir, "img_dir")
+    fonts_dir = os.path.join(output_dir, "fonts_dir")
+    if os.path.exists(css_dir):
+        shutil.rmtree(css_dir)
+    shutil.copytree("static/css", css_dir)
+    if os.path.exists(js_dir):
+        shutil.rmtree(js_dir)
+    shutil.copytree("static/js", js_dir)
+    if os.path.exists(img_dir):
+        shutil.rmtree(img_dir)
+    shutil.copytree("static/img", img_dir)
+    if os.path.exists(fonts_dir):
+        shutil.rmtree(fonts_dir)
+    shutil.copytree("static/fonts", fonts_dir)
 
     # read the config file to get the datasets we want to publish
     parser = SafeConfigParser()
