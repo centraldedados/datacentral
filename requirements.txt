@@ -10,3 +10,4 @@ wsgiref==0.1.2
 click==1.1
 colorlog==2.2.0
 zenlog==0.1
+livereload==2.2.0

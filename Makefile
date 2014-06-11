@@ -25,6 +25,7 @@
 
 MAIN_SCRIPT = $(wildcard generate.py)
 OFFLINE_FLAG = "--offline"
+SERVER_PORT = 8002
 
 html:
 	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT)
@@ -38,7 +39,7 @@ install:
 	. `pwd`/.env/bin/activate; pip install -r requirements.txt
 
 serve:
-	cd _output && python -m SimpleHTTPServer
+	cd _output && livereload -p $(SERVER_PORT)
 
 upload:
 	rsync --compress --progress --recursive --update --delete _output/* wf:~/webapps/centraldedados/
