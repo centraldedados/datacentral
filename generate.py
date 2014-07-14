@@ -215,6 +215,7 @@ def generate(offline, fetch_only):
             else:
                 log.info("We don't have repo '%s', cloning..." % name)
                 repo = git.Repo.clone_from(url, dir_name)
+                updated = True
          
         # get datapackage metadata
         pkg_info = process_datapackage(name)
