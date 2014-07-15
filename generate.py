@@ -157,7 +157,7 @@ def generate(offline, fetch_only):
     parser.read(config_file)
     packages = []
 
-    if not parser.get('repositories'):
+    if not parser.items('repositories'):
         log.critical('No repository data in settings.conf (does it even exist?). Cannot proceed :(')
         sys.exit()
     # go through each specified dataset
