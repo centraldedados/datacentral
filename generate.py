@@ -14,7 +14,7 @@ TODO:
 
 from ConfigParser import SafeConfigParser
 import jinja2
-import git, os, shutil
+import git, sys, os, shutil
 import markdown
 import json
 import codecs
@@ -76,6 +76,7 @@ def process_datapackage(pkg_name):
         - title
         - license
         - description
+        - sources
         - readme: in HTML, processed with python-markdown from README.md, 
           empty if README.md does not exist)
         - datafiles: a dict that contains the contents of the "resources" 
@@ -156,6 +157,9 @@ def generate(offline, fetch_only):
     parser.read(config_file)
     packages = []
 
+    if not parser.get('repositories'):
+        log.critical('No repository data in settings.conf (does it even exist?). Cannot proceed :(')
+        sys.exit()
     # go through each specified dataset
     for r in parser.items('repositories'):
         name, url = r
