@@ -37,9 +37,10 @@ html-offline:
 install:
 	virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\)
 	. `pwd`/.env/bin/activate; pip install -r requirements.txt
+	cp settings.conf.sample settings.conf
 
 serve:
-	cd _output && livereload -p $(SERVER_PORT)
+	. `pwd`/.env/bin/activate; cd _output && livereload -p $(SERVER_PORT)
 
 upload:
 	rsync --compress --progress --recursive --update --delete _output/* wf:~/webapps/centraldedados/
