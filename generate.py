@@ -135,9 +135,9 @@ def generate(offline, fetch_only):
     # create static dirs
     # TODO: only update changed files -- right now we regenerate the whole static dir
     css_dir = os.path.join(output_dir, "css")
-    js_dir = os.path.join(output_dir, "js_dir")
-    img_dir = os.path.join(output_dir, "img_dir")
-    fonts_dir = os.path.join(output_dir, "fonts_dir")
+    js_dir = os.path.join(output_dir, "js")
+    img_dir = os.path.join(output_dir, "img")
+    fonts_dir = os.path.join(output_dir, "fonts")
     if os.path.exists(css_dir):
         shutil.rmtree(css_dir)
     shutil.copytree("static/css", css_dir)
