@@ -47,6 +47,18 @@ def create_index_page(packages):
     f.close()
     log.info("Created index.html.")
 
+def create_api(packages):
+    '''Generates a static API containing all the datapackage.json of the containing datasets.
+    Accepts a list of pkg_info dicts, which are generated with the
+    process_datapackage function.'''
+    all_metadata = []
+    for pkg_info in packages:
+        pkg_dir = os.path.join(repo_dir, pkg_info['name'])
+        all_metadata.append(json.loads(open(os.path.join(pkg_dir, "datapackage.json")).read()))
+    with open(os.path.join(output_dir, 'api.json'), 'w') as api_file:
+          json.dump(all_metadata, api_file)
+    log.info("Created api.json.")
+
 def create_dataset_page(pkg_info):
     '''Generate a single dataset page.'''
     template = env.get_template("dataset.html")
@@ -252,6 +264,8 @@ def generate(offline, fetch_only):
 
     # generate the HTML index with the list of available packages
     create_index_page(packages)
+    # generate the static JSON API of the data packages
+    create_api(packages)
 
 
 if __name__ == "__main__":
