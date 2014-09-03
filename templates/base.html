@@ -1,62 +1,67 @@
 <!DOCTYPE html>
 <html>
-	<head>
-			<meta charset="utf-8"> 
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-			<title>{% block title %}Central de dados{% endblock %}</title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="/css/main.css">
-	</head>
-	<body>
-		<nav class="nav">
-			<div>
-				<ul>
-	  			  <!--
-				  <li><a href="#">Acerca</a></li>
-				  <li><a href="#">FAQ</a></li>
-			          -->
-				  <li><a href="/api.json">API</a></li>
-				</ul>
-			</div>
-		</nav>
-		<header class="header">
-			<div>
-				<a href="/">
-					<p><img src="/img/centraldedados.png" alt="Central de Dados" /></p>
-					<h1>Central de Dados</h1>
-				</a>
-			</div>
-		</header>
-		<section class="row">
-			<div>
-				<div class="description">
-          {{ welcome_text }}
-				</div>
-				<div class="main">
-					{% block content %}{% endblock %}
-				</div>
-			</div>
-		</section>
-		<footer class="footer row">
-			<div>
-				<h4><a rel="external" href="http://transparenciahackday.org" title="Transparência Hackday">Transparência Hackday Portugal</a></h4></a>
-				<ul>
-					<li>com Apoio <a rel="external" href="http://jplusplus.pt">
-						<img src="/img/jplusplus.png" alt="Journalism++" />
-						<strong>Journalism++</strong>
-					</a></li>
-					<li>Agradecimentos <a rel="external" href="https://okfn.org">
-						<img src="/img/okfn.png" alt="OKFN" />
-						<strong>Open Knowledge</strong>
-					</a></li>
-					<!--<li>Parceiros <a rel="external" href="http://ama.pt">
-						<img src="/img/ama.png" alt="AMA" />
-						<strong>AMA, Agência para a Modernização</strong>
-					</a></li>-->
-				</ul>
-			</div>
-		</footer>
-		<script src="/js/vendor/jquery-1.11.0.min.js"></script>
-	</body>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}Central de dados{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+        <nav class="nav">
+            <div>
+                <ul>
+                    <!--
+                    <li><a href="#">Acerca</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    -->
+                    <li><a href="/api.json">API</a></li>
+                </ul>
+            </div>
+        </nav>
+        <header class="header">
+            <div>
+                <a href="/">
+                    <p><img src="/img/centraldedados.png" alt="Central de Dados" /></p>
+                    <h1>Central de Dados</h1>
+                </a>
+            </div>
+        </header>
+        <section class="row">
+            <div>
+                <div class="description">
+                    {{ welcome_text }}
+                </div>
+                <div class="main">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </section>
+        <footer class="footer row">
+            <div>
+                <h4><a rel="external" href="http://transparenciahackday.org" title="Transparência Hackday">Transparência Hackday Portugal</a></h4></a>
+                <ul>
+                    <li>com Apoio&nbsp;
+                        <a rel="external" href="http://jplusplus.pt">
+                            <img src="/img/jplusplus.png" alt="Journalism++" />
+                            <strong>Journalism++</strong>
+                        </a>
+                    </li>
+                    <li>
+                        Agradecimentos&nbsp;
+                        <a rel="external" href="https://okfn.org">
+                            <img src="/img/okfn.png" alt="OKFN" />
+                            <strong>Open Knowledge</strong>
+                        </a>
+                    </li>
+                    <!--<li>Parceiros <a rel="external" href="http://ama.pt">
+                        <img src="/img/ama.png" alt="AMA" />
+                        <strong>AMA, Agência para a Modernização</strong>
+                    </a></li>-->
+                </ul>
+            </div>
+        </footer>
+        <script src="/js/vendor/jquery-1.11.0.min.js"></script>
+    </body>
 </html>
