@@ -2,8 +2,11 @@
 
 {% block content %}
     <ul class="datasets">
+        <li class="notfound">
+            Oops no datasets found...
+        </li>
     {% for d in datapackages %}
-        <li>
+        <li class="dataset-{{ d.original_name }}">
             <h3>
                 {{ d.title }}&nbsp;
                 <span>
