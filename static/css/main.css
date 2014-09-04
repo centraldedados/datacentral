@@ -195,6 +195,7 @@ a {
         margin: 1em auto;
 }
 
+.nav, .header, .row, .search {
         background: #f7f8f2;
 }
 
@@ -263,23 +264,43 @@ a {
 .row .main {
         padding-top: 1em;
 }
-		padding-top: 1em;
+
+.search > div {
+    clear: both;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1em 0;
+}
+
+#search {
+    width: 95%;
+    display: inline;
+    float: left;
+}
+
+#spinner {
+    float: left;
+    display: inline;
+    visibility: hidden;
+    padding-right: 1em;
+}
+
+.notfound {
+    display: none;
 }
 
 /* homepage dataset list
 */
 
 .datasets > li {
-        border-top: 1px solid #b9bdc5;
-        margin-bottom: 1em;
-}
-
-.datasets > li:first-child {
-        border-top: 0;
+        border-bottom: 1px solid #b9bdc5;
+        padding-bottom: 1em;
+        margin-top: 1em;
+        margin-bottom: 0.45em;
 }
 
 .datasets h3 {
-        padding-top: .45em;
+        /*padding-top: .45em;*/
 }
 
 .datasets h3 > span {
