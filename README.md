@@ -22,6 +22,10 @@ sexy, but they're extremely useful for some purposes:
 We informally refer to this project as "the poor man's
 [CKAN](http://ckan.org)".
 
+Data Central even exposes a static JSON 'API', so that developers 
+have an easy access to the available datasets and their metadata 
+on the portal.
+
 Installation
 ------------
 
