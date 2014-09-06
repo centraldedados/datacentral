@@ -102,6 +102,7 @@ def process_datapackage(pkg_name):
 
     # get main attributes
     pkg_info['name'] = pkg_name
+    pkg_info['original_name'] = metadata['name']
     pkg_info['title'] = metadata['title']
     pkg_info['license'] = metadata.get('license')
     pkg_info['description'] = metadata['description']

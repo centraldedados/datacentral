@@ -1,14 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <ul class="datasets">
+    <ul class="datasets">
+        <li class="notfound">
+            Oops no datasets found...
+        </li>
     {% for d in datapackages %}
-      <li>
-				<h3>{{ d.title }} <span><a href="/datasets/{{ d.name }}.html">Detalhes</a> <a href="/download/{{ d.name }}.zip">Download</a></span></h3>
-      	<p>{{ d.description }}</p>
-      	<p class="source">{% if d.sources %} <em>Fontes:</em> {% for s in d.sources %}<a href="{{ s.web }}">{{ s.name }}</a> {% endfor %} {% endif %}</p>
-			</li>
+        <li class="dataset-{{ d.original_name }}">
+            <h3>
+                {{ d.title }}&nbsp;
+                <span>
+                    <a href="/datasets/{{ d.name }}.html">Detalhes</a>&nbsp;
+                    <a href="/download/{{ d.name }}.zip">Download</a>
+                </span>
+            </h3>
+            <p>{{ d.description }}</p>
+            <p class="source">
+                {% if d.sources %}
+                    <em>Fontes:</em>
+                    {% for s in d.sources %}
+                        <a href="{{ s.web }}">{{ s.name }}</a>
+                    {% endfor %}
+                {% endif %}
+            </p>
+        </li>
     {% endfor %}
-  </ul>
+    </ul>
 {% endblock content %}
 
