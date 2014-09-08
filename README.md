@@ -40,7 +40,7 @@ of the process:
    your website
  * Run `make html` to generate the HTML output
  * Now run `make serve` to run a simple webserver, and open the site
-   by pointing your browser to `localhost:8000`.
+   by pointing your browser to `localhost:8002`.
 
 
 TODO
