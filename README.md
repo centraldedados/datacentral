@@ -26,21 +26,25 @@ Data Central even exposes a static JSON 'API', so that developers
 have an easy access to the available datasets and their metadata 
 on the portal.
 
-Installation
+Installation and Usage
 ------------
 
-Development is very active at this moment; while we hadn't yet time to
-sit down and document the steps in detail, here is a rough description
-of the process:
+1. **Install dependencies**. After cloning the repository, change 
+   to the project directory and run `make install`. This will 
+   create a local virtualenv and install the necessary 
+   dependencies; it shouldn't be necessary to create a virtualenv 
+   since the `make` commands are all set to work with the venv 
+   that `make install` creates inside the Data Central dir.
 
- * Run `make install` -- this will create a virtualenv and install the
-   necessary dependencies from `requirements.txt`
- * Copy the `settings.conf.sample` into `settings.conf`
- * Edit that file to specify which repositories you want to include in
-   your website
- * Run `make html` to generate the HTML output
- * Now run `make serve` to run a simple webserver, and open the site
-   by pointing your browser to `localhost:8002`.
+2. **Edit settings**. Copy the `settings.conf.sample` file into 
+   `settings.conf`, and edit it to set your options and point to 
+   your data package repositories.
+
+3. **Generate the HTML output**. Just run `make html`!
+
+4. **Run a web server to see the output**. Now run `make serve` 
+   to run a simple webserver, and open the site by pointing your 
+   browser to `localhost:8002`.
 
 
 TODO
