@@ -39,9 +39,10 @@ def create_index_page(packages):
     process_datapackage function.'''
     template = env.get_template("list.html")
     target = "index.html"
-    datapackages = [p['name'] for p in packages]
-    welcome_text = markdown.markdown(codecs.open("content/welcome_text.md", 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8")
-    contents = template.render(datapackages=packages, welcome_text=welcome_text)
+    context = {"datapackages": packages,
+               "welcome_text": markdown.markdown(codecs.open("content/welcome_text.md", 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8"),
+               }
+    contents = template.render(**context)
     f = codecs.open(os.path.join(output_dir, target), 'w', 'utf-8')
     f.write(contents)
     f.close()
