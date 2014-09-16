@@ -19,19 +19,36 @@
 # You should have received a copy of the GNU General Public License
 # along with Data Central. If not, see <http://www.gnu.org/licenses/>.
 
+# This is *heavily* based on Edouard Richard's excellent Makefiles.
+# See https://github.com/jplusplus/resonate2014/blob/master/Makefile for
+# the basis from where this file was created.
 
-run:
-	python generate.py
+MAIN_SCRIPT = $(wildcard generate.py)
+OFFLINE_FLAG = "--offline"
+SERVER_PORT = 8002
 
-runoffline:
-	python generate.py --offline
+html:
+	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT)
 
+html-offline:
+	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT) $(OFFLINE_FLAG)
+
+# FIXME: untested
 install:
-	virtualenv venv --no-site-packages --distribute --prompt=datacentral
-	. `pwd`/.env ; pip install -r requirements.txt
+	virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\)
+	. `pwd`/.env/bin/activate; pip install -r requirements.txt
+	cp settings.conf.sample settings.conf
 
 serve:
-	cd _output && python -m SimpleHTTPServer
+	. `pwd`/.env/bin/activate; cd _output && livereload -p $(SERVER_PORT)
 
 upload:
 	rsync --compress --progress --recursive --update --delete _output/* wf:~/webapps/centraldedados/
+
+clean:
+	rm -fr repos _output
+
+clean-html:
+	rm -fr _output
+
+

@@ -8,3 +8,6 @@ gitdb==0.5.4
 smmap==0.8.2
 wsgiref==0.1.2
 click==1.1
+colorlog==2.2.0
+zenlog==0.1
+livereload==2.2.0

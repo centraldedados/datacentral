@@ -103,33 +103,33 @@ textarea {
 */
 
 @font-face {
-	  font-family: 'Comme Regular';
-	  src: local('Comme Regular'), url('/fonts/CommeSans/Comme-Regular.ttf') format('truetype');
+      font-family: 'Comme Regular';
+      src: local('Comme Regular'), url('/fonts/CommeSans/Comme-Regular.ttf') format('truetype');
 }
 
 @font-face {
-	  font-family: 'Comme Thin';
-	  src: local('Comme Thin'), url('/fonts/CommeSans/Comme-Thin.ttf') format('truetype');
+      font-family: 'Comme Thin';
+      src: local('Comme Thin'), url('/fonts/CommeSans/Comme-Thin.ttf') format('truetype');
 }
 
 @font-face {
-	  font-family: 'Comme Bold';
-	  src: local('Comme Bold'), url('/fonts/CommeSans/Comme-Bold.ttf') format('truetype');
+      font-family: 'Comme Bold';
+      src: local('Comme Bold'), url('/fonts/CommeSans/Comme-Bold.ttf') format('truetype');
 }
 
 @font-face {
-	  font-family: 'Comme Medium';
-	  src: local('Comme Medium'), url('/fonts/CommeSans/Comme-Medium.ttf') format('truetype');
+      font-family: 'Comme Medium';
+      src: local('Comme Medium'), url('/fonts/CommeSans/Comme-Medium.ttf') format('truetype');
 }
 
 @font-face {
-	  font-family: 'Comme Mono';
-	  src: local('Comme Mono'), url('/fonts/CommeSans/CommeMono-Regular.ttf') format('truetype');
+      font-family: 'Comme Mono';
+      src: local('Comme Mono'), url('/fonts/CommeSans/CommeMono-Regular.ttf') format('truetype');
 }
 
 body {
-		font-family: 'Comme Regular', DejaVu Sans, Arial, sans-serif;
-		line-height: 1.4;
+        font-family: 'Comme Regular', DejaVu Sans, Arial, sans-serif;
+        line-height: 1.4;
 }
 
 h1 {  font-size: 2.25em;  font-family: 'Comme Thin'; margin-bottom: .5em;  }
@@ -151,7 +151,7 @@ strong,
 .nav,
 .footer,
 small {
-		font-size: 0.75em;
+        font-size: 0.75em;
 }
 
 
@@ -159,13 +159,13 @@ small {
 */
 
 body {
-		background: #d8d6c9;
-		color: #2c373a;
+        background: #d8d6c9;
+        color: #2c373a;
 }
 
 a {
-		color: #de1b1b;
-		text-decoration: none;
+        color: #de1b1b;
+        text-decoration: none;
 }
 
 /* Layout
@@ -191,175 +191,197 @@ a {
 }
 
 .row > div {
-		width: 96%;
-		margin: 1em auto;
+        width: 96%;
+        margin: 1em auto;
 }
 
-.nav, .header, .row {
-		background: #f7f8f2;
+.nav, .header, .row, .search {
+        background: #f7f8f2;
 }
 
 .nav > div {
-		width: 96%;
-		margin: 0 auto;
+        width: 96%;
+        margin: 0 auto;
 }
 
 .nav li {
-		text-transform: uppercase;
+        text-transform: uppercase;
 }
 
 .nav > div > ul {
-		text-align: right;
+        text-align: right;
 }
 
 .nav li {
-		display: inline-block;
+        display: inline-block;
 }
 
 .nav li a {
-		display: block;
-		padding: .75em .5em;
+        display: block;
+        padding: .75em .5em;
 }
 
 .header > div {
-		width: 96%;
-		clear: both;
-		margin: 0 auto 1em;
-		padding-bottom: 1em;
-		border-bottom: 1px solid #b9bdc5;
+        width: 96%;
+        clear: both;
+        margin: 0 auto 1em;
+        padding-bottom: 1em;
+        border-bottom: 1px solid #b9bdc5;
 }
 
 .header a {
-		display: block;
-		overflow: hidden;
-		color: #2c373a;
-		padding: .5em 0;
+        display: block;
+        overflow: hidden;
+        color: #2c373a;
+        padding: .5em 0;
 }
 
 .header a:hover {
-		color: #de1b1b;
+        color: #de1b1b;
 }
 
 .header h1 {
-		font-size: 4em;
-		line-height: 1;
-		margin: 0;
+        font-size: 4em;
+        line-height: 1;
+        margin: 0;
 }
 
 
 .header img {
-		max-width: 100%;
+        max-width: 100%;
 }
 
 .row .description {
-		font-size: 0.865em;
-		padding-top: 1.5em;
+        font-size: 0.865em;
+        padding-top: 1.5em;
 }
 
 .description p,
 .main .readme p {
-		margin-bottom: .75em;
+        margin-bottom: .75em;
 }
 
 .row .main {
-		padding-top: 1em;
+        padding-top: 1em;
+}
+
+.search > div {
+    clear: both;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1em 0;
+}
+
+#search {
+    width: 95%;
+    display: inline;
+    float: left;
+}
+
+#spinner {
+    float: left;
+    display: inline;
+    visibility: hidden;
+    padding-right: 1em;
+}
+
+.notfound {
+    display: none;
 }
 
 /* homepage dataset list
 */
 
 .datasets > li {
-		border-top: 1px solid #b9bdc5;
-		margin-bottom: 1em;
-}
-
-.datasets > li:first-child {
-		border-top: 0;
+        border-bottom: 1px solid #b9bdc5;
+        padding-bottom: 1em;
+        margin-top: 1em;
+        margin-bottom: 0.45em;
 }
 
 .datasets h3 {
-		padding-top: .45em;
+        /*padding-top: .45em;*/
 }
 
 .datasets h3 > span {
-		display: inline-block;
-		float: right;
+        display: inline-block;
+        float: right;
 }
 
 .datasets h3 > span a {
-		font-size: 0.5em;
-		display: inline-block;
-		border: 2px solid #de1b1b;
-		padding: 6px 10px;
-		border-radius: 4px;
+        font-size: 0.5em;
+        display: inline-block;
+        border: 2px solid #de1b1b;
+        padding: 6px 10px;
+        border-radius: 4px;
 }
 
 .datasets .source {
-		color: #969ba6;
+        color: #969ba6;
 }
 
 
 .datasets .source a {
-		color: #969ba6;
-		border-bottom: 1px solid #969ba6;
+        color: #969ba6;
+        border-bottom: 1px solid #969ba6;
 }
 
 /* dataset page
 */
 
 .readme > h4 {
-		color: #969ba6;
-		line-height: 1.2;
-		margin-bottom: .5em;
+        color: #969ba6;
+        line-height: 1.2;
+        margin-bottom: .5em;
 }
 
 .readme h2 {
-		margin-top: .5em;
+        margin-top: .5em;
 }
 
 .datafiles {
-		display: block;
+        display: block;
 }
 
 .datafiles > li {
-		overflow: auto;
-		padding: 6px 0;
-		border-top: 1px solid #b9bdc5;
+        overflow: auto;
+        padding: 6px 0;
+        border-top: 1px solid #b9bdc5;
 }
 
 .datafiles > li:first-child {
-		padding: 0 0 10px 0;
-		border-top: 0;
+        padding: 0 0 10px 0;
+        border-top: 0;
 }
 
 .datafiles > li > a {
-		float: right;
-		display: inline-block;
-		font-size: 0.75em;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		border: 2px solid #de1b1b;
-		padding: 5px 8px;
-		border-radius: 4px;
+        float: right;
+        display: inline-block;
+        font-size: 0.75em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: 2px solid #de1b1b;
+        padding: 5px 8px;
+        border-radius: 4px;
 }
 
 .footer {
-		background: #d8d6c9;
-		padding-top: 1em;
+        background: #d8d6c9;
+        padding-top: 1em;
 }
 
 .footer h4 {
-		margin-bottom: 1em;
+        margin-bottom: 1em;
 }
 
 .footer li {
-		margin: 1em 1em 0 0;
+        margin: 1em 1em 0 0;
 }
 
 .footer div > ul img {
-		display: inline-block;
-		height: 50px;
-		width: auto;
+        display: inline-block;
+        height: 50px;
+        width: auto;
 }
 
 
@@ -369,9 +391,9 @@ a {
 
 @media only screen and (min-width: 400px) {
 
-		.datafiles > ul {
-				margin: 0 0 20px;
-		}
+        .datafiles > ul {
+                margin: 0 0 20px;
+        }
 
 }
 
@@ -382,35 +404,35 @@ a {
 
 @media only screen and (min-width: 600px) {
 
-		.row > div {
-				width: 92%;
-				margin: 1em auto;
-		}
+        .row > div {
+                width: 92%;
+                margin: 1em auto;
+        }
 
-		.header > div {
-				width: 92%;
-				margin: 0 auto;
-		}
+        .header > div {
+                width: 92%;
+                margin: 0 auto;
+        }
 
-		.header > div > a p {
-				display: block;
-				float: left;
-				width: 20%;
-				margin-right: 2%;
-		}
+        .header > div > a p {
+                display: block;
+                float: left;
+                width: 20%;
+                margin-right: 2%;
+        }
 
-		.header h1 {
-				float: left;
-		}
+        .header h1 {
+                float: left;
+        }
 
-		.nav > div {
-				width: 92%;
-				margin: 0 auto;
-		}
+        .nav > div {
+                width: 92%;
+                margin: 0 auto;
+        }
 
-		.datafiles > ul {
-				margin: 0 0  20px;
-		}
+        .datafiles > ul {
+                margin: 0 0  20px;
+        }
 
 }
 
@@ -420,87 +442,87 @@ a {
 
 @media only screen and (min-width: 900px) {
 
-		.row > div {
-				width: 86%;
-				margin: 1em auto;
-		}
+        .row > div {
+                width: 86%;
+                margin: 1em auto;
+        }
 
-		.header > div {
-				width: 86%;
-				margin: 0 auto;
-		}
+        .header > div {
+                width: 86%;
+                margin: 0 auto;
+        }
 
-		.header > div > a p {
-				display: block;
-				float: left;
-				width: 20%;
-				margin-right: 2%;
-		}
+        .header > div > a p {
+                display: block;
+                float: left;
+                width: 20%;
+                margin-right: 2%;
+        }
 
-		.header h1 {
-				float: left;
-				font-size: 6.5em;
-		}
+        .header h1 {
+                float: left;
+                font-size: 6.5em;
+        }
 
-		.nav > div {
-				width: 86%;
-				margin: 0 auto;
-		}
+        .nav > div {
+                width: 86%;
+                margin: 0 auto;
+        }
 
-		.nav > div > ul {
-				float: right;
-				width: 70%;
-		}
+        .nav > div > ul {
+                float: right;
+                width: 70%;
+        }
 
-		.header + .row > div {
-				width: 86%;
-				overflow: auto;
-				clear: both;
-				margin: 0 auto;
-				padding-bottom: 1.325em;
-		}
+        .header + .row > div {
+                width: 86%;
+                overflow: auto;
+                clear: both;
+                margin: 0 auto;
+                padding-bottom: 1.325em;
+        }
 
-		.row > div > .description {
-				float: left;
-				width: 20%;
-				margin-right: 2%;
-		}
+        .row > div > .description {
+                float: left;
+                width: 20%;
+                margin-right: 2%;
+        }
 
-		.row div .main {
-				float: left;
-				width: 78%;
-		}
+        .row div .main {
+                float: left;
+                width: 78%;
+        }
 
-		.main .readme {
-				width: 66%;
-				margin-right: 4%;
-				float: left;
-		}
+        .main .readme {
+                width: 66%;
+                margin-right: 4%;
+                float: left;
+        }
 
-		.datafiles {
-				width: 30%;
-				float: left;
-		}
+        .datafiles {
+                width: 30%;
+                float: left;
+        }
 
-		.datafiles > ul {
-				margin: 0 0  20px;
-		}
+        .datafiles > ul {
+                margin: 0 0  20px;
+        }
 
-		.datafiles ul > li {
-		}
+        .datafiles ul > li {
+        }
 
-		.datafiles ul > li > a {
-		}
+        .datafiles ul > li > a {
+        }
 
-		.footer li {
-				display: inline-block;
-				margin: 0 1em 0 0;
-		}
+        .footer li {
+                display: inline-block;
+                margin: 0 1em 0 0;
+        }
 
-		.footer li a {
-				display: inline-block;
-				padding: .5em .25em;
-		}
+        .footer li a {
+                display: inline-block;
+                padding: .5em .25em;
+        }
 
 }
 
