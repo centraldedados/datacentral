@@ -245,8 +245,9 @@ def generate(offline, fetch_only):
         pkg_info['last_updated'] = last_updated
         # add it to the packages list for index page generation after the loop ends
         packages.append(pkg_info)
-        # if repo was updated, 1. generate the dataset HTML page and 2. copy over
-        # CSV/JSON/* and ZIP files to the download dir
+        # re-generate the dataset HTML pages
+        create_dataset_page(pkg_info)
+        # if repo was updated, copy over CSV/JSON/* and ZIP files to the download dir
         # (we always generate them if offline)
         if updated or offline:
             create_dataset_page(pkg_info)
