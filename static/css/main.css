@@ -195,7 +195,7 @@ a {
         margin: 1em auto;
 }
 
-.nav, .header, .row, .search {
+.nav, .header, .row {
         background: #f7f8f2;
 }
 
@@ -253,7 +253,7 @@ a {
 
 .row .description {
         font-size: 0.865em;
-        padding-top: 1.5em;
+        padding-top: 2em;
 }
 
 .description p,
@@ -262,27 +262,29 @@ a {
 }
 
 .row .main {
-        padding-top: 1em;
+        padding-top: 1rem;
 }
 
-.search > div {
-    clear: both;
-    width: 50%;
-    margin: 0 auto;
-    padding: 1em 0;
+.search {
+        position: relative;
+        padding: 0 0 1em;
 }
 
 #search {
-    width: 95%;
-    display: inline;
-    float: left;
+        display: block;
+        width: 100%;
+        border: 2px solid #de1b1b;
+        padding: 0.5rem 1.65rem 0.5rem 0.45rem;
+        border-radius: 4px;
 }
 
 #spinner {
-    float: left;
-    display: inline;
-    visibility: hidden;
-    padding-right: 1em;
+        display: inline;
+        visibility: hidden;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.35rem;
+        z-index: 100;
 }
 
 .notfound {
@@ -299,6 +301,10 @@ a {
         margin-bottom: 0.45em;
 }
 
+    .datasets > li:nth-child(2) {
+            margin-top: 0;
+    }
+
 .datasets h3 {
         /*padding-top: .45em;*/
 }
@@ -312,7 +318,7 @@ a {
         font-size: 0.5em;
         display: inline-block;
         border: 2px solid #de1b1b;
-        padding: 6px 10px;
+        padding: 0.5rem 1rem;
         border-radius: 4px;
 }
 

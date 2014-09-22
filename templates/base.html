@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{% block title %}Central de Dados{% endblock %}</title>
-        <meta name="description" content="">
+        <meta name="description" content="Um repositório de datasets Open Data em Portugal">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/css/main.css">
     </head>
@@ -28,15 +28,13 @@
                 </a>
             </div>
         </header>
-        <section class="search">
-            <div>
-                <span id="spinner"><img src="/img/ajax-loader.gif" alt="Loading..." title="Loading..." /></span>
-                <input id="search" type="text" placeholder="Search..." />
-            </div>
-        </section>
         <section class="row">
             <div>
                 <div class="description">
+                    <div class="search">
+                        <input id="search" type="text" placeholder="Pesquisar datasets..." />
+                        <span id="spinner"><img src="/img/ajax-loader.gif" alt="Loading..." title="Loading..." /></span>
+                    </div>
                     {{ welcome_text }}
                 </div>
                 <div class="main">
@@ -46,7 +44,7 @@
         </section>
         <footer class="footer row">
             <div>
-                <h4><a rel="external" href="http://transparenciahackday.org" title="Transparência Hackday">Transparência Hackday Portugal</a></h4></a>
+                <h4><a rel="external" href="http://transparenciahackday.org" title="Transparência Hackday">Transparência Hackday Portugal</a></h4>
                 <ul>
                     <li>com Apoio&nbsp;
                         <a rel="external" href="http://jplusplus.pt">

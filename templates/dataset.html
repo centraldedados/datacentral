@@ -4,7 +4,9 @@
 <h1>{{ title }}</h1>
 
     <div class="readme">
-        <h4>{{ description }}</h4>
+        {% if description %}
+            <h4>{{ description }}</h4>
+        {% endif %}
         {{ readme }}
     </div>
 
