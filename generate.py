@@ -83,18 +83,18 @@ def create_dataset_page(pkg_info):
 
 
 def process_datapackage(pkg_name):
-    '''Reads a data package and returns a dict with its metadata. The 
+    '''Reads a data package and returns a dict with its metadata. The
     items in the dict are:
         - name
         - title
         - license
         - description
         - sources
-        - readme: in HTML, processed with python-markdown from README.md, 
+        - readme: in HTML, processed with python-markdown from README.md,
           empty if README.md does not exist)
-        - datafiles: a dict that contains the contents of the "resources" 
+        - datafiles: a dict that contains the contents of the "resources"
           attribute. Each resource also contains the "basename" property,
-          which is the resource base filename (without preceding 
+          which is the resource base filename (without preceding
           directory)
     '''
     pkg_dir = os.path.join(repo_dir, pkg_name)
@@ -127,7 +127,8 @@ def process_datapackage(pkg_name):
         r['basename'] = os.path.basename(r['path'])
     pkg_info['datafiles'] = metadata['resources']
 
-    return pkg_info    
+    return pkg_info
+
 
 @click.command()
 @click.option('-f', '--fetch-only', help='Only clone or pull repos, do not generate HTML output.', is_flag=True, default=False)
@@ -178,7 +179,7 @@ def generate(offline, fetch_only):
     for r in parser.items('repositories'):
         name, url = r
         dir_name = os.path.join(repo_dir, name)
-  
+
         # do we have a local copy?
         if os.path.isdir(dir_name):
             if not offline:
@@ -191,17 +192,17 @@ def generate(offline, fetch_only):
                     # usually this fails on the first run, try again
                     origin.fetch()
                 except git.exc.GitCommandError:
-                    log.critical("Error connecting to repository, this dataset will be ignored and not listed in the index!")
+                    log.critical("Fetch error connecting to repository, this dataset will be ignored and not listed in the index!")
                     continue
                 # connection errors can also happen if fetch succeeds but pull fails
                 try:
                     result = origin.pull()[0]
                 except git.exc.GitCommandError:
-                    log.critical("Error connecting to repository, this dataset will be ignored and not listed in the index!")
+                    log.critical("Pull error connecting to repository, this dataset will be ignored and not listed in the index!")
                     continue
                 # we get specific flags for the results Git gave us
                 # and we set the "updated" var in order to signal whether to
-                # copy over the new files to the download dir or not 
+                # copy over the new files to the download dir or not
                 if result.flags & result.FAST_FORWARD:
                     log.info("Pulled new changes to repo '%s'." % name)
                     updated = True
@@ -212,7 +213,7 @@ def generate(offline, fetch_only):
                     log.error("Error pulling from repo '%s'!" % name)
                     updated = False
                 else:
-                    # TODO: figure out the other git-python flags and return more
+                    # TODO: figure out other git-python flags and return more
                     # informative log output
                     log.info("Repo changed, updating. (returned flags: %d)" % result.flags)
                     updated = True
@@ -234,7 +235,7 @@ def generate(offline, fetch_only):
                 log.info("We don't have repo '%s', cloning..." % name)
                 repo = git.Repo.clone_from(url, dir_name)
                 updated = True
-         
+
         # get datapackage metadata
         pkg_info = process_datapackage(name)
         # set last updated time based on last commit, comes in Unix timestamp format so we convert
@@ -273,5 +274,3 @@ def generate(offline, fetch_only):
 
 if __name__ == "__main__":
     generate()
-
-
