@@ -6,3 +6,8 @@ repos/
 settings.conf
 # virtualenv is local
 .env/
+
+# cruft files
+*.pyc
+*.swp
+*~

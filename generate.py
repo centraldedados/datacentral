@@ -14,13 +14,16 @@ TODO:
 
 from ConfigParser import SafeConfigParser
 import jinja2
-import git, sys, os, shutil
+import git
+import sys
+import os
+import shutil
 import markdown
 import json
 import codecs
 import click
 import zipfile
-# instant pretty logs
+from utils import csv2json
 from zenlog import log
 
 config_file = "settings.conf"
@@ -32,6 +35,7 @@ files_dir = "download"
 
 # set up Jinja
 env = jinja2.Environment(loader=jinja2.FileSystemLoader([template_dir]))
+
 
 def create_index_page(packages):
     '''Generates the index page with the list of available packages.
@@ -48,6 +52,7 @@ def create_index_page(packages):
     f.close()
     log.info("Created index.html.")
 
+
 def create_api(packages):
     '''Generates a static API containing all the datapackage.json of the containing datasets.
     Accepts a list of pkg_info dicts, which are generated with the
@@ -57,14 +62,15 @@ def create_api(packages):
         pkg_dir = os.path.join(repo_dir, pkg_info['name'])
         all_metadata.append(json.loads(open(os.path.join(pkg_dir, "datapackage.json")).read()))
     with open(os.path.join(output_dir, 'api.json'), 'w') as api_file:
-          json.dump(all_metadata, api_file)
+        json.dump(all_metadata, api_file)
     log.info("Created api.json.")
+
 
 def create_dataset_page(pkg_info):
     '''Generate a single dataset page.'''
     template = env.get_template("dataset.html")
     name = pkg_info["name"]
-    target = os.path.join("datasets/", name+".html")
+    target = os.path.join("datasets/", name + ".html")
 
     context = {"title": pkg_info["title"],
                "description": pkg_info["description"],
@@ -72,7 +78,7 @@ def create_dataset_page(pkg_info):
                "readme": pkg_info["readme"],
                "datafiles": pkg_info["datafiles"],
                "last_updated": pkg_info["last_updated"],
-              }
+               }
     context['welcome_text'] = markdown.markdown(codecs.open("content/welcome_text.md", 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8")
     contents = template.render(**context)
 
@@ -253,12 +259,14 @@ def generate(offline, fetch_only):
         if updated or offline:
             create_dataset_page(pkg_info)
             datafiles = pkg_info['datafiles']
-            zipf = zipfile.ZipFile(os.path.join(output_dir, files_dir, name+'.zip'), 'w')
+            zipf = zipfile.ZipFile(os.path.join(output_dir, files_dir, name + '.zip'), 'w')
             for d in datafiles:
-                log.info("Copying %s to the %s/%s dir..." % (d['basename'], output_dir, files_dir))
+                # copy CSV file
                 target = os.path.join(output_dir, files_dir, os.path.basename(d['path']))
                 shutil.copyfile(os.path.join(dir_name, d['path']), target)
-                log.info("Creating %s.zip in the %s/%s dir..." % (d['name'], output_dir, files_dir))
+                # generate JSON version
+                csv2json(target, target.replace(".csv", ".json"))
+                # make zip file
                 zipf.write(os.path.join(dir_name, d['path']), d['basename'], compress_type=zipfile.ZIP_DEFLATED)
             try:
                 zipf.write(pkg_info['readme_path'], 'README.md')
