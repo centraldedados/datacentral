@@ -29,6 +29,9 @@ on the portal.
 Installation and Usage
 ------------
 
+**Note:** This was tested on Python 2.7, and some tweaks are still
+needed to support Python 3 (we could use some help!)
+
 1. **Install dependencies**. After cloning the repository, change 
    to the project directory and run `make install`. This will 
    create a local virtualenv and install the necessary 
