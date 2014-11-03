@@ -203,10 +203,7 @@ def generate(offline, fetch_only):
                 # we get specific flags for the results Git gave us
                 # and we set the "updated" var in order to signal whether to
                 # copy over the new files to the download dir or not
-                if result.flags & result.FAST_FORWARD:
-                    log.info("Pulled new changes to repo '%s'." % name)
-                    updated = True
-                elif result.flags & result.HEAD_UPTODATE:
+                if result.flags & result.HEAD_UPTODATE:
                     log.info("No new changes in repo '%s'." % name)
                     updated = False
                 elif result.flags & result.ERROR:
