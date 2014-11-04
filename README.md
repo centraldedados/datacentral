@@ -39,9 +39,9 @@ needed to support Python 3 (we could use some help!)
    since the `make` commands are all set to work with the venv 
    that `make install` creates inside the Data Central dir.
 
-2. **Edit settings**. Copy the `settings.conf.sample` file into 
-   `settings.conf`, and edit it to set your options and point to 
-   your data package repositories.
+2. **Edit settings**. Edit the newly created `settings.conf`
+   to set your options and point to your data package 
+   repositories.
 
 3. **Generate the HTML output**. Just run `make html`!
 
