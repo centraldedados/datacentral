@@ -23,9 +23,12 @@
 # See https://github.com/jplusplus/resonate2014/blob/master/Makefile for
 # the basis from where this file was created.
 
+# your SSH target dir for rsync
+SSH_PATH = "wf:~/webapps/centraldedados/"
+# server port for local server
+SERVER_PORT = 8002
 MAIN_SCRIPT = $(wildcard generate.py)
 OFFLINE_FLAG = "--offline"
-SERVER_PORT = 8002
 
 html:
 	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT)
@@ -43,7 +46,7 @@ serve:
 	. `pwd`/.env/bin/activate; cd _output && livereload -p $(SERVER_PORT)
 
 upload:
-	rsync --compress --progress --recursive --update --delete _output/* wf:~/webapps/centraldedados/
+	rsync --compress --progress --recursive --update --exclude=".htaccess" --exclude="apache2" --exclude="htdocs" --delete _output/* $(SSH_PATH)
 
 clean:
 	rm -fr repos _output
