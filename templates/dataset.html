@@ -14,8 +14,9 @@
         <li><h4>Ficheiros</h4></li>
         {% for d in datafiles %}
             <li class="box">
-                <span>{{ d.basename }}</span>
-                <a href="/download/{{ d.basename }}">Download</a>
+                <span>{{ d.name }}</span>
+                <a href="/download/{{ d.basename }}">CSV</a>
+                <a href="/download/{{ d.basename.replace(".csv", ".json") }}">JSON</a>
             </li>
         {% endfor %}
     </ul>

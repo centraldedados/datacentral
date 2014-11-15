@@ -131,6 +131,7 @@ def process_datapackage(pkg_name):
     # process resource/datafiles list
     for r in metadata['resources']:
         r['basename'] = os.path.basename(r['path'])
+        r['title'] = os.path.basename(r['name'])
     pkg_info['datafiles'] = metadata['resources']
 
     return pkg_info
