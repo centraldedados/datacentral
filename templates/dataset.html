@@ -15,8 +15,8 @@
         {% for d in datafiles %}
             <li class="box">
                 <span>{{ d.name }}</span>
-                <a href="/download/{{ d.basename }}">CSV</a>
-                <a href="/download/{{ d.basename.replace(".csv", ".json") }}">JSON</a>
+                <a href="/{{ d.basename }}">CSV</a>
+                <a href="/{{ d.basename.replace(".csv", ".json") }}">JSON</a>
             </li>
         {% endfor %}
     </ul>

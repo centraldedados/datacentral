@@ -1,0 +1,22 @@
+# Apache Rewrite Rules
+ <IfModule mod_rewrite.c>
+  Options +FollowSymLinks
+  RewriteEngine On
+  RewriteBase /
+
+# Add trailing slash to url
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/|#(.*))$
+  RewriteRule ^(.*)$ $1/ [R=301,L]
+
+# Remove .html-extension from url
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^([^\.]+)/$ $1.html 
+
+# End of Apache Rewrite Rules
+ </IfModule>
+
+# Fix JSON encoding
+AddDefaultCharset utf-8
+AddType 'application/json; charset=UTF-8' .json

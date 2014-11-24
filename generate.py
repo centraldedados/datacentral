@@ -70,7 +70,7 @@ def create_dataset_page(pkg_info):
     '''Generate a single dataset page.'''
     template = env.get_template("dataset.html")
     name = pkg_info["name"]
-    target = os.path.join("datasets/", name + ".html")
+    target = name + ".html"
 
     context = {"title": pkg_info["title"],
                "description": pkg_info["description"],
@@ -149,12 +149,8 @@ def generate(offline, fetch_only):
     if not os.path.exists(repo_dir):
         log.info("Directory %s doesn't exist, creating it." % repo_dir)
         os.mkdir(repo_dir)
-    # create dir for dataset pages
-    if not os.path.exists(os.path.join(output_dir, datasets_dir)):
-        os.mkdir(os.path.join(output_dir, datasets_dir))
-    # create download dir for zip and csv/json/* dataset files
-    if not os.path.exists(os.path.join(output_dir, files_dir)):
-        os.mkdir(os.path.join(output_dir, files_dir))
+    # copy htaccess file
+    shutil.copyfile('static/htaccess', os.path.join(output_dir, ".htaccess"))
     # create static dirs
     # TODO: only update changed files -- right now we regenerate the whole static dir
     css_dir = os.path.join(output_dir, "css")
@@ -257,10 +253,10 @@ def generate(offline, fetch_only):
         if updated or offline:
             create_dataset_page(pkg_info)
             datafiles = pkg_info['datafiles']
-            zipf = zipfile.ZipFile(os.path.join(output_dir, files_dir, name + '.zip'), 'w')
+            zipf = zipfile.ZipFile(os.path.join(output_dir, name + '.zip'), 'w')
             for d in datafiles:
                 # copy CSV file
-                target = os.path.join(output_dir, files_dir, os.path.basename(d['path']))
+                target = os.path.join(output_dir, os.path.basename(d['path']))
                 shutil.copyfile(os.path.join(dir_name, d['path']), target)
                 # generate JSON version
                 csv2json(target, target.replace(".csv", ".json"))

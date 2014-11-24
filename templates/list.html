@@ -3,15 +3,15 @@
 {% block content %}
     <ul class="datasets">
         <li class="notfound">
-            Oops no datasets found...
+            No datasets found.
         </li>
     {% for d in datapackages %}
         <li class="dataset-{{ d.original_name }}">
             <h3>
                 {{ d.title }}&nbsp;
                 <span>
-                    <a href="/datasets/{{ d.name }}.html">Detalhes</a>&nbsp;
-                    <a href="/download/{{ d.name }}.zip">Download</a>
+                    <a href="/{{ d.name }}">Detalhes</a>&nbsp;
+                    <a href="/{{ d.name }}.zip">Download</a>
                 </span>
             </h3>
             <p>{{ d.description }}</p>
