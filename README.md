@@ -34,9 +34,13 @@ needed to support Python 3 (we could use some help!)
 
 1. **Install dependencies**. After cloning the repository, check 
 if you have virtualenv installed with:
+	
 	$ pip show virtualenv
+
 You can install virtualenv with:
+
 	$ pip install --user virtualenv
+
 Once all the dependecies are installed, change 
    to the project directory and run `make install`. This will 
    create a local virtualenv and install the necessary 
