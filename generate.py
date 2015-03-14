@@ -70,7 +70,10 @@ def create_dataset_page(pkg_info):
     '''Generate a single dataset page.'''
     template = env.get_template("dataset.html")
     name = pkg_info["name"]
-    target = name + ".html"
+    if not os.path.exists(os.path.join(output_dir, name)):
+        os.makedirs(os.path.join(output_dir, name))
+
+    target = "%s/index.html" % (name)
 
     context = {"title": pkg_info["title"],
                "description": pkg_info["description"],
