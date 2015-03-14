@@ -266,15 +266,14 @@ a {
 }
 
 .search {
-        position: relative;
         padding: 0 0 1em;
 }
 
 #search {
         display: block;
-        width: 100%;
+        width: 95%;
         border: 2px solid #de1b1b;
-        padding: 0.5rem 1.65rem 0.5rem 0.45rem;
+        padding: 0.5rem 0rem 0.5rem 0.5rem;
         border-radius: 4px;
 }
 
