@@ -28,12 +28,22 @@ from zenlog import log
 
 config_file = "settings.conf"
 output_dir = "_output"
-template_dir = "templates"
 repo_dir = "repos"
 datasets_dir = "datasets"
 files_dir = "download"
+themes_dir = "themes"
+
+# read the config file
+parser = SafeConfigParser()
+parser.read(config_file)
+packages = []
+
+print parser.get('ui', 'theme')
+theme_name = parser.get('ui', 'theme')
+theme_dir = os.path.join(themes_dir, theme_name)
 
 # set up Jinja
+template_dir = os.path.join(theme_dir, "templates")
 env = jinja2.Environment(loader=jinja2.FileSystemLoader([template_dir]))
 
 
@@ -160,7 +170,7 @@ def generate(offline, fetch_only):
         log.info("Directory %s doesn't exist, creating it." % repo_dir)
         os.mkdir(repo_dir)
     # copy htaccess file
-    shutil.copyfile('static/htaccess', os.path.join(output_dir, ".htaccess"))
+    shutil.copyfile(os.path.join(theme_dir, 'static/htaccess'), os.path.join(output_dir, ".htaccess"))
     # create static dirs
     # TODO: only update changed files -- right now we regenerate the whole static dir
     css_dir = os.path.join(output_dir, "css")
@@ -169,21 +179,17 @@ def generate(offline, fetch_only):
     fonts_dir = os.path.join(output_dir, "fonts")
     if os.path.exists(css_dir):
         shutil.rmtree(css_dir)
-    shutil.copytree("static/css", css_dir)
+    shutil.copytree(os.path.join(theme_dir, "static/css"), css_dir)
     if os.path.exists(js_dir):
         shutil.rmtree(js_dir)
-    shutil.copytree("static/js", js_dir)
+    shutil.copytree(os.path.join(theme_dir, "static/js"), js_dir)
     if os.path.exists(img_dir):
         shutil.rmtree(img_dir)
-    shutil.copytree("static/img", img_dir)
+    shutil.copytree(os.path.join(theme_dir, "static/img"), img_dir)
     if os.path.exists(fonts_dir):
         shutil.rmtree(fonts_dir)
-    shutil.copytree("static/fonts", fonts_dir)
+    shutil.copytree(os.path.join(theme_dir, "static/fonts"), fonts_dir)
 
-    # read the config file to get the datasets we want to publish
-    parser = SafeConfigParser()
-    parser.read(config_file)
-    packages = []
 
     if not parser.items('repositories'):
         log.critical('No repository data in settings.conf (does it even exist?). Cannot proceed :(')
