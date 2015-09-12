@@ -4,15 +4,15 @@
 <h1>{{ title }}</h1>
 
     <div class="readme">
-        {% if description %}
-            <h4>{{ description }}</h4>
+        {% if datapkg.description %}
+            <h4>{{ datapkg.description }}</h4>
         {% endif %}
-        {{ readme }}
+        {{ datapkg.readme }}
     </div>
 
     <ul class="datafiles">
         <li><h4>Ficheiros</h4></li>
-        {% for d in datafiles %}
+        {% for d in datapkg.datafiles %}
             <li class="box">
                 <span>{{ d.name }}</span>
                 <a href="/{{ d.basename }}">CSV</a>

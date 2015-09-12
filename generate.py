@@ -85,13 +85,7 @@ def create_dataset_page(pkg_info):
 
     target = "%s/index.html" % (name)
 
-    context = {"title": pkg_info["title"],
-               "description": pkg_info["description"],
-               "sources": pkg_info.get("sources"),
-               "readme": pkg_info["readme"],
-               "datafiles": pkg_info["datafiles"],
-               "last_updated": pkg_info["last_updated"],
-               }
+    context = {"datapkg": pkg_info}
     context['welcome_text'] = markdown.markdown(codecs.open("content/welcome_text.md", 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8")
     contents = template.render(**context)
 
@@ -189,7 +183,6 @@ def generate(offline, fetch_only):
     if os.path.exists(fonts_dir):
         shutil.rmtree(fonts_dir)
     shutil.copytree(os.path.join(theme_dir, "static/fonts"), fonts_dir)
-
 
     if not parser.items('repositories'):
         log.critical('No repository data in settings.conf (does it even exist?). Cannot proceed :(')
