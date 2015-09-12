@@ -212,7 +212,7 @@ def generate(offline, fetch_only):
                     origin.fetch()
                 except git.exc.GitCommandError:
                     log.critical("Fetch error connecting to repository, this dataset will be ignored and not listed in the index!")
-                    continue
+                    raise
                 # connection errors can also happen if fetch succeeds but pull fails
                 try:
                     result = origin.pull()[0]
@@ -257,8 +257,7 @@ def generate(offline, fetch_only):
         # set last updated time based on last commit, comes in Unix timestamp format so we convert
         import datetime
         d = repo.head.commit.committed_date
-        last_updated = datetime.datetime.fromtimestamp(int("1284101485")).strftime('%Y-%m-%d %H:%M:%S')
-        log.debug(last_updated)
+        last_updated = datetime.datetime.fromtimestamp(int(d)).strftime('%Y-%m-%d %H:%M:%S')
         pkg_info['last_updated'] = last_updated
         # add it to the packages list for index page generation after the loop ends
         packages.append(pkg_info)
