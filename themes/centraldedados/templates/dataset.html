@@ -13,7 +13,7 @@
           <h5>{{ d.name }}</h5>
           <dl>
           {% for f in d.schema.fields %}
-           <dd>{{ f.name }}</dd><dt>{{ f.description }}</dt>
+           <dt>{{ f.name }}</dt><dd>{{ f.description }}</dd>
           {% endfor %}
         {% endfor %}
     </div>
