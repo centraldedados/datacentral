@@ -8,6 +8,14 @@
             <h4>{{ datapkg.description }}</h4>
         {% endif %}
         {{ datapkg.readme }}
+
+        {% for d in datapkg.datafiles %}
+          <h5>{{ d.name }}</h5>
+          <dl>
+          {% for f in d.schema.fields %}
+           <dd>{{ f.name }}</dd><dt>{{ f.description }}</dt>
+          {% endfor %}
+        {% endfor %}
     </div>
 
     <div class="more-info">
