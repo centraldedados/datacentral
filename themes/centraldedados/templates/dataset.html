@@ -10,6 +10,17 @@
         {{ datapkg.readme }}
     </div>
 
+    <div class="more-info">
+      <p>Versão: {{ datapkg.version }}</p>
+      <p>Fontes:</p>
+      <ul>
+        {% for s in datapkg.sources %}
+        <li><a href="{{ s.web }}">{{ s.name }}</a></li>
+        {% endfor %}
+      <p>Licença: {{ datapkg.license }}</p>
+      <p>Última atualização: {{ datapkg.last_updated }}</p>
+      <p>Repositório Git: <em>{{ datapkg.repository }}</em></p>
+
     <ul class="datafiles">
         <li><h4>Ficheiros</h4></li>
         {% for d in datapkg.datafiles %}
