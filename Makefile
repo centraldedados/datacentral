@@ -30,13 +30,12 @@ SERVER_PORT = 8002
 MAIN_SCRIPT = $(wildcard generate.py)
 OFFLINE_FLAG = "--offline"
 
-html:
+build:
 	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT)
 
-html-offline:
+build-offline:
 	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT) $(OFFLINE_FLAG)
 
-# FIXME: untested
 install:
 	virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\)
 	. `pwd`/.env/bin/activate; pip install -r requirements.txt
@@ -50,8 +49,4 @@ upload:
 
 clean:
 	rm -fr repos _output
-
-clean-html:
-	rm -fr _output
-
 
