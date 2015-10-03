@@ -4,32 +4,29 @@
 
 <section class="row">
   <div>
-    <div class="main">
+    <div class="main-dataset">
       <h1>{{ title }}</h1>
 
-      <div class="files">
+      <div class="left-col">
+
+        <h4>Downloads</h4>
         {% for d in datapkg.datafiles %}
         <h5>{{ d.title }} &ndash; <a href="/{{ d.basename }}">CSV</a> &bull; <a href="/{{ d.basename.replace(".csv", ".json") }}">JSON</a></h5>
-        <dl>
+
+        <h5>Campos</h5>
+        <ul>
           {% for f in d.schema.fields %}
-          <dt>{{ f.name }}</dt><dd>{{ f.description }}</dd>
+          <li><strong>{{ f.name }}</strong> &ndash; {{ f.description }}</li>
           {% endfor %}
-          {% endfor %}
-      </div>
+        {% endfor %}
+        </ul>
 
-      <hr>
-
-      <div class="readme">
-        {% if datapkg.description %}
-        <h4>{{ datapkg.description }}</h4>
-        {% endif %}
-        {{ datapkg.readme }}
-      </div>
-
-      <div class="more-info">
         <p><a href="{{ datapkg.repository }}">Ver o repositório Git</a></p>
-        <p>Versão: {{ datapkg.version }}</p>
-        <p>Fontes:</p>
+
+        <h6>Versão</h6>
+        <p>{{ datapkg.version }}</p>
+
+        <h6>Fontes</h6>
         <ul>
           {% for s in datapkg.sources %}
           <li><a href="{{ s.web }}">{{ s.name }}</a></li>
@@ -37,8 +34,15 @@
         </ul>
         <p>Licença: {{ datapkg.license }}</p>
         <p>Última atualização: {{ datapkg.last_updated }}</p>
-
       </div>
+
+      <div class="right-col">
+        {% if datapkg.description %}
+        <h4>{{ datapkg.description }}</h4>
+        {% endif %}
+        {{ datapkg.readme }}
+      </div>
+
     </div>
   </div>
 </section>

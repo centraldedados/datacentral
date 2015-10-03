@@ -498,6 +498,23 @@ a {
                 width: 78%;
         }
 
+        .row div .main-dataset {
+                width: 100%;
+        }
+        /* Dataset page columns */
+
+        .left-col {
+                float: left;
+                width: 50%;
+                margin-right: 2%;
+        }
+
+        .right-col {
+                float: left;
+                width: 48%;
+        }
+
+        /*
         .main .readme {
                 width: 66%;
                 margin-right: 4%;
@@ -518,6 +535,7 @@ a {
 
         .datafiles ul > li > a {
         }
+        */
 
         .footer li {
                 display: inline-block;
