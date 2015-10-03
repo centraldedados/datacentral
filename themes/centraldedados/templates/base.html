@@ -1,73 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{% block title %}Central de Dados{% endblock %}</title>
-        <meta name="description" content="Um repositório de datasets Open Data em Portugal">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/main.css">
-    </head>
-    <body>
-        <nav class="nav">
-            <div>
-                <ul>
-                    <!--
-                    <li><a href="#">Acerca</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    -->
-                    <li><a href="/api.json">API</a></li>
-                </ul>
-            </div>
-        </nav>
-        <header class="header">
-            <div>
-                <a href="/">
-                    <p><img src="/img/centraldedados.png" alt="Central de Dados" /></p>
-                    <h1>Central de Dados</h1>
-                </a>
-            </div>
-        </header>
-        <section class="row">
-            <div>
-                <div class="description">
-                    <div class="search">
-                        <input id="search" type="text" placeholder="Pesquisar datasets..." />
-                        <span id="spinner"><img src="/img/ajax-loader.gif" alt="Loading..." title="Loading..." /></span>
-                    </div>
-                    {{ welcome_text }}
-                </div>
-                <div class="main">
-                    {% block content %}{% endblock %}
-                </div>
-            </div>
-        </section>
-        <footer class="footer row">
-            <div>
-                <h4><a rel="external" href="http://transparenciahackday.org" title="Transparência Hackday">Transparência Hackday Portugal</a></h4>
-                <ul>
-                    <li>com Apoio&nbsp;
-                        <a rel="external" href="http://jplusplus.pt">
-                            <img src="/img/jplusplus.png" alt="Journalism++" />
-                            <strong>Journalism++</strong>
-                        </a>
-                    </li>
-                    <li>
-                        Agradecimentos&nbsp;
-                        <a rel="external" href="https://okfn.org">
-                            <img src="/img/okfn.png" alt="OKFN" />
-                            <strong>Open Knowledge</strong>
-                        </a>
-                    </li>
-                    <!--<li>Parceiros <a rel="external" href="http://ama.pt">
-                        <img src="/img/ama.png" alt="AMA" />
-                        <strong>AMA, Agência para a Modernização</strong>
-                    </a></li>-->
-                </ul>
-            </div>
-        </footer>
-        <script src="/js/jquery-1.11.0.min.js"></script>
-        <script src="/js/underscore-min.js"></script>
-        <script src="/js/search.js"></script>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block title %}Central de Dados{% endblock %}</title>
+    <meta name="description" content="Um repositório de datasets Open Data em Portugal">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <nav class="nav">
+      <div>
+        <ul>
+          <!--
+            <li><a href="#">Acerca</a></li>
+            <li><a href="#">FAQ</a></li>
+          -->
+          <li><a href="/api.json">API</a></li>
+        </ul>
+      </div>
+    </nav>
+    <header class="header">
+      <div>
+        <a href="/">
+          <p><img src="/img/centraldedados.png" alt="Central de Dados" /></p>
+          <h1>Central de Dados</h1>
+        </a>
+      </div>
+    </header>
+    {% block content %}{% endblock %}
+    <footer class="footer row">
+      <div>
+        <h4><a rel="external" href="http://transparenciahackday.org" title="Transparência Hackday">Transparência Hackday Portugal</a></h4>
+        <ul>
+          <li>Apoio&nbsp;
+            <a rel="external" href="http://jplusplus.org">
+              <img src="/img/jplusplus.png" alt="Journalism++" />
+              <strong>Journalism++</strong>
+            </a>
+          </li>
+          <li>
+            Agradecimentos&nbsp;
+            <a rel="external" href="https://okfn.org">
+              <img src="/img/okfn.png" alt="OKFN" />
+              <strong>Open Knowledge</strong>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/underscore-min.js"></script>
+    <script src="/js/search.js"></script>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(["setCookieDomain", "*.centraldedados.pt"]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//piwik.manufacturaindependente.org/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 2]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//piwik.manufacturaindependente.org/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+
+  </body>
 </html>

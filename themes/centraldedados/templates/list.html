@@ -1,30 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <ul class="datasets">
+<section class="row">
+  <div>
+    <div class="description">
+      <div class="search">
+        <input id="search" type="text" placeholder="Pesquisar datasets..." />
+        <span id="spinner"><img src="/img/ajax-loader.gif" alt="Loading..." title="Loading..." /></span>
+      </div>
+      {{ welcome_text }}
+    </div>
+    <div class="main">
+      <ul class="datasets">
         <li class="notfound">
-            No datasets found.
+          No datasets found.
         </li>
-    {% for d in datapackages %}
+        {% for d in datapackages %}
         <li class="dataset-{{ d.original_name }}">
-            <h3>
-                {{ d.title }}&nbsp;
-                <span>
-                    <a href="/{{ d.name }}/">Detalhes</a>&nbsp;
-                    <a href="/{{ d.name }}.zip">Download</a>
-                </span>
-            </h3>
-            <p>{{ d.description }}</p>
-            <p class="source">
-                {% if d.sources %}
-                    <em>Fontes:</em>
-                    {% for s in d.sources %}
-                        <a href="{{ s.web }}">{{ s.name }}</a>
-                    {% endfor %}
-                {% endif %}
-            </p>
+          <h3>
+            {{ d.title }}&nbsp;
+            <span>
+              <a href="/{{ d.name }}/">Detalhes</a>&nbsp;
+              <a href="/{{ d.name }}.zip">Download</a>
+            </span>
+          </h3>
+          <p>{{ d.description }}</p>
+          <p class="source">
+          {% if d.sources %}
+          <em>Fontes:</em>
+          {% for s in d.sources %}
+          <a href="{{ s.web }}">{{ s.name }}</a>
+          {% endfor %}
+          {% endif %}
+          </p>
         </li>
-    {% endfor %}
-    </ul>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
 {% endblock content %}
 
