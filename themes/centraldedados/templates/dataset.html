@@ -9,6 +9,13 @@
 
       <div class="left-col">
 
+
+        <h4>Detalhes</h4>
+        <p><strong>Versão</strong> {{ datapkg.version }}</p>
+        <p><strong>Licença</strong> {{ datapkg.license }}</p>
+        <p><strong>Última atualização</strong> {{ datapkg.last_updated }}</p>
+        <p><a href="{{ datapkg.repository }}">Ver o repositório Git</a></p>
+
         <h4>Downloads</h4>
         {% for d in datapkg.datafiles %}
         <p>{{ d.title }} &ndash; <a href="/{{ d.basename }}">CSV</a> &bull; <a href="/{{ d.basename.replace(".csv", ".json") }}">JSON</a></p>
@@ -21,13 +28,7 @@
         {% endfor %}
         </ul>
 
-        <p><a href="{{ datapkg.repository }}">Ver o repositório Git</a></p>
 
-
-        <h4>Detalhes</h4>
-        <p><strong>Versão</strong> {{ datapkg.version }}</p>
-        <p><strong>Licença</strong> {{ datapkg.license }}</p>
-        <p><strong>Última atualização</strong> {{ datapkg.last_updated }}</p>
 
         <h4>Fontes</h4>
         <ul>
