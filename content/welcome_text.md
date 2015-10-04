@@ -1,6 +1,7 @@
-A Central de Dados é um **repositório aberto de datasets _Open Data_ em Portugal**. Os dados aqui publicados são provenientes de diversas fontes (sempre indicadas!) e estão sob a curadoria do [Transparência Hackday](http://transparenciahackday.org).
+Hey -- You just got Datacentral working!
 
-Neste momento, os datasets que colocamos à disposição estão em formato CSV, mas estamos a trabalhar ativamente para poder fornecer outros formatos _open data_.
+If you haven't already, copy the `settings.conf.sample` file to `settings.conf`, and edit the new file to edit the datasets to be listed.
 
-A Central de Dados é uma ferramenta livre, e todo o código que criámos está [disponível como software livre](https://github.com/centraldedados/datacentral). O projeto ainda está em construção, por isso agradecemos imenso que nos sejam indicadas correções, sugestões e outros comentários no nosso [tracker](https://github.com/centraldedados/datacentral/issues).
+This sidebar is a good place to tell your visitors what this site is about in a few paragraphs. You can edit this in `content/welcome_text.md`.
 
+Have fun with data!
