@@ -44,7 +44,7 @@ install:
 serve:
 	. `pwd`/.env/bin/activate; cd _output && livereload -p $(SERVER_PORT)
 
-upload:
+deploy:
 	rsync --compress --progress --recursive --update --delete _output/ $(SSH_PATH)
 
 clean:
