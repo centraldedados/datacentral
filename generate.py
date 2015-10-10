@@ -202,7 +202,6 @@ def generate(offline, fetch_only):
         # do we have a local copy?
         if os.path.isdir(dir_name):
             if not offline:
-                log.info("Checking for changes in repo '%s'..." % name)
                 repo = git.Repo(dir_name)
                 origin = repo.remotes.origin
                 try:
@@ -211,26 +210,26 @@ def generate(offline, fetch_only):
                     # usually this fails on the first run, try again
                     origin.fetch()
                 except git.exc.GitCommandError:
-                    log.critical("Fetch error connecting to repository, this dataset will be ignored and not listed in the index!")
+                    log.critical("%s: Fetch error, this dataset will be left out." % name)
                     raise
                 # see if we have updates
                 if not local_and_remote_are_at_same_commit(repo, origin):
-                    log.info("Repo has new commits, updating local copy.")
+                    log.info("%s: Repo has new commits, updating local copy." % name)
                     updated = True
                     # connection errors can also happen if fetch succeeds but pull fails
                     try:
                         result = origin.pull()[0]
                     except git.exc.GitCommandError:
-                        log.critical("Pull error connecting to repository, this dataset will be ignored and not listed in the index!")
+                        log.critical("%s: Pull error, this dataset will be left out." % name)
                         continue
                     if result.flags & result.ERROR:
-                        log.error("Error pulling from repo '%s'!" % name)
+                        log.error("%s: Pull error, but going ahead." % name)
                         updated = False
                 else:
-                    log.info("No new changes in repo '%s'." % name)
+                    log.info("%s: No changes." % name)
                     updated = False
             else:
-                log.info("Offline mode, using cached version of package %s..." % name)
+                log.info("%s: Offline mode, using cached version." % name)
                 # we set updated to True in order to re-generate everything
                 # FIXME: See checksum of CSV files to make sure they're new before
                 # marking updated as true
@@ -241,10 +240,10 @@ def generate(offline, fetch_only):
                 continue
         else:
             if offline:
-                log.warn("Package %s specified in settings but no local cache, skipping..." % name)
+                log.warn("%s: No local cache, skipping." % name)
                 continue
             else:
-                log.info("We don't have repo '%s', cloning..." % name)
+                log.info("%s: New repo, cloning." % name)
                 repo = git.Repo.clone_from(url, dir_name)
                 updated = True
 
