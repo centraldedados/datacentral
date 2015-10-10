@@ -177,18 +177,22 @@ h6 {
 }
 
 strong,
-.datasets h3 > span,
-.datafiles > li > a,
-.footer li a {	font-family: 'Comme Bold';	}
+.footer li a {	
+  font-family: 'Comme Bold';
+}
 
-.header .description {	font-family: 'Comme Medium';	}
+.header .description {	
+  font-family: 'Comme Medium';	
+}
 
-.datafiles > .box span {	font-family: 'Comme Mono';	}
+.datafiles > .box span {
+  font-family: 'Comme Mono';	
+}
 
 .nav,
 .footer,
 small {
-        font-size: 0.75em;
+  font-size: 0.75em;
 }
 
 
@@ -196,13 +200,13 @@ small {
 */
 
 body {
-        background: #d8d6c9;
-        color: #2c373a;
+  background: #d8d6c9;
+  color: #2c373a;
 }
 
 a {
-        color: #de1b1b;
-        text-decoration: none;
+  color: #de1b1b;
+  text-decoration: none;
 }
 
 /* Layout
@@ -376,18 +380,8 @@ code {
 /* dataset page
 */
 
-.readme > h4 {
-        color: #969ba6;
-        line-height: 1.2;
-        margin-bottom: .5em;
-}
-
-.readme h2 {
-        margin-top: .5em;
-}
-
 .datafile-box {
-  margin-left: 1em;
+  margin-top: 1em;
 }
 
 .datafile-fieldlist ul {
@@ -396,26 +390,50 @@ code {
 }
 
 .sources ul {
-  margin-left: 1em;
+  margin-left: 0.75em;
+}
+
+.readme h1.title {
+  font-size: 1.75em;
+  margin-bottom: 0px;
+}
+
+.readme h2.subtitle {
+  font-size: 0.9em;
+  font-family: 'Comme Bold';
+  color: #999;
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+
+.readme h1 {
+  font-size: 1.5em;
+}
+
+.readme h2 {
+  font-size: 1.25em;
+  text-transform: uppercase;
+  font-family: 'Comme Thin';
+  margin-top: 1em;
 }
 
 .footer {
-        background: #d8d6c9;
-        padding-top: 1em;
+  background: #d8d6c9;
+  padding-top: 1em;
 }
 
 .footer h4 {
-        margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .footer li {
-        margin: 1em 1em 0 0;
+  margin: 1em 1em 0 0;
 }
 
 .footer div > ul img {
-        display: inline-block;
-        height: 50px;
-        width: auto;
+  display: inline-block;
+  height: 50px;
+  width: auto;
 }
 
 
@@ -532,39 +550,16 @@ code {
         }
         /* Dataset page columns */
 
-        .left-col {
+        .details {
                 float: left;
                 width: 30%;
-                margin-right: 15%;
+                margin-right: 5%;
         }
 
-        .right-col {
+        .readme {
                 float: left;
-                width: 55%;
+                width: 65%;
         }
-
-        /*
-        .main .readme {
-                width: 66%;
-                margin-right: 4%;
-                float: left;
-        }
-
-        .datafiles {
-                width: 30%;
-                float: left;
-        }
-
-        .datafiles > ul {
-                margin: 0 0  20px;
-        }
-
-        .datafiles ul > li {
-        }
-
-        .datafiles ul > li > a {
-        }
-        */
 
         .footer li {
                 display: inline-block;

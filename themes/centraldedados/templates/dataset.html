@@ -7,7 +7,7 @@
     <div class="main-dataset">
       <h1>{{ title }}</h1>
 
-      <div class="left-col">
+      <div class="details">
         <h4>Detalhes</h4>
         <p><strong>Versão</strong> {{ datapkg.version }}</p>
         <p><strong>Licença</strong> {{ datapkg.license }}</p>
@@ -40,9 +40,10 @@
           </ul>
         </div>
       </div>
-      <div class="right-col">
+      <div class="readme">
+        <h1 class="title">{{ datapkg.title }}</h1>
         {% if datapkg.description %}
-        <h4>{{ datapkg.description }}</h4>
+        <h2 class="subtitle">{{ datapkg.description }}</h2>
         {% endif %}
         {{ datapkg.readme }}
       </div>
