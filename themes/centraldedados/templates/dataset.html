@@ -14,20 +14,22 @@
         <p><strong>Última atualização</strong> {{ datapkg.last_updated }}</p>
         <p><a href="{{ datapkg.repository }}">Ver o repositório Git</a></p>
         <hr>
-        <h4>Downloads</h4>
-        {% for d in datapkg.datafiles %}
-        <div class="datafile-box">
-          <p><strong>{{ d.title|upper }}</strong> &ndash; <a href="/{{ d.basename }}">CSV</a> &bull; <a href="/{{ d.basename.replace(".csv", ".json") }}">JSON</a></p>
-          <div class="datafile-fieldlist">
-            <h5>Campos</h5>
-            <ul>
-              {% for f in d.schema.fields %}
-              <li><strong>{{ f.name }}</strong> &ndash; {{ f.description }}</li>
-              {% endfor %}
-            </ul>
+        <div class="downloads">
+          <h4>Downloads</h4>
+          {% for d in datapkg.datafiles %}
+          <div class="datafile-box">
+            <p><strong>{{ d.title|upper }}</strong> &ndash; <a href="/{{ d.basename }}">CSV</a> &bull; <a href="/{{ d.basename.replace(".csv", ".json") }}">JSON</a></p>
+            <div class="datafile-fieldlist">
+              <h5>Campos</h5>
+              <ul>
+                {% for f in d.schema.fields %}
+                <li><strong>{{ f.name }}</strong> &ndash; {{ f.description }}</li>
+                {% endfor %}
+              </ul>
+            </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
         <hr>
         <div class="sources">
           <h4>Fontes</h4>
