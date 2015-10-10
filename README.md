@@ -62,6 +62,6 @@ Once all the dependecies are installed, change
 TODO
 ----
 
- * Set up a generic base theme for the HTML output
- * Use [Hyde](http://pypi.python.org/pypi/hyde/0.8.4) for a more solid 
-   static generator back-end
+ * Set up an English language base theme for the HTML output
+ * Use [Hyde](http://pypi.python.org/pypi/hyde/0.8.4) or
+   [Pelican](http://getpelican.com) for a more solid static generator back-end

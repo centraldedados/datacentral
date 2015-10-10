@@ -163,13 +163,17 @@ h4 {
 }
 
 h5 {  
-  font-size: 1.25em;  
-  font-family: 'Comme Thin';	
+  color: #aaa;
+  margin-top: 6px;
+  font-size: 0.8em;  
+  font-family: 'Comme Bold';	
+  text-transform: uppercase;
 }
 
 h6 {  
-  font-size: 1.125em; 
-  font-family: 'Comme Thin';  
+  font-size: 0.7em; 
+  font-family: 'Comme Medium';
+  text-transform: uppercase;
 }
 
 strong,
@@ -323,6 +327,11 @@ a {
     display: none;
 }
 
+code {
+  font-family: monospace;
+  border-bottom: 1px solid #bbb;
+}
+
 /* homepage dataset list
 */
 
@@ -377,30 +386,17 @@ a {
         margin-top: .5em;
 }
 
-.datafiles {
-        display: block;
+.datafile-box {
+  margin-left: 1em;
 }
 
-.datafiles > li {
-        overflow: auto;
-        padding: 6px 0;
-        border-top: 1px solid #b9bdc5;
+.datafile-fieldlist ul {
+  margin-left: 0.75em;
+  font-size: 0.8em;
 }
 
-.datafiles > li:first-child {
-        padding: 0 0 10px 0;
-        border-top: 0;
-}
-
-.datafiles > li > a {
-        float: right;
-        display: inline-block;
-        font-size: 0.75em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border: 2px solid #de1b1b;
-        padding: 5px 8px;
-        border-radius: 4px;
+.sources ul {
+  margin-left: 1em;
 }
 
 .footer {
@@ -538,13 +534,13 @@ a {
 
         .left-col {
                 float: left;
-                width: 50%;
-                margin-right: 2%;
+                width: 30%;
+                margin-right: 15%;
         }
 
         .right-col {
                 float: left;
-                width: 48%;
+                width: 55%;
         }
 
         /*
