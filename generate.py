@@ -213,29 +213,22 @@ def generate(offline, fetch_only):
                 except git.exc.GitCommandError:
                     log.critical("Fetch error connecting to repository, this dataset will be ignored and not listed in the index!")
                     raise
-                # connection errors can also happen if fetch succeeds but pull fails
-                try:
-                    result = origin.pull()[0]
-                except git.exc.GitCommandError:
-                    log.critical("Pull error connecting to repository, this dataset will be ignored and not listed in the index!")
-                    continue
-                # we get specific flags for the results Git gave us
-                # and we set the "updated" var in order to signal whether to
-                # copy over the new files to the download dir or not
-                if local_and_remote_are_at_same_commit(repo, origin):
-                    log.info("Repo changed, updating. (returned flags: %d)" % result.flags)
+                # see if we have updates
+                if not local_and_remote_are_at_same_commit(repo, origin):
+                    log.info("Repo has new commits, updating local copy.")
                     updated = True
-                elif result.flags & result.HEAD_UPTODATE:
+                    # connection errors can also happen if fetch succeeds but pull fails
+                    try:
+                        result = origin.pull()[0]
+                    except git.exc.GitCommandError:
+                        log.critical("Pull error connecting to repository, this dataset will be ignored and not listed in the index!")
+                        continue
+                    if result.flags & result.ERROR:
+                        log.error("Error pulling from repo '%s'!" % name)
+                        updated = False
+                else:
                     log.info("No new changes in repo '%s'." % name)
                     updated = False
-                elif result.flags & result.ERROR:
-                    log.error("Error pulling from repo '%s'!" % name)
-                    updated = False
-                else:
-                    # TODO: figure out other git-python flags and return more
-                    # informative log output
-                    log.info("Repo changed, updating. (returned flags: %d)" % result.flags)
-                    updated = True
             else:
                 log.info("Offline mode, using cached version of package %s..." % name)
                 # we set updated to True in order to re-generate everything
