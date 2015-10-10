@@ -47,6 +47,12 @@ template_dir = os.path.join(theme_dir, "templates")
 env = jinja2.Environment(loader=jinja2.FileSystemLoader([template_dir]))
 
 
+def local_and_remote_are_at_same_commit(repo, remote):
+    local_commit = repo.commit()
+    remote_commit = remote.fetch()[0].commit
+    return local_commit.hexsha == remote_commit.hexsha
+
+
 def create_index_page(packages):
     '''Generates the index page with the list of available packages.
     Accepts a list of pkg_info dicts, which are generated with the
@@ -216,7 +222,10 @@ def generate(offline, fetch_only):
                 # we get specific flags for the results Git gave us
                 # and we set the "updated" var in order to signal whether to
                 # copy over the new files to the download dir or not
-                if result.flags & result.HEAD_UPTODATE:
+                if local_and_remote_are_at_same_commit(repo, origin):
+                    log.info("Repo changed, updating. (returned flags: %d)" % result.flags)
+                    updated = True
+                elif result.flags & result.HEAD_UPTODATE:
                     log.info("No new changes in repo '%s'." % name)
                     updated = False
                 elif result.flags & result.ERROR:
