@@ -1,14 +1,10 @@
-GitPython==0.3.2.RC1
+GitPython==1.0.1
 Jinja2==2.7.2
 Markdown==2.4.1
 MarkupSafe==0.23
 argparse==1.2.1
-async==0.6.1
-gitdb==0.5.4
-smmap==0.8.2
-wsgiref==0.1.2
 click==1.1
 colorlog==2.2.0
 zenlog==0.1
-livereload==2.2.0
+livereload==2.4.0
 csvkit==0.9.0

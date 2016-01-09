@@ -12,7 +12,11 @@ TODO:
 
 '''
 
-from ConfigParser import SafeConfigParser
+try:
+    from configparser import SafeConfigParser
+except ImportError:
+    from ConfigParser import SafeConfigParser
+
 import jinja2
 import git
 import sys
@@ -38,7 +42,7 @@ parser = SafeConfigParser()
 parser.read(config_file)
 packages = []
 
-print parser.get('ui', 'theme')
+print(parser.get('ui', 'theme'))
 theme_name = parser.get('ui', 'theme')
 theme_dir = os.path.join(themes_dir, theme_name)
 
