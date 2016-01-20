@@ -12,7 +12,11 @@ TODO:
 
 '''
 
-from ConfigParser import SafeConfigParser
+try:
+    from configparser import SafeConfigParser
+except ImportError:
+    from ConfigParser import SafeConfigParser
+
 import jinja2
 import git
 import sys
