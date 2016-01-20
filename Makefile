@@ -27,7 +27,7 @@
 SSH_PATH = "wf:~/webapps/centraldedados/"
 # server port for local server
 SERVER_PORT = 8002
-MAIN_SCRIPT = $(wildcard generate.py)
+MAIN_SCRIPT = $(wildcard datacentral.py)
 OFFLINE_FLAG = "--offline"
 
 build:
@@ -49,4 +49,7 @@ deploy:
 
 clean:
 	rm -fr repos _output
+
+test:
+	. `pwd`/.env/bin/activate; nosetests tests.py
 
