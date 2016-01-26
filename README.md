@@ -56,6 +56,14 @@ Once all the dependecies are installed, change
    browser to `localhost:8002`.
 
 
+Running tests
+-------------
+
+Datacentral uses Nose for testing. After installing it on your system or virtualenv, just run
+
+    nosetests tests.py
+    
+
 TODO
 ----
 
