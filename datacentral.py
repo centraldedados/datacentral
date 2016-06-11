@@ -74,9 +74,9 @@ def create_static_pages(output_dir):
     template = env.get_template("page.html")
     for f in glob.glob("content/pages/*.md"):
         page_name = f.split("/")[-1].replace(".md", "")
-        print page_name
         target_dir = os.path.join(output_dir, "%s/" % page_name)
-        os.makedirs(target_dir)
+        if not os.path.exists(target_dir):
+            os.makedirs(target_dir)
         target = os.path.join(target_dir, "index.html")
         context = {"content": markdown.markdown(codecs.open(f, 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8"),
                    }
@@ -85,6 +85,13 @@ def create_static_pages(output_dir):
         f.write(contents)
         f.close()
         log.debug("Created static page '%s'." % page_name)
+
+        # Content images
+        media_dir = os.path.join(output_dir, "media")
+        if os.path.exists(media_dir):
+            shutil.rmtree(media_dir)
+        os.makedirs(media_dir)
+        shutil.copytree("content/media", media_dir)
 
 
 def create_api(packages, output_dir, repo_dir):
@@ -184,41 +191,44 @@ def generate(offline=False,
              config_file=CONFIG_FILE):
     '''Main function that takes care of the whole process.'''
     global env, packages
-    # read the config file
+    # Read the config file
     parser = SafeConfigParser()
     parser.read(config_file)
-
+    # Load the theme and set up Jinja
     theme_name = parser.get('ui', 'theme')
     theme_dir = os.path.join(THEMES_DIR, theme_name)
-
-    # set up Jinja
     template_dir = os.path.join(theme_dir, "templates")
     env = jinja2.Environment(loader=jinja2.FileSystemLoader([template_dir]))
 
-    # set up the output directory
+    # Set up the output directory
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
-    # set up the dir for storing repositories
+    # Set up the dir for storing repositories
     if not os.path.exists(repo_dir):
         log.debug("Directory %s doesn't exist, creating it." % repo_dir)
         os.mkdir(repo_dir)
-    # copy htaccess file
+    # Copy htaccess file
     shutil.copyfile(os.path.join(theme_dir, 'static/htaccess'), os.path.join(output_dir, ".htaccess"))
-    # create static dirs
+    # Create static dirs
     # TODO: only update changed files -- right now we regenerate the whole static dir
+
+    # Static CSS files
     css_dir = os.path.join(output_dir, "css")
-    js_dir = os.path.join(output_dir, "js")
-    img_dir = os.path.join(output_dir, "img")
-    fonts_dir = os.path.join(output_dir, "fonts")
     if os.path.exists(css_dir):
         shutil.rmtree(css_dir)
     shutil.copytree(os.path.join(theme_dir, "static/css"), css_dir)
+    # Static JavaScript files
+    js_dir = os.path.join(output_dir, "js")
     if os.path.exists(js_dir):
         shutil.rmtree(js_dir)
     shutil.copytree(os.path.join(theme_dir, "static/js"), js_dir)
+    # Theme images
+    img_dir = os.path.join(output_dir, "img")
     if os.path.exists(img_dir):
         shutil.rmtree(img_dir)
     shutil.copytree(os.path.join(theme_dir, "static/img"), img_dir)
+    # Fonts
+    fonts_dir = os.path.join(output_dir, "fonts")
     if os.path.exists(fonts_dir):
         shutil.rmtree(fonts_dir)
     shutil.copytree(os.path.join(theme_dir, "static/fonts"), fonts_dir)
