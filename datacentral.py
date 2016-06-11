@@ -27,6 +27,7 @@ import json
 import codecs
 import click
 import zipfile
+import glob
 from utils import csv2json
 from zenlog import log
 
@@ -65,6 +66,25 @@ def create_index_page(packages, output_dir):
     f.write(contents)
     f.close()
     log.debug("Created index.html.")
+
+
+def create_static_pages(output_dir):
+    '''Generates a static page from each of the files contained in
+    `content/pages/`.'''
+    template = env.get_template("page.html")
+    for f in glob.glob("content/pages/*.md"):
+        page_name = f.split("/")[-1].replace(".md", "")
+        print page_name
+        target_dir = os.path.join(output_dir, "%s/" % page_name)
+        os.makedirs(target_dir)
+        target = os.path.join(target_dir, "index.html")
+        context = {"content": markdown.markdown(codecs.open(f, 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8"),
+                   }
+        contents = template.render(**context)
+        f = codecs.open(target, 'w', 'utf-8')
+        f.write(contents)
+        f.close()
+        log.debug("Created static page '%s'." % page_name)
 
 
 def create_api(packages, output_dir, repo_dir):
@@ -290,10 +310,13 @@ def generate(offline=False,
                 pass
             zipf.close()
 
-    # generate the HTML index with the list of available packages
+    # HTML index with the list of available packages
     create_index_page(packages, output_dir)
-    # generate the static JSON API of the data packages
+    # Static JSON API of the data packages
     create_api(packages, output_dir, repo_dir)
+    # Static pages
+    create_static_pages(output_dir)
+
     log.info("All static content is ready inside '%s'." % OUTPUT_DIR)
 
 
