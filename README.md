@@ -29,15 +29,16 @@ on the portal.
 Installation and Usage
 ------------
 
-1. **Install dependencies**. After cloning the repository, run:
+1. **Install dependencies**. After cloning the repository, ensure that
+   you have virtualenv installed with this command:
 	
 	$ pip show virtualenv
 
-You can install virtualenv with:
+If it's not there, you can install it with:
 
 	$ pip install --user virtualenv
 
-Once all the dependecies are installed, change 
+   Now, change 
    to the project directory and run `make install`. This will 
    create a local virtualenv and install the necessary 
    dependencies; it shouldn't be necessary to create a virtualenv 
