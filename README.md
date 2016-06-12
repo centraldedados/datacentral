@@ -29,8 +29,7 @@ on the portal.
 Installation and Usage
 ------------
 
-1. **Install dependencies**. After cloning the repository, check 
-if you have virtualenv installed with:
+1. **Install dependencies**. After cloning the repository, run:
 	
 	$ pip show virtualenv
 
@@ -49,12 +48,15 @@ Once all the dependecies are installed, change
    to set your options and point to your data package 
    repositories.
 
-3. **Generate the HTML output**. Just run `make html`!
+3. **Generate the HTML output**. Just run `make build`!
 
-4. **Run a web server to see the output**. Now run `make serve` 
-   to run a simple webserver, and open the site by pointing your 
-   browser to `localhost:8002`.
+4. **Push the static HTML output somewhere!**. The generated
+   site is placed at the `_output` directory. Just copy the contents
+   to your webserver, everything's included.
 
+5. **Run a web server to see the output**. While developing, you
+   can also run `make serve` to run a simple webserver, and then
+   open the site by pointing your browser to `localhost:8002`.
 
 Running tests
 -------------
