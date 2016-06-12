@@ -1,7 +1,7 @@
 Data Central
 ============
 
-This is a lightweight platform to easily distribute public data.
+This is a lightweight platform to easily publish and distribute datasets.
 
 It uses Open Knowledge's excellent Data Packages specification as a
 common format to provide datasets. See the [Frictionless Data
