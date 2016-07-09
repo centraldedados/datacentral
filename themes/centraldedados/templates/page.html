@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
+{% block title %}
+      <title>{{ pagename }} — Datacentral</title>
+{% endblock %}
+
 {% block content %}
 
 <section class="row">
   <div>
-    <div class="main-dataset">
-      <div class="readme">
+    <div class="description">
+      {{ welcome_text }}
+    </div>
+    <div class="main">
+      <div class="static-page page-{{ pagename }}">
         {{ content }}
       </div>
     </div>

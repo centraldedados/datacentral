@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
+{% block title %}
+      <title>{{ datapkg.title }} — Datacentral</title>
+      <meta name="description" content="{{ datapkg.description }}. An open data repository powered by Datacentral">
+{% endblock %}
+
 {% block content %}
 
 <section class="row">
   <div>
     <div class="main-dataset">
-      <h1>{{ title }}</h1>
-
+    
       <div class="details">
         <h4>Detalhes</h4>
         <p><strong>Versão</strong> {{ datapkg.version }}</p>
