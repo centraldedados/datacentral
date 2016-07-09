@@ -1,8 +1,8 @@
 [ui]
 theme = centraldedados
 
-[keys]
-morph_api_key = your_morph_api_key
+[credentials]
+contact_email = johndoe@dummydomain.net
 
 [repositories]
 population = https://github.com/datasets/population.git

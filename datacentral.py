@@ -68,6 +68,22 @@ def create_index_page(packages, output_dir):
     log.debug("Created index.html.")
 
 
+def create_contact_page(output_dir, contact_email=""):
+    '''Creates a contact form page.'''
+    template = env.get_template("contact.html")
+    target_dir = os.path.join(output_dir, "contact/")
+    if not os.path.exists(target_dir):
+        os.makedirs(target_dir)
+    target = os.path.join(target_dir, "index.html")
+    context = {}
+    context["contact_email"] = contact_email
+    contents = template.render(**context)
+    f = codecs.open(target, 'w', 'utf-8')
+    f.write(contents)
+    f.close()
+    log.debug("Created contact page.")
+
+
 def create_static_pages(output_dir):
     '''Generates a static page from each of the files contained in
     `content/pages/`.'''
@@ -78,8 +94,9 @@ def create_static_pages(output_dir):
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
         target = os.path.join(target_dir, "index.html")
-        context = {"content": markdown.markdown(codecs.open(f, 'r', 'utf-8').read(), output_format="html5", encoding="UTF-8"),
-                   }
+        context = {}
+        md_content = codecs.open(f, 'r', 'utf-8').read()
+        context["content"] = markdown.markdown(md_content, output_format="html5", encoding="UTF-8")
         contents = template.render(**context)
         f = codecs.open(target, 'w', 'utf-8')
         f.write(contents)
@@ -87,11 +104,12 @@ def create_static_pages(output_dir):
         log.debug("Created static page '%s'." % page_name)
 
         # Content images
-        media_dir = os.path.join(output_dir, "media")
-        if os.path.exists(media_dir):
-            shutil.rmtree(media_dir)
-        os.makedirs(media_dir)
-        shutil.copytree("content/media", media_dir)
+        if os.path.exists("content/media"):
+            media_dir = os.path.join(output_dir, "media")
+            if os.path.exists(media_dir):
+                shutil.rmtree(media_dir)
+            os.makedirs(media_dir)
+            shutil.copytree("content/media", media_dir)
 
 
 def create_api(packages, output_dir, repo_dir):
@@ -326,6 +344,8 @@ def generate(offline=False,
     create_api(packages, output_dir, repo_dir)
     # Static pages
     create_static_pages(output_dir)
+    # Contact page
+    create_contact_page(output_dir, parser.get('credentials', 'contact_email'))
 
     log.info("All static content is ready inside '%s'." % OUTPUT_DIR)
 
