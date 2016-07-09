@@ -1,4 +1,10 @@
-/* Eric Meyer's Reset CSS */
+/* Reset
+*/
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -8,40 +14,123 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary, main,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
-
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
 body {
-  line-height: 1;
+	line-height: 1;
 }
-
 ol, ul {
-  list-style: none;
+	list-style: none;
 }
-
 blockquote, q {
-  quotes: none;
+	quotes: none;
 }
-
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: '';
-  content: none;
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
+
+a { background-color: transparent; }
+
+a:active,
+a:hover { outline: 0; }
+
+hr {
+  box-sizing: content-box;
+  height: 0; }
+
+pre { overflow: auto; }
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1rem; }
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+button { overflow: visible; }
+
+button,
+select {
+  text-transform: none; }
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: not-allowed; }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+input {
+  line-height: normal; }
+
+optgroup {
+  font-weight: bold; }
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  line-height: 1; }
+  [data-whatinput='mouse'] button {
+    outline: 0; }
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; }
 
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
@@ -54,7 +143,7 @@ textarea {
 }
 
 html {
-    font-size: 1em;
+    font-size: 100%;
     line-height: 1.4;
 }
 
@@ -73,7 +162,7 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid #ccc;
-    margin: 1em 0;
+    margin: 1rem 0;
     padding: 0;
 }
 
@@ -133,13 +222,13 @@ body {
 }
 
 h1 {  
-  font-size: 2.25em;  
+  font-size: 2.25rem;  
   font-family: 'Comme Thin'; 
-  margin-bottom: .5em;  
+  margin-bottom: .5rem;  
 }
 
 h2 {  
-  font-size: 1.85em;     
+  font-size: 1.85rem;     
   font-family: 'Comme Medium';  
   color: #888;
   margin-top: 10px;
@@ -147,7 +236,7 @@ h2 {
 }
 
 h3 {  
-  font-size: 1.625em; 
+  font-size: 1.625rem; 
   font-family: 'Comme Medium';  
   color: #888;
   margin-top: 10px;
@@ -155,7 +244,7 @@ h3 {
 }
 
 h4 {  
-  font-size: 1.375em; 
+  font-size: 1.375rem; 
   font-family: 'Comme Medium';  
   color: #888;
   margin-top: 10px;
@@ -165,13 +254,13 @@ h4 {
 h5 {  
   color: #aaa;
   margin-top: 6px;
-  font-size: 0.8em;  
+  font-size: 0.8rem;  
   font-family: 'Comme Bold';	
   text-transform: uppercase;
 }
 
 h6 {  
-  font-size: 0.7em; 
+  font-size: 0.7rem; 
   font-family: 'Comme Medium';
   text-transform: uppercase;
 }
@@ -192,7 +281,7 @@ strong,
 .nav,
 .footer,
 small {
-  font-size: 0.75em;
+  font-size: 0.75rem;
 }
 
 
@@ -259,14 +348,14 @@ a {
 
 .nav li a {
         display: block;
-        padding: .75em .5em;
+        padding: .75rem .5rem;
 }
 
 .header > div {
         width: 96%;
         clear: both;
-        margin: 0 auto 1em;
-        padding-bottom: 1em;
+        margin: 0 auto 1rem;
+        padding-bottom: 1rem;
         border-bottom: 1px solid #b9bdc5;
 }
 
@@ -282,7 +371,7 @@ a {
 }
 
 .header h1 {
-        font-size: 4em;
+        font-size: 4rem;
         line-height: 1;
         margin: 0;
 }
@@ -293,13 +382,13 @@ a {
 }
 
 .row .description {
-        font-size: 0.865em;
-        padding-top: 2em;
+        font-size: 0.865rem;
+        padding-top: 2rem;
 }
 
 .description p,
 .main .readme p {
-        margin-bottom: .75em;
+        margin-bottom: .75rem;
 }
 
 .row .main {
@@ -307,7 +396,7 @@ a {
 }
 
 .search {
-        padding: 0 0 1em;
+        padding: 0 0 1rem;
 }
 
 #search {
@@ -341,9 +430,9 @@ code {
 
 .datasets > li {
         border-bottom: 1px solid #b9bdc5;
-        padding-bottom: 1em;
-        margin-top: 1em;
-        margin-bottom: 0.45em;
+        padding-bottom: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.45rem;
 }
 
     .datasets > li:nth-child(2) {
@@ -351,7 +440,7 @@ code {
     }
 
 .datasets h3 {
-        /*padding-top: .45em;*/
+        /*padding-top: .45rem;*/
 }
 
 .datasets h3 > span {
@@ -360,7 +449,7 @@ code {
 }
 
 .datasets h3 > span a {
-        font-size: 0.5em;
+        font-size: 0.5rem;
         display: inline-block;
         border: 2px solid #de1b1b;
         padding: 0.5rem 1rem;
@@ -381,59 +470,152 @@ code {
 */
 
 .datafile-box {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 .datafile-fieldlist ul {
-  margin-left: 0.75em;
-  font-size: 0.8em;
+  margin-left: 0.75rem;
+  font-size: 0.8rem;
 }
 
 .sources ul {
-  margin-left: 0.75em;
+  margin-left: 0.75rem;
 }
 
 .readme h1.title {
-  font-size: 1.75em;
-  margin-bottom: 0px;
+  font-size: 1.75rem;
+  line-height: 1.3;
+  margin-bottom: 0.45rem;
 }
 
 .readme h2.subtitle {
-  font-size: 0.9em;
+  font-size: 0.9rem;
   font-family: 'Comme Bold';
+  line-height: 1.3;
   color: #999;
-  margin-top: 0;
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 }
 
 .readme h1 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 .readme h2 {
-  font-size: 1.25em;
+  font-size: 1.25rem;
   text-transform: uppercase;
   font-family: 'Comme Thin';
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 .footer {
   background: #d8d6c9;
-  padding-top: 1em;
+  padding-top: 1rem;
 }
 
 .footer h4 {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .footer li {
-  margin: 1em 1em 0 0;
+  margin: 1rem 1rem 0 0;
 }
 
 .footer div > ul img {
   display: inline-block;
   height: 50px;
   width: auto;
+}
+
+/* Forms -- contact form
+*/
+
+form {
+    padding: 1.5rem 0;
+}
+
+form p {
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+form label {
+    font-size: 0.875rem;
+    font-family: 'Comme Regular', DejaVu Sans, Arial, sans-serif;
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+form input {
+    display: block;
+    width: 100%;
+}
+
+input[type="text"],
+input[type="email"] {
+    display: block;
+    background-color: #fefefe;
+    border: 1px solid #cacaca;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1) inset;
+    box-sizing: border-box;
+    color: #2c373a;
+    display: block;
+    font-size: 1rem;
+    height: 2.4375rem;
+    margin: 0.45rem 0 1rem;
+    padding: 0.5rem;
+    transition: box-shadow 0.5s ease 0s, border-color 0.25s ease-in-out 0s;
+    width: 100%;
+}
+
+
+textarea {
+  display: block;
+  height: auto;
+  min-height: 50px;
+  border-radius: 3px;
+  overflow: auto;
+  background-color: #fefefe;
+  border: 1px solid #cacaca;
+  box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1) inset;
+  box-sizing: border-box;
+  color: #2c373a;
+  display: block;
+  font-size: 1rem;
+  margin: 0.75rem 0 1rem;
+  padding: 0.5rem;
+  transition: box-shadow 0.5s ease 0s, border-color 0.25s ease-in-out 0s;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus  {
+    background-color: #fefefe;
+    border: 1px solid #888;
+    box-shadow: 0 0 5px #cacaca;
+    outline: medium none;
+    transition: box-shadow 0.5s ease 0s, border-color 0.25s ease-in-out 0s;
+}
+
+.button {
+    font-size: 0.875rem;
+    font-family: 'Comme Medium', DejaVu Sans, Arial, sans-serif;
+    line-height: 1;
+    color: #2c373a;
+    background-color: #cacaca;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    transition: background-color 0.25s ease-out 0s, color 0.25s ease-out 0s;
+    vertical-align: middle;
+}
+
+.button:hover, .button:focus {
+    background-color: #888;
 }
 
 
@@ -513,7 +695,7 @@ code {
 
         .header h1 {
                 float: left;
-                font-size: 6.5em;
+                font-size: 6.5rem;
         }
 
         .nav > div {
@@ -531,7 +713,7 @@ code {
                 overflow: auto;
                 clear: both;
                 margin: 0 auto;
-                padding-bottom: 1.325em;
+                padding-bottom: 1.325rem;
         }
 
         .row > div > .description {
@@ -568,7 +750,7 @@ code {
 
         .footer li a {
                 display: inline-block;
-                padding: .5em .25em;
+                padding: .5em .25rem;
         }
 
 }
