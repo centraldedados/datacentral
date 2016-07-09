@@ -762,7 +762,7 @@ textarea:focus  {
 
         .row > div {
                 width: 86%;
-                margin: 1em auto;
+                margin: 1rem auto;
         }
 
         .header > div {
@@ -829,12 +829,12 @@ textarea:focus  {
 
         .footer li {
                 display: inline-block;
-                margin: 0 1em 0 0;
+                margin: 0 1rem 0 0;
         }
 
         .footer li a {
                 display: inline-block;
-                padding: .5em .25rem;
+                padding: .5rem .25rem;
         }
 
 }
