@@ -108,7 +108,6 @@ def create_static_pages(output_dir):
             media_dir = os.path.join(output_dir, "media")
             if os.path.exists(media_dir):
                 shutil.rmtree(media_dir)
-            os.makedirs(media_dir)
             shutil.copytree("content/media", media_dir)
 
 
