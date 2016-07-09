@@ -8,9 +8,15 @@
       <div class="readme">
         <h2>Contact</h2>
         <form action="http://formspree.io/{{ contact_email }}" method="post">
-          <label for="message">Your message</label><input type="text" name="message" id="message">
-          <label for="sender">Your e-mail</label><input type="email" name="_replyto" id="sender">
-          <input type="submit" value="Send">
+          <label for="message">
+            Your message
+            <textarea name="message" id="message" placeholder="Message..." required></textarea>
+          </label>
+          <label for="sender">
+            Your e-mail
+            <input type="email" name="_replyto" id="sender" placeholder="your-email@example.com">
+          </label>
+          <p><input class="button" type="submit" value="Send"></p>
           <input type="hidden" name="_subject" value="Datacentral contact!" />
           <input type="text" name="_gotcha" style="display:none" />
         </form>
