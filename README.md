@@ -1,7 +1,7 @@
 Data Central
 ============
 
-This is a lightweight platform to easily publish and distribute datasets.
+This is a lightweight platform to easily publish and distribute datasets. It was created to be the base for [Central de Dados](http://centraldedados.pt), a repository of data packages related to Portugal.
 
 It uses Open Knowledge's excellent Data Packages specification as a
 common format to provide datasets. See the [Frictionless Data
