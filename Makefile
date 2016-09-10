@@ -30,6 +30,8 @@ SERVER_PORT = 8002
 MAIN_SCRIPT = $(wildcard datacentral.py)
 OFFLINE_FLAG = "--offline"
 
+all: build
+
 build:
 	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT)
 

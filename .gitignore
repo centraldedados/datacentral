@@ -11,3 +11,4 @@ settings.conf
 *.pyc
 *.swp
 *~
+*.orig
