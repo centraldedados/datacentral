@@ -180,10 +180,11 @@ def process_datapackage(pkg_name, repo_dir):
         try:
             readme = markdown.markdown(contents, output_format="html5", encoding="UTF-8")
         except UnicodeDecodeError:
-            log.critical("README.md has invalid encoding, maybe the datapackage is not UTF-8?")
-            raise
+            raise Exception("README.md has invalid encoding, maybe the datapackage is not UTF-8?")
     pkg_info['readme'] = readme
     # process resource/datafiles list
+    if not 'schema' in metadata['resources'][0]:
+        raise Exception("Schema missing in datapackage")
     for r in metadata['resources']:
         r['basename'] = os.path.basename(r['path'])
         if not r.get('title'):
@@ -307,7 +308,10 @@ def generate(offline=False,
                 updated = True
 
         # get datapackage metadata
-        pkg_info = process_datapackage(name, repo_dir)
+        try:
+            pkg_info = process_datapackage(name, repo_dir)
+        except Exception as inst:
+            log.warn("%s: skipping %s" % (inst, name))
         # set last updated time based on last commit, comes in Unix timestamp format so we convert
         import datetime
         d = repo.head.commit.committed_date
