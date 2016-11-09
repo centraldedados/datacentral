@@ -1,7 +1,20 @@
-Hey -- You just got Datacentral working!
+Hallo!
 
-If you haven't already, copy the `settings.conf.sample` file to `settings.conf`, and edit the new file to edit the datasets to be listed.
+Wir haben hier verschiedene offene Datensätze für [Jugend hackt Schweiz](https://jugendhackt.org/events/ch/) vorbereitet. Einfach durchstrobern und die unterliegende [CSV](https://de.wikipedia.org/wiki/CSV_(Dateiformat)) / [JSON](https://de.wikipedia.org/wiki/JavaScript_Object_Notation) links verwenden.
 
-This sidebar is a good place to tell your visitors what this site is about in a few paragraphs. You can edit this in `content/welcome_text.md`.
+Mentors: für zusätzliche Hilfe und Tips bitte bei @heidi / @odi / @loleg melden.
 
-Have fun with data!
+Brauchst du auch Werkzeug?
+
+- [R-Fiddle](http://www.r-fiddle.org)
+- [Repl.it](https://repl.it/languages)
+- [Plot.ly](https://plot.ly/learn/)
+- [OpenRefine](http://openrefine.org/)
+- [OKFN Labs](http://okfnlabs.org/projects/#priority=true)
+
+---
+
+Viel Spass mit Daten!
+
+[![](https://make.opendata.ch/files/2015/03/schoolofdata.png)](https://make.opendata.ch/?page_id=795)
+Hosted by [schoolofdata.ch](http://schoolofdata.ch)
