@@ -1,6 +1,6 @@
 /* Reset
 */
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -14,8 +14,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -26,7 +26,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -233,68 +233,68 @@ body {
 }
 
 h1 {
-    font-size: 2.25rem;    
+    font-size: 2.25rem;
     font-family: "Comme";
-    font-weight: 300; 
+    font-weight: 300;
     margin-bottom: 0.5rem;
 }
 
-h2 {  
-    font-size: 1.85rem;      
+h2 {
+    font-size: 1.85rem;
     font-family: "Comme";
-    font-weight: 300;  
+    font-weight: 300;
     color: #888;
     margin-top: 0.625rem;
     margin-bottom: 0.375rem;
 }
 
-h3 {  
+h3 {
     font-size: 1.625rem;
     font-family: "Comme";
-    font-weight: 500;    
+    font-weight: 500;
     color: #888;
     margin-top: 0.625rem;
     margin-bottom: 0.1rem;
 }
 
-h4 {  
-    font-size: 1.375rem; 
+h4 {
+    font-size: 1.375rem;
     font-family: "Comme";
-    font-weight: 500;    
+    font-weight: 500;
     color: #888;
     margin-top: 0.625rem;
     margin-bottom: 0.375rem;
 }
 
-h5 {  
-    font-size: 0.8rem;    
+h5 {
+    font-size: 0.8rem;
     font-family: "Comme";
-    font-weight: 700;	
+    font-weight: 700;
     color: #aaa;
     text-transform: uppercase;
     margin-top: 0.375rem;
 }
 
 h6 {
-    font-size: 0.7rem; 
+    font-size: 0.7rem;
     font-family: "Comme";
     font-weight: 500;
     text-transform: uppercase;
 }
 
 strong,
-.footer li a {	
+.footer li a {
     font-family: "Comme";
     font-weight: 700;
 }
 
-.header .description {	
+.header .description {
     font-family: "Comme";
     font-weight: 500;
 }
 
 .datafiles > .box span {
-    font-family: "Comme Mono";	
+    font-family: "Comme Mono";
 }
 
 .nav,
@@ -412,6 +412,10 @@ a:active {
 .row .description p,
 .row .description code {
     font-size: 0.875rem;
+}
+
+.row .description img {
+    max-width: 100%;
 }
 
 .row .main {
@@ -832,4 +836,3 @@ textarea:focus  {
         }
 
 }
-

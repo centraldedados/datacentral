@@ -142,6 +142,8 @@ def create_dataset_page(pkg_info, output_dir):
     f.close()
     log.debug("Created %s." % target)
 
+class ParseException(Exception):
+    pass
 
 def process_datapackage(pkg_name, repo_dir):
     '''Reads a data package and returns a dict with its metadata. The
@@ -160,14 +162,20 @@ def process_datapackage(pkg_name, repo_dir):
     '''
     pkg_dir = os.path.join(repo_dir, pkg_name)
     pkg_info = {}
-    metadata = json.loads(open(os.path.join(pkg_dir, "datapackage.json")).read())
+    try:
+        metadata = json.loads(open(os.path.join(pkg_dir, "datapackage.json")).read())
+    except IOError:
+        raise ParseException("datapackage.json not found")
 
     # get main attributes
     pkg_info['name'] = pkg_name
     pkg_info['original_name'] = metadata['name']
     pkg_info['title'] = metadata['title']
     pkg_info['license'] = metadata.get('license')
-    pkg_info['description'] = metadata['description']
+    if not 'description' in metadata:
+        pkg_info['description'] = ""
+    else:
+        pkg_info['description'] = metadata['description']
     pkg_info['sources'] = metadata.get('sources')
     # process README
     readme = ""
@@ -180,11 +188,11 @@ def process_datapackage(pkg_name, repo_dir):
         try:
             readme = markdown.markdown(contents, output_format="html5", encoding="UTF-8")
         except UnicodeDecodeError:
-            raise Exception("README.md has invalid encoding, maybe the datapackage is not UTF-8?")
+            raise ParseException("README.md has invalid encoding, maybe the datapackage is not UTF-8?")
     pkg_info['readme'] = readme
     # process resource/datafiles list
     if not 'schema' in metadata['resources'][0]:
-        raise Exception("Schema missing in datapackage")
+        raise ParseException("Schema missing in datapackage")
     for r in metadata['resources']:
         r['basename'] = os.path.basename(r['path'])
         if not r.get('title'):
@@ -271,7 +279,7 @@ def generate(offline=False,
                     origin.fetch()
                 except git.exc.GitCommandError:
                     log.critical("%s: Fetch error, this dataset will be left out." % name)
-                    raise
+                    continue
                 # see if we have updates
                 if not local_and_remote_are_at_same_commit(repo, origin):
                     log.debug("%s: Repo has new commits, updating local copy." % name)
@@ -304,14 +312,23 @@ def generate(offline=False,
                 continue
             else:
                 log.info("%s: New repo, cloning." % name)
-                repo = git.Repo.clone_from(url, dir_name)
+                try:
+                    repo = git.Repo.clone_from(url, dir_name)
+                    # For faster checkouts, one file at a time:
+                    #repo = git.Repo.clone_from(url, dir_name, n=True, depth=1)
+                    #repo.git.checkout("HEAD", "datapackage.json")
+                except git.exc.GitCommandError as inst:
+                    log.warn("%s: skipping %s" % (inst, name))
+                    continue
                 updated = True
 
         # get datapackage metadata
         try:
             pkg_info = process_datapackage(name, repo_dir)
-        except Exception as inst:
+        except ParseException as inst:
             log.warn("%s: skipping %s" % (inst, name))
+            continue
+
         # set last updated time based on last commit, comes in Unix timestamp format so we convert
         import datetime
         d = repo.head.commit.committed_date

@@ -4,7 +4,7 @@ Wir haben hier verschiedene offene Datensätze für [Jugend hackt Schweiz](https
 
 Mentors: für zusätzliche Hilfe und Tips bitte bei @heidi / @odi / @loleg melden.
 
-Brauchst du auch Werkzeug?
+Brauchst du Werkzeug?
 
 - [R-Fiddle](http://www.r-fiddle.org)
 - [Repl.it](https://repl.it/languages)
