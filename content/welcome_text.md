@@ -1,4 +1,4 @@
-Wir haben hier verschiedene offene Datensätze für [Jugend hackt Schweiz](https://jugendhackt.org/events/ch/) vorbereitet. Einfach durchstrobern und die unterliegende [CSV](https://de.wikipedia.org/wiki/CSV_(Dateiformat)) / [JSON](https://de.wikipedia.org/wiki/JavaScript_Object_Notation) links verwenden.
+Hier sind verschiedene offene Datensätze bezuglich die Thema "Grenzen" für [Jugend hackt Schweiz](https://jugendhackt.org/events/ch/) vorbereitet. Einfach durchstrobern und die unterliegende [CSV](https://de.wikipedia.org/wiki/CSV_(Dateiformat)) / [JSON](https://de.wikipedia.org/wiki/JavaScript_Object_Notation) links verwenden.
 
 Brauchst du Werkzeug?
 
