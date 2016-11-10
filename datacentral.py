@@ -145,7 +145,7 @@ def create_dataset_page(pkg_info, output_dir):
 class ParseException(Exception):
     pass
 
-def process_datapackage(pkg_name, repo_dir):
+def process_datapackage(pkg_name, repo_dir, repo_url):
     '''Reads a data package and returns a dict with its metadata. The
     items in the dict are:
         - name
@@ -169,6 +169,7 @@ def process_datapackage(pkg_name, repo_dir):
 
     # get main attributes
     pkg_info['name'] = pkg_name
+    pkg_info['homepage'] = repo_url
     pkg_info['original_name'] = metadata['name']
     pkg_info['title'] = metadata['title']
     pkg_info['license'] = metadata.get('license')
@@ -324,7 +325,7 @@ def generate(offline=False,
 
         # get datapackage metadata
         try:
-            pkg_info = process_datapackage(name, repo_dir)
+            pkg_info = process_datapackage(name, repo_dir, url)
         except ParseException as inst:
             log.warn("%s: skipping %s" % (inst, name))
             continue
@@ -345,6 +346,7 @@ def generate(offline=False,
             datafiles = pkg_info['datafiles']
             zipf = zipfile.ZipFile(os.path.join(output_dir, name + '.zip'), 'w')
             for d in datafiles:
+                log.info("Copying %s" % d['path'])
                 # copy CSV file
                 target = os.path.join(output_dir, os.path.basename(d['path']))
                 shutil.copyfile(os.path.join(dir_name, d['path']), target)

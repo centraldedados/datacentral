@@ -1,8 +1,4 @@
-Hallo!
-
 Wir haben hier verschiedene offene Datensätze für [Jugend hackt Schweiz](https://jugendhackt.org/events/ch/) vorbereitet. Einfach durchstrobern und die unterliegende [CSV](https://de.wikipedia.org/wiki/CSV_(Dateiformat)) / [JSON](https://de.wikipedia.org/wiki/JavaScript_Object_Notation) links verwenden.
-
-Mentors: für zusätzliche Hilfe und Tips bitte bei @heidi / @odi / @loleg melden.
 
 Brauchst du Werkzeug?
 
@@ -13,6 +9,8 @@ Brauchst du Werkzeug?
 - [OKFN Labs](http://okfnlabs.org/projects/#priority=true)
 
 ---
+
+Für zusätzliche Hilfe und Tips bitte bei @heidi / @odi / @loleg melden.
 
 Viel Spass mit Daten!
 
