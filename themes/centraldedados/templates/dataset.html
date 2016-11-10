@@ -22,7 +22,14 @@
           <h4>Downloads</h4>
           {% for d in datapkg.datafiles %}
           <div class="datafile-box">
-            <p><strong>{{ d.title|upper }}</strong> &ndash; <a href="/{{ d.basename }}">CSV</a> &bull; <a href="/{{ d.basename.replace(".csv", ".json") }}">JSON</a></p>
+            <p><strong>{{ d.title|upper }}</strong> &ndash;
+              {% if d.basename.endswith('.csv') %}
+                <a href="/{{ d.basename }}" download>CSV</a> &bull;
+                <a href="/{{ d.basename.replace(".csv", ".json") }}" download>JSON</a>
+              {% else %}
+                <a href="/{{ d.basename }}" download>{{ d.basename }}</a> 
+              {% endif %}
+              </p>
             <div class="datafile-fieldlist">
               <h5>Fields</h5>
               <ul>
