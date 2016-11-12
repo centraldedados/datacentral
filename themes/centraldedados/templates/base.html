@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
+	
+	<!-- For nomad URL preview -->
+    <img src="/img/share-image.png" class="hide">
+
     <nav class="nav">
       <div>
         <ul>
@@ -24,10 +28,10 @@
     </nav>
     <header class="header">
       <div>
-        <a href="/">
-          <p><img src="/img/centraldedados.png" alt="Datacentral" /></p>
-          <h1>Central de Dados</h1>
-        </a>
+        <h1><a href="/">
+          <span id="logo"><img src="/img/centraldedados.png" alt="Datacentral"></span>
+          <span id="sitename">Central de Dados</span>
+        </a></h1>
       </div>
     </header>
     {% block content %}{% endblock %}
