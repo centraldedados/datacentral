@@ -177,7 +177,7 @@ def process_datapackage(pkg_name, repo_dir, repo_url):
         pkg_info['description'] = ""
     else:
         pkg_info['description'] = metadata['description']
-    pkg_info['sources'] = metadata.get('sources')
+    pkg_info['sources'] = metadata.get('sources') or []
     # process README
     readme = ""
     readme_path = os.path.join(pkg_dir, "README.md")
