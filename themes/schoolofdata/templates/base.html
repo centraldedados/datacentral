@@ -27,8 +27,10 @@
     </nav>
     <header class="header">
       <div>
-        <h1><a href="/">
-          <span id="logo"><img src="https://food.opendata.ch/wp-content/themes/food.opendata.ch/images/logo.png" alt="food.opendata.ch"></span></a>
+        <h1>
+          <a href="/" id="logo">
+            <img src="/img/scoda-horizontal-212x60-nontransparent.png" alt="School of Data">
+          </a>
           <span id="sitename">Datacentral</span>
         </h1>
       </div>
@@ -36,25 +38,20 @@
     {% block content %}{% endblock %}
     <footer class="footer row">
       <div>
-        <h5>Powered by
+        <p>
           <a rel="external" target="_blank" href="http://food.opendata.ch">
-            Open Food Hackdays
+            <img src="https://food.opendata.ch/wp-content/themes/food.opendata.ch/images/logo.png" alt="food.opendata.ch" style="height:100px">
           </a>
-        </h5>
+          <br><br>Supported by
+            <a rel="external" target="_blank" href="http://food.opendata.ch">
+              <strong>Open Food Hackdays</strong></a>
+        </p>
         <ul>
           <li>
-            Thanks to&nbsp;
+            Powered by&nbsp;
             <a rel="external" target="_blank" href="https://okfn.org">
               <img src="/img/okfn.png" alt="OKI">
               <strong>Open Knowledge International</strong>
-            </a>
-            <a rel="external" target="_blank" href="https://okfn.org/network/portugal/">
-              <img src="/img/okfn-pt.png" alt="Open Knowledge Portugal">
-              <strong>Open Knowledge Portugal</strong>
-            </a>
-            <a rel="external" target="_blank" href="http://jplusplus.org">
-              <img src="/img/jplusplus.png" alt="Journalism++">
-              <strong>Journalism++</strong>
             </a>
           </li>
         </ul>
@@ -63,21 +60,5 @@
     <script src="/js/jquery-3.0.0.min.js"></script>
     <script src="/js/underscore-min.js"></script>
     <script src="/js/search.js"></script>
-    <!-- Piwik -->
-    <script type="text/javascript">
-      var _paq = _paq || [];
-      _paq.push(["setCookieDomain", "*.centraldedados.pt"]);
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-        var u="//piwik.manufacturaindependente.org/";
-        _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', 2]);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-      })();
-    </script>
-    <noscript><p><img src="//piwik.manufacturaindependente.org/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
-    <!-- End Piwik Code -->
   </body>
 </html>
