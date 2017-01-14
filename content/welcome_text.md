@@ -6,10 +6,10 @@ Need tools? [Visit our wiki](https://github.com/schoolofdata-swiss/datacentral/w
 
 To contribute, please [leave a comment here](https://docs.google.com/spreadsheets/d/1W27W3vuD5mj1CDWbGJhjECabRbsqVzt_8EhPJV1l5b0/edit#gid=1386834576), or just [contact us](/contact/) - and take part in upcoming events:
 
-**Data Expedition**
+**[Data Expedition](https://schoolofdata-ch.github.io/2016/12/14/Food-Data-Expedition.html)**
 
-<small>January 14, 2017</small> <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=ajFhM2ZvMWVlYzZiMGx1NGtiOWhybzJyMmcgMG9ocXRtNWg0YjY1OHRrNmRrZTVoZDU3c2NAZw&amp;tmsrc=0ohqtm5h4b658tk6dke5hd57sc%40group.calendar.google.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en-GB.gif"></a>
+<small>January 14, 2017</small>
 
-**Open Food Hackdays**
+**[Open Food Hackdays](http://food.opendata.ch)**
 
-<small>February 18, 2017</small> <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=NjVnajZlOWc3NWhqYWI5bmM5ajZhYjlrNjhvM2liOXBjNHJqNGJiNjZoaGppb2hwNjhvM2dkMWljNCAwb2hxdG01aDRiNjU4dGs2ZGtlNWhkNTdzY0Bn&amp;tmsrc=0ohqtm5h4b658tk6dke5hd57sc%40group.calendar.google.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en-GB.gif"></a>
+<small>February 10-11, 2017</small> <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NjVnajZlOWc3NWhqYWI5bmM5ajZhYjlrNjhvM2liOXBjNHJqNGJiNjZoaGppb2hwNjhvM2dkMWljNCAwb2hxdG01aDRiNjU4dGs2ZGtlNWhkNTdzY0Bn&tmsrc=0ohqtm5h4b658tk6dke5hd57sc%40group.calendar.google.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en-GB.gif"></a>
