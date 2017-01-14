@@ -1,5 +1,9 @@
 We are collecting Data Packages here related to the topic of Food - from agriculture to nutrition.
 
+An initial list of suggestions is in a spreadsheet here:
+
+[![](http://icons.iconarchive.com/icons/carlosjj/google-jfk/128/spreadsheets-icon.png)](https://docs.google.com/spreadsheets/d/1W27W3vuD5mj1CDWbGJhjECabRbsqVzt_8EhPJV1l5b0/pubhtml) [[Contribute](https://goo.gl/forms/J5nHDCBvu3VGmonE3)] [[Edit](https://docs.google.com/spreadsheets/d/1W27W3vuD5mj1CDWbGJhjECabRbsqVzt_8EhPJV1l5b0/edit)]
+
 You can browse and download the corresponding [CSV](https://de.wikipedia.org/wiki/CSV_(Dateiformat)) and [JSON](https://de.wikipedia.org/wiki/JavaScript_Object_Notation) files, or use the [JSON API](http://127.0.0.1:8002/api.json).
 
 Need tools? [Visit our wiki](https://github.com/schoolofdata-swiss/datacentral/wiki).
