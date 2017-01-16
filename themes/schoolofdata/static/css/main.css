@@ -33,8 +33,14 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-ol, ul {
+ol {
+	margin: 1em 2em;
+}
+ul {
 	list-style: none;
+}
+.readme p {
+	margin-bottom: 1em;
 }
 blockquote, q {
 	quotes: none;
