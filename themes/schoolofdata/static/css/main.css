@@ -191,57 +191,20 @@ textarea {
 /* Typography
 */
 
-@font-face {
-    font-family: "Comme";
-    font-weight: 400;
-    font-style: normal;
-    src: local("Comme"), url("/fonts/CommeSans/Comme-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "Comme";
-    font-weight: 300;
-    font-style: normal;
-    src: local("Comme Thin"), url("/fonts/CommeSans/Comme-Thin.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "Comme";
-    font-weight: 700;
-    font-style: normal;
-    src: local("Comme Bold"), url("/fonts/CommeSans/Comme-Bold.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "Comme";
-    font-weight: 500;
-    font-style: normal;
-    src: local("Comme Medium"), url("/fonts/CommeSans/Comme-Medium.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "Comme Mono";
-    font-weight: 400;
-    font-style: normal;
-    src: local("Comme Mono"), url("/fonts/CommeSans/CommeMono-Regular.ttf") format("truetype");
-}
-
 body {
-    font-family: "Comme", DejaVu Sans, Arial, sans-serif;
+    font-family: DejaVu Sans, Arial, sans-serif;
     font-weight: 400;
     line-height: 1.4;
 }
 
 h1 {
     font-size: 2.25rem;
-    font-family: "Comme";
     font-weight: 300;
     margin-bottom: 0.5rem;
 }
 
 h2 {
     font-size: 1.85rem;
-    font-family: "Comme";
     font-weight: 300;
     color: #888;
     margin-top: 0.625rem;
@@ -250,7 +213,6 @@ h2 {
 
 h3 {
     font-size: 1.625rem;
-    font-family: "Comme";
     font-weight: 500;
     color: #888;
     margin-top: 0.625rem;
@@ -259,7 +221,6 @@ h3 {
 
 h4 {
     font-size: 1.375rem;
-    font-family: "Comme";
     font-weight: 500;
     color: #888;
     margin-top: 0.625rem;
@@ -268,7 +229,6 @@ h4 {
 
 h5 {
     font-size: 0.8rem;
-    font-family: "Comme";
     font-weight: 700;
     color: #aaa;
     text-transform: uppercase;
@@ -277,19 +237,17 @@ h5 {
 
 h6 {
     font-size: 0.7rem;
-    font-family: "Comme";
     font-weight: 500;
     text-transform: uppercase;
 }
 
 strong,
 .footer li a {
-    font-family: "Comme";
     font-weight: 700;
 }
 
 .datafiles > .box span {
-    font-family: "Comme Mono";
+    font-family: monospace;
 }
 
 .nav,
@@ -469,7 +427,6 @@ a:active {
     box-sizing: border-box;
     display: block;
     font-size: 1rem;
-    font-family: "Comme";
     font-weight: 400;
     width: 100%;
     border: 2px solid #ccc;
@@ -571,7 +528,6 @@ code {
 
 .readme h2.subtitle {
     font-size: 0.9rem;
-    font-family: "Comme";
     font-weight: 700;
     line-height: 1.3;
     color: #999;
@@ -584,7 +540,6 @@ code {
 
 .readme h2 {
     font-size: 1.25rem;
-    font-family: "Comme";
     font-weight: 300;
     text-transform: uppercase;
     margin-top: 1rem;
@@ -642,7 +597,6 @@ form p {
 
 form label {
     font-size: 0.875rem;
-    font-family: "Comme Regular", DejaVu Sans, Arial, sans-serif;
     display: block;
     width: 100%;
     margin-bottom: 1rem;
@@ -703,7 +657,6 @@ textarea:focus  {
 
 .button {
     font-size: 0.875rem;
-    font-family: "Comme", DejaVu Sans, Arial, sans-serif;
     font-weight: 500;
     line-height: 1;
     color: #2c373a;
