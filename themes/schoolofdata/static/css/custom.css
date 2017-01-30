@@ -1,0 +1,15 @@
+/* Modification for schoolofdata theme */
+
+.nav, .header, .row, body { background: white; }
+
+.header h1 #logo img {
+  height: 2.8em;
+	width: auto;
+  position: absolute;
+  top: 0px;
+  z-index: 0;
+}
+
+@media only screen and (max-width: 480px) {
+	.header h1 #logo img { display: none }
+}

@@ -25,7 +25,7 @@
 
 # your SSH target dir for rsync (set this in the environment)
 #SSH_PATH = "wf:~/webapps/centraldedados/"
-SSH_PATH = "linode1.datalets.ch:/opt/www-sodacamp/workshops/2017/foodopendata-dc"
+SSH_PATH = "food.schoolofdata.ch:/opt/www-sodacamp/workshops/2017/foodopendata-dc"
 # server port for local server
 SERVER_PORT = 8002
 MAIN_SCRIPT = $(wildcard datacentral.py)
