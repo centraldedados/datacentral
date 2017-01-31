@@ -195,6 +195,10 @@ def process_datapackage(pkg_name, repo_dir, repo_url):
     if not 'schema' in metadata['resources'][0]:
         raise ParseException("Schema missing in datapackage")
     for r in metadata['resources']:
+        if not r.get('path'):
+            log.warn("path missing in resource, skipping")
+            log.debug(r)
+            continue
         r['basename'] = os.path.basename(r['path'])
         if not r.get('title'):
             if r.get('name'):
