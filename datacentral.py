@@ -192,9 +192,10 @@ def process_datapackage(pkg_name, repo_dir, repo_url):
             raise ParseException("README.md has invalid encoding, maybe the datapackage is not UTF-8?")
     pkg_info['readme'] = readme
     # process resource/datafiles list
-    if not 'schema' in metadata['resources'][0]:
-        raise ParseException("Schema missing in datapackage")
     for r in metadata['resources']:
+        if not r.get('schema'):
+            log.warn("Schema missing in resource, adding blank")
+            r['schema'] = { 'fields': [] }
         if not r.get('path'):
             log.warn("path missing in resource, skipping")
             log.debug(r)
