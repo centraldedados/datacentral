@@ -1,11 +1,9 @@
 # About
 
-**Datacentral** is a lightweight platform to easily publish and distribute datasets. It uses the [Data Packages](http://frictionlessdata.io/data-packages/) specification as a common format to provide datasets. By collecting datasets on this portal, we hope to make it easier for developers to plug them into their projects. See the [Frictionless Data vision](http://frictionlessdata.io/about/) to understand why it is crucial to think about dataset packaging and distribution.
+**Datacentral** is a lightweight platform to easily publish and distribute datasets. It uses the [Data Packages](http://frictionlessdata.io/data-packages/) specification as a common format. By collecting datasets on this portal, we make it easier for developers to plug data into projects. See the [Frictionless Data vision](http://frictionlessdata.io/about/) for more background.
 
-There is a [validation tool](http://data.okfn.org/tools/validate) developed by Open Knowledge available. For example data packages, browse the [github.com/datasets](https://github.com/datasets) organisation.
+For example data packages, browse the [github.com/datasets](https://github.com/datasets) organisation.
 
-If you are a data publisher and use CKAN, install the [datapackager extension](https://github.com/ckan/ckanext-datapackager) to share your datasets in this format.
+There is an [online authoring](http://datapackagist.okfnlabs.org/) and [validation tool](http://data.okfn.org/tools/validate) for data packages developed by Open Knowledge. On CKAN portals, the [datapackager extension](https://github.com/ckan/ckanext-datapackager) allows exporting datasets as data packages.
 
-For more information and to submit issues to the team running this specific instance see [schoolofdata-swiss/datacentral](https://github.com/schoolofdata-swiss/datacentral/).
-
-The Datacentral platform was initially developed for the [Central de dados](http://centraldedados.pt/) project by [Open Knowledge Portugal](https://okfn.org/network/portugal/) and [Journalism++](http://jplusplus.org/).
+The Datacentral platform was initially developed for [Central de dados](http://centraldedados.pt/) project by [Open Knowledge Portugal](https://okfn.org/network/portugal/), [Journalism++](http://jplusplus.org/), and other open-source [contributors](https://github.com/centraldedados/datacentral/graphs/contributors).

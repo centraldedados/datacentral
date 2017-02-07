@@ -49,17 +49,23 @@ If it's not there, you can install it with:
    to set your options and point to your data package
    repositories.
 
-3. **Generate the HTML output**. Just run `make build`!
+3. **Add content**. The sidebar is a good place to tell your visitors
+   what this site is about in a few paragraphs. You can edit this in
+   `content/welcome_text.md`. There is also a dedicated About page you
+   can modify. Look and feel can be customised by editing the default
+   theme or adding your own to the `themes` folder and changing settings.
 
-4. **Push the static HTML output somewhere!**. The generated
+4. **Generate the HTML output**. Just run `make build`!
+
+5. **Push the static HTML output somewhere!**. The generated
    site is placed at the `_output` directory. Just copy the contents
    to your webserver, everything's included.
 
-5. **Run a web server to see the output**. While developing, you
+6. **Run a web server to see the output**. While developing, you
    can also run `make serve` to run a simple webserver, and then
    open the site by pointing your browser to `localhost:8002`.
 
-6. **Upload to a remote web server to publish.** Using *rsync*, your
+7. **Upload to a remote web server to publish.** Using *rsync*, your
    portal contents are compressed and uploaded to a remote server with a
    command like `SSH_PATH="my.server.org:/my/remote/path" make deploy`.
 
