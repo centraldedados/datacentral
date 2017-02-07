@@ -352,15 +352,24 @@ def generate(offline=False,
                         print("Not authorized %d at %s" % (rq.status_code, url))
                     else:
                         spec = rq.json()
+                        # create a data folder
                         data_folder = os.path.join(dir_name, 'data')
                         if not os.path.isdir(dir_name):
                             os.makedirs(data_folder)
+                        # download a copy of the datapackage
                         download_file(dir_name, url, 'datapackage.json')
                         for res in spec['resources']:
-                            if not 'url' in res: continue
+                            if 'path' in res:
+                                # paths override urls, for local mirrors
+                                basepath = "/".join(url.split('/')[:-1]) + '/'
+                                fn = download_file(data_folder, basepath + res['path'])
+                            elif 'url' in res:
+                                # download resource from url
+                                fn = download_file(data_folder, res['url'])
+                            else:
+                                continue
                             if 'title' in res:
-                                print('Downloading: %s' % res['title'])
-                            fn = download_file(data_folder, res['url'])
+                                print('Downloaded: %s - %s' % (res['title'], fn))
                         updated = True
                 else:
                     log.warn("Unsupported repository: %s" % url)
