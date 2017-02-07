@@ -28,10 +28,9 @@ import codecs
 import click
 import zipfile
 import glob
-import requests
 import time
 
-from utils import csv2json, download_file
+from utils import csv2json, download_file, fetch_data_package
 from zenlog import log
 
 CONFIG_FILE = "settings.conf"
@@ -286,8 +285,12 @@ def generate(offline=False,
         # do we have a local copy?
         if os.path.isdir(dir_name):
             if not os.path.isdir(os.path.join(dir_name, '.git')):
-                log.info('%s: Not a git repo, skipping update' % name)
-                continue
+                if url.endswith(".json"):
+                    log.info("%s: Data package, refreshing" % name)
+                    updated = fetch_data_package(url, dir_name)
+                else:
+                    log.info('%s: Unsupported repo, skipping update' % name)
+                    continue
 
             elif not offline:
                 repo = git.Repo(dir_name)
@@ -347,30 +350,7 @@ def generate(offline=False,
                 elif url.endswith(".json"):
                     # Handle Data Package URL
                     log.info("%s: New data package, fetching." % name)
-                    rq = requests.get(url)
-                    if (rq.status_code != 200):
-                        print("Not authorized %d at %s" % (rq.status_code, url))
-                    else:
-                        spec = rq.json()
-                        # create a data folder
-                        data_folder = os.path.join(dir_name, 'data')
-                        if not os.path.isdir(dir_name):
-                            os.makedirs(data_folder)
-                        # download a copy of the datapackage
-                        download_file(dir_name, url, 'datapackage.json')
-                        for res in spec['resources']:
-                            if 'path' in res:
-                                # paths override urls, for local mirrors
-                                basepath = "/".join(url.split('/')[:-1]) + '/'
-                                fn = download_file(data_folder, basepath + res['path'])
-                            elif 'url' in res:
-                                # download resource from url
-                                fn = download_file(data_folder, res['url'])
-                            else:
-                                continue
-                            if 'title' in res:
-                                print('Downloaded: %s - %s' % (res['title'], fn))
-                        updated = True
+                    updated = fetch_data_package(url, dir_name)
                 else:
                     log.warn("Unsupported repository: %s" % url)
 
