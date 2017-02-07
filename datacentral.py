@@ -28,7 +28,10 @@ import codecs
 import click
 import zipfile
 import glob
-from utils import csv2json
+import requests
+import time
+
+from utils import csv2json, download_file
 from zenlog import log
 
 CONFIG_FILE = "settings.conf"
@@ -173,6 +176,8 @@ def process_datapackage(pkg_name, repo_dir, repo_url):
     pkg_info['original_name'] = metadata['name']
     pkg_info['title'] = metadata['title']
     pkg_info['license'] = metadata.get('license')
+    if 'title' in pkg_info['license']:
+        pkg_info['license'] = pkg_info['license']['title']
     if not 'description' in metadata:
         pkg_info['description'] = ""
     else:
@@ -181,10 +186,16 @@ def process_datapackage(pkg_name, repo_dir, repo_url):
     # process README
     readme = ""
     readme_path = os.path.join(pkg_dir, "README.md")
-    pkg_info['readme_path'] = readme_path
     if not os.path.exists(readme_path):
-        log.warn("No README.md file found in the data package.")
+        readme_path = os.path.join(pkg_dir, "README.markdown")
+    if not os.path.exists(readme_path):
+        if len(pkg_info['description']) > 140:
+            readme = markdown.markdown(pkg_info['description'], output_format="html5", encoding="UTF-8")
+            pkg_info['description'] = ""
+        else:
+            log.warn("No README.md or description found in the data package.")
     else:
+        pkg_info['readme_path'] = readme_path
         contents = codecs.open(readme_path, 'r', 'utf-8').read()
         try:
             readme = markdown.markdown(contents, output_format="html5", encoding="UTF-8")
@@ -197,9 +208,7 @@ def process_datapackage(pkg_name, repo_dir, repo_url):
             log.warn("Schema missing in resource, adding blank")
             r['schema'] = { 'fields': [] }
         if not r.get('path'):
-            log.warn("path missing in resource, skipping")
-            log.debug(r)
-            continue
+            r['path'] = 'data/%s' % r['url'].split('/')[-1]
         r['basename'] = os.path.basename(r['path'])
         if not r.get('title'):
             if r.get('name'):
@@ -272,10 +281,15 @@ def generate(offline=False,
     for r in parser.items('repositories'):
         name, url = r
         dir_name = os.path.join(repo_dir, name)
+        repo = None
 
         # do we have a local copy?
         if os.path.isdir(dir_name):
-            if not offline:
+            if not os.path.isdir(os.path.join(dir_name, '.git')):
+                log.info('%s: Not a git repo, skipping update' % name)
+                continue
+
+            elif not offline:
                 repo = git.Repo(dir_name)
                 origin = repo.remotes.origin
                 try:
@@ -317,16 +331,39 @@ def generate(offline=False,
                 log.warn("%s: No local cache, skipping." % name)
                 continue
             else:
-                log.info("%s: New repo, cloning." % name)
-                try:
-                    repo = git.Repo.clone_from(url, dir_name)
-                    # For faster checkouts, one file at a time:
-                    #repo = git.Repo.clone_from(url, dir_name, n=True, depth=1)
-                    #repo.git.checkout("HEAD", "datapackage.json")
-                except git.exc.GitCommandError as inst:
-                    log.warn("%s: skipping %s" % (inst, name))
-                    continue
-                updated = True
+                if url.endswith(".git"):
+                    # Handle GIT Repository URL
+                    log.info("%s: New repo, cloning." % name)
+                    try:
+                        repo = git.Repo.clone_from(url, dir_name)
+                        # For faster checkouts, one file at a time:
+                        #repo = git.Repo.clone_from(url, dir_name, n=True, depth=1)
+                        #repo.git.checkout("HEAD", "datapackage.json")
+                    except git.exc.GitCommandError as inst:
+                        log.warn("%s: skipping %s" % (inst, name))
+                        continue
+                    updated = True
+
+                elif url.endswith(".json"):
+                    # Handle Data Package URL
+                    log.info("%s: New data package, fetching." % name)
+                    rq = requests.get(url)
+                    if (rq.status_code != 200):
+                        print("Not authorized %d at %s" % (rq.status_code, url))
+                    else:
+                        spec = rq.json()
+                        data_folder = os.path.join(dir_name, 'data')
+                        if not os.path.isdir(dir_name):
+                            os.makedirs(data_folder)
+                        download_file(dir_name, url, 'datapackage.json')
+                        for res in spec['resources']:
+                            if not 'url' in res: continue
+                            if 'title' in res:
+                                print('Downloading: %s' % res['title'])
+                            fn = download_file(data_folder, res['url'])
+                        updated = True
+                else:
+                    log.warn("Unsupported repository: %s" % url)
 
         # get datapackage metadata
         try:
@@ -337,7 +374,10 @@ def generate(offline=False,
 
         # set last updated time based on last commit, comes in Unix timestamp format so we convert
         import datetime
-        d = repo.head.commit.committed_date
+        if repo is not None:
+            d = repo.head.commit.committed_date
+        else:
+            d = int(time.mktime(time.localtime()))
         last_updated = datetime.datetime.fromtimestamp(int(d)).strftime('%Y-%m-%d %H:%M:%S')
         pkg_info['last_updated'] = last_updated
         # add it to the packages list for index page generation after the loop ends
@@ -352,17 +392,19 @@ def generate(offline=False,
             zipf = zipfile.ZipFile(os.path.join(output_dir, name + '.zip'), 'w')
             for d in datafiles:
                 log.info("Copying %s" % d['path'])
-                # copy CSV file
+                # copy file
                 target = os.path.join(output_dir, os.path.basename(d['path']))
                 shutil.copyfile(os.path.join(dir_name, d['path']), target)
-                # generate JSON version
-                csv2json(target, target.replace(".csv", ".json"))
+                # generate JSON version of CSV
+                if target.endswith('.csv'):
+                    csv2json(target, target.replace(".csv", ".json"))
                 # make zip file
                 zipf.write(os.path.join(dir_name, d['path']), d['basename'], compress_type=zipfile.ZIP_DEFLATED)
-            try:
-                zipf.write(pkg_info['readme_path'], 'README.md')
-            except OSError:
-                pass
+            if 'readme_path' in pkg_info:
+                try:
+                    zipf.write(pkg_info['readme_path'], 'README.md')
+                except OSError:
+                    pass
             zipf.close()
 
     # HTML index with the list of available packages

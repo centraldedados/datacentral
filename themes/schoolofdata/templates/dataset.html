@@ -13,23 +13,27 @@
 
       <div class="details">
         <h4>Details</h4>
+        {% if datapkg.version %}
         <p><strong>Version</strong> {{ datapkg.version }}</p>
+        {% endif %}
+        {% if datapkg.license %}
         <p><strong>License</strong> {{ datapkg.license }}</p>
-        <p><strong>Updated</strong> {{ datapkg.last_updated }}</p>
-        <p><a href="{{ datapkg.homepage }}">&raquo; GitHub</a></p>
+        {% endif %}
+        <p><a href="{{ datapkg.homepage }}">&raquo; Source</a></p>
         <hr>
         <div class="downloads">
           <h4>Downloads</h4>
           {% for d in datapkg.datafiles %}
           <div class="datafile-box">
             <p><strong>{{ d.title|upper }}</strong> &ndash;
-              {% if d.basename.endswith('.csv') %}
-                <a href="/{{ d.basename }}" download>CSV</a> &bull;
-                <a href="/{{ d.basename.replace(".csv", ".json") }}" download>JSON</a>
-              {% else %}
-                <a href="/{{ d.basename }}" download>{{ d.basename }}</a> 
-              {% endif %}
-              </p>
+            {% if d.basename.endswith('.csv') %}
+              <a href="/{{ d.basename }}" download>CSV</a> &bull;
+              <a href="/{{ d.basename.replace(".csv", ".json") }}" download>JSON</a>
+            {% else %}
+              <a href="/{{ d.basename }}" download>File</a>
+            {% endif %}
+            </p>
+            {% if d.schema.fields %}
             <div class="datafile-fieldlist">
               <h5>Fields</h5>
               <ul>
@@ -38,15 +42,23 @@
                 {% endfor %}
               </ul>
             </div>
+            {% endif %}
           </div>
           {% endfor %}
         </div>
         <hr>
         <div class="sources">
-          <h4>Sources</h4>
+          <h4>Data sources</h4>
           <ul>
             {% for s in datapkg.sources %}
-            <li><a href="{{ s.web }}">{{ s.name }}</a></li>
+              <li>
+                {% if s.web %}
+                <a href="{{ s.web }}">
+                  {{ s.name }}</a>
+                {% else %}
+                  {{ s.name }}
+                {% endif %}
+              </li>
             {% endfor %}
           </ul>
         </div>
@@ -56,9 +68,15 @@
         {% if datapkg.description %}
         <h2 class="subtitle">{{ datapkg.description }}</h2>
         {% endif %}
-        {{ datapkg.readme }}
+        <div class="readme-body">
+          {{ datapkg.readme }}
+        </div>
+        {% if datapkg.last_updated %}
+        <div class="last_updated">
+          <p><strong>Refreshed</strong> {{ datapkg.last_updated }}</p>
+        </div>
+        {% endif %}
       </div>
-
     </div>
   </div>
 </section>
