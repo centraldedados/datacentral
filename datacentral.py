@@ -176,7 +176,7 @@ def process_datapackage(pkg_name, repo_dir, repo_url):
     pkg_info['original_name'] = metadata['name']
     pkg_info['title'] = metadata['title']
     pkg_info['license'] = metadata.get('license')
-    if 'title' in pkg_info['license']:
+    if pkg_info['license'] and 'title' in pkg_info['license']:
         pkg_info['license'] = pkg_info['license']['title']
     if not 'description' in metadata:
         pkg_info['description'] = ""
