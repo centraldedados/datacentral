@@ -131,6 +131,7 @@ html {
 *::after {
   box-sizing: inherit; }
 
+
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
 html,
@@ -203,7 +204,6 @@ textarea {
     font-style: normal;
     src: local("Comme Thin"), url("/fonts/CommeSans/Comme-Thin.ttf") format("truetype");
 }
-
 
 @font-face {
     font-family: "Comme";
@@ -288,11 +288,6 @@ strong,
     font-weight: 700;
 }
 
-.header .description {	
-    font-family: "Comme";
-    font-weight: 500;
-}
-
 .datafiles > .box span {
     font-family: "Comme Mono";	
 }
@@ -323,6 +318,14 @@ a:focus,
 a:active {
     color: #c91313;
 }
+
+
+/* Helper classes
+*/
+
+.hide { display: none; }
+
+
 /* Layout
 */
 
@@ -386,7 +389,7 @@ a:active {
 
 .header a {
     display: block;
-    overflow: hidden;
+    width: 100%;
     color: #2c373a;
     padding: .5rem 0;
 }
@@ -396,13 +399,27 @@ a:active {
 }
 
 .header h1 {
-    font-size: 4rem;
     line-height: 1;
     margin: 0;
 }
 
-.header img {
-    max-width: 100%;
+.header h1 #sitename {
+    font-size: 6.5vw;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.header h1 #logo {
+    display: inline-block;
+    width: 20%;
+    margin-right: 2%;
+}
+
+.header h1 #logo img {
+    display: inline-block;
+    width: 80%;
+    height: auto;
+    vertical-align: bottom;
 }
 
 .row .description {
@@ -709,7 +726,28 @@ textarea:focus  {
    Media Queries
    ========================================================================== */
 
-@media only screen and (min-width: 400px) {
+
+@media only screen and (max-width: 480px) {
+
+        .header > div {
+            padding-bottom: 0;
+        }
+        .header h1 #logo { 
+            width: 15%;
+            margin-right: 1%;
+        }
+        .header h1 #logo img { 
+            width: 100%;
+        }
+        .header h1 #sitename { 
+            font-size: 8.5vw;
+        }
+        .row .description {
+            padding-top: 0;
+        }
+}
+
+@media only screen and (min-width: 480px) {
 
         .datafiles > ul {
                 margin: 0 0 1.25rem;
@@ -729,7 +767,7 @@ textarea:focus  {
                 margin: 0 auto;
         }
 
-        .header > div > a p {
+        /*.header > div > a p {
                 display: block;
                 float: left;
                 width: 20%;
@@ -738,7 +776,7 @@ textarea:focus  {
 
         .header h1 {
                 float: left;
-        }
+        }*/
 
         .nav > div {
                 width: 92%;
@@ -764,9 +802,8 @@ textarea:focus  {
                 margin: 0 auto;
         }
 
-        .header > div > a p {
-                display: block;
-                float: left;
+        /*.header > div > a img {
+                display: inline-block;
                 width: 20%;
                 margin-right: 2%;
         }
@@ -774,7 +811,7 @@ textarea:focus  {
         .header h1 {
                 float: left;
                 font-size: 6.5rem;
-        }
+        }*/
 
         .nav > div {
                 width: 86%;

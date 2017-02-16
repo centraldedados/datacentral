@@ -23,8 +23,9 @@
 # See https://github.com/jplusplus/resonate2014/blob/master/Makefile for
 # the basis from where this file was created.
 
-# your SSH target dir for rsync
-SSH_PATH = "wf:~/webapps/centraldedados/"
+# your SSH target dir for rsync (set this in the environment)
+#SSH_PATH = "wf:~/webapps/centraldedados/"
+
 # server port for local server
 SERVER_PORT = 8002
 MAIN_SCRIPT = $(wildcard datacentral.py)
@@ -54,4 +55,3 @@ clean:
 
 test:
 	. `pwd`/.env/bin/activate; nosetests tests.py
-
