@@ -22,8 +22,8 @@ sexy, but they're extremely useful for some purposes:
 We informally refer to this project as "the poor man's
 [CKAN](http://ckan.org)".
 
-Data Central even exposes a static JSON 'API', so that developers 
-have an easy access to the available datasets and their metadata 
+Data Central even exposes a static JSON 'API', so that developers
+have an easy access to the available datasets and their metadata
 on the portal.
 
 Installation and Usage
@@ -31,33 +31,43 @@ Installation and Usage
 
 1. **Install dependencies**. After cloning the repository, ensure that
    you have virtualenv installed with this command:
-	
+
 	$ pip show virtualenv
 
 If it's not there, you can install it with:
 
 	$ pip install --user virtualenv
 
-   Now, change 
-   to the project directory and run `make install`. This will 
-   create a local virtualenv and install the necessary 
-   dependencies; it shouldn't be necessary to create a virtualenv 
-   since the `make` commands are all set to work with the venv 
+   Now, change
+   to the project directory and run `make install`. This will
+   create a local virtualenv and install the necessary
+   dependencies; it shouldn't be necessary to create a virtualenv
+   since the `make` commands are all set to work with the venv
    that `make install` creates inside the Data Central dir.
 
 2. **Edit settings**. Edit the newly created `settings.conf`
-   to set your options and point to your data package 
+   to set your options and point to your data package
    repositories.
 
-3. **Generate the HTML output**. Just run `make build`!
+3. **Add content**. The sidebar is a good place to tell your visitors
+   what this site is about in a few paragraphs. You can edit this in
+   `content/welcome_text.md`. There is also a dedicated About page you
+   can modify. Look and feel can be customised by editing the default
+   theme or adding your own to the `themes` folder and changing settings.
 
-4. **Push the static HTML output somewhere!**. The generated
+4. **Generate the HTML output**. Just run `make build`!
+
+5. **Push the static HTML output somewhere!**. The generated
    site is placed at the `_output` directory. Just copy the contents
    to your webserver, everything's included.
 
-5. **Run a web server to see the output**. While developing, you
+6. **Run a web server to see the output**. While developing, you
    can also run `make serve` to run a simple webserver, and then
    open the site by pointing your browser to `localhost:8002`.
+
+7. **Upload to a remote web server to publish.** Using *rsync*, your
+   portal contents are compressed and uploaded to a remote server with a
+   command like `SSH_PATH="my.server.org:/my/remote/path" make deploy`.
 
 Running tests
 -------------
@@ -65,7 +75,7 @@ Running tests
 Datacentral uses Nose for testing. After installing it on your system or virtualenv, just run
 
     nosetests tests.py
-    
+
 
 TODO
 ----
