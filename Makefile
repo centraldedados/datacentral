@@ -30,6 +30,8 @@
 SERVER_PORT = 8002
 MAIN_SCRIPT = $(wildcard datacentral.py)
 OFFLINE_FLAG = "--offline"
+OUTPUT = "_output"
+
 
 all: build
 
@@ -42,16 +44,16 @@ build-offline:
 install:
 	virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\)
 	. `pwd`/.env/bin/activate; pip install -r requirements.txt
-	cp settings.conf.sample settings.conf
+	if [ ! -f settings.conf ]; then cp settings.conf.sample settings.conf; fi
 
 serve:
-	. `pwd`/.env/bin/activate; cd _output && livereload -p $(SERVER_PORT)
+	. `pwd`/.env/bin/activate; livereload -p $(SERVER_PORT) $(OUTPUT)
 
 deploy:
-	rsync --compress --progress --recursive --update --delete _output/ $(SSH_PATH)
+	rsync --checksum --compress --progress --recursive --delete $(OUTPUT)/ $(SSH_PATH)
 
 clean:
-	rm -fr repos _output
+	rm -fr repos $(OUTPUT)
 
 test:
 	. `pwd`/.env/bin/activate; nosetests tests.py
