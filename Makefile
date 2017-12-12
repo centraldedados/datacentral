@@ -52,6 +52,9 @@ serve:
 deploy:
 	rsync --checksum --compress --progress --recursive --delete $(OUTPUT)/ $(SSH_PATH)
 
+deploy-dry:
+	rsync --dry-run --checksum --compress --progress --recursive --delete $(OUTPUT)/ $(SSH_PATH)
+
 clean:
 	rm -fr repos $(OUTPUT)
 
