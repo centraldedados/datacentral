@@ -1,4 +1,4 @@
-GitPython==1.0.1
+GitPython==2.1.8
 Jinja2==2.7.2
 Markdown==2.4.1
 MarkupSafe==0.23
