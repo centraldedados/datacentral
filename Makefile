@@ -42,7 +42,7 @@ build-offline:
 	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT) $(OFFLINE_FLAG)
 
 install:
-	virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\)
+	if ! [ -x "$(pyvenv -h)" ]; then virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\); else pyvenv .env; fi
 	. `pwd`/.env/bin/activate; pip install -r requirements.txt
 	if [ ! -f settings.conf ]; then cp settings.conf.sample settings.conf; fi
 
