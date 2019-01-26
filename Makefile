@@ -36,10 +36,12 @@ OUTPUT = "_output"
 all: build
 
 build:
-	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT)
+	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi
+	python $(MAIN_SCRIPT)
 
 build-offline:
-	. `pwd`/.env/bin/activate; python $(MAIN_SCRIPT) $(OFFLINE_FLAG)
+	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi
+	python $(MAIN_SCRIPT) $(OFFLINE_FLAG)
 
 install:
 	if ! [ -x "$(pyvenv -h)" ]; then virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\); else pyvenv .env; fi
@@ -47,7 +49,8 @@ install:
 	if [ ! -f settings.conf ]; then cp settings.conf.sample settings.conf; fi
 
 serve:
-	. `pwd`/.env/bin/activate; livereload -p $(SERVER_PORT) $(OUTPUT)
+	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi
+	livereload -p $(SERVER_PORT) $(OUTPUT)
 
 deploy:
 	rsync --checksum --compress --progress --recursive --delete $(OUTPUT)/ $(SSH_PATH)
@@ -59,4 +62,5 @@ clean:
 	rm -fr repos $(OUTPUT)
 
 test:
-	. `pwd`/.env/bin/activate; nosetests tests.py
+	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi
+	nosetests tests.py
