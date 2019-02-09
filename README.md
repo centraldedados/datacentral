@@ -1,11 +1,11 @@
 Data Central
 ============
 
-This is a lightweight platform to easily publish and distribute datasets. It was created to be the base for [Central de Dados](http://centraldedados.pt), a repository of data packages related to Portugal. It also powers the [Open Food Hackdays portal](http://food.schoolofdata.ch/) by the [School of Data Switzerland](http://schoolofdata.ch/).
+This is a lightweight platform to easily publish and distribute datasets. It was created to be the base for [Central de Dados](http://centraldedados.pt), a repository of data packages related to Portugal. It also used for Data Expeditions and hackathons of [Opendata.ch](https://opendata.ch/).
 
-It uses Open Knowledge's excellent Data Packages specification as a
+It uses Open Knowledge's excellent [Data Package](http://frictionlessdata.io/specs/data-package/) specification as a
 common format to provide datasets. See the [Frictionless Data
-vision](http://data.okfn.org/vision) document to understand why it's
+vision](http://frictionlessdata.io) document to understand why it's
 crucial to think about dataset packaging and distribution.
 
 The main design principle when coming up with Data Central was
@@ -45,6 +45,10 @@ If it's not there, you can install it with:
    since the `make` commands are all set to work with the venv
    that `make install` creates inside the Data Central dir.
 
+(A) **Alternative installation**
+
+It is also possible to use the more modern [pipenv](https://pipenv.readthedocs.io/en/latest/) tool to create the environment instead of running `make install`. You will need to copy `settings.conf.sample` to `settings.conf` by hand.   
+
 2. **Edit settings**. Edit the newly created `settings.conf`
    to set your options and point to your data package
    repositories.
@@ -81,5 +85,5 @@ TODO
 ----
 
  * Set up an English language base theme for the HTML output
- * Use [Hyde](http://pypi.python.org/pypi/hyde/0.8.4) or
+ * Use [Hyde](http://pypi.python.org/pypi/hyde/) or
    [Pelican](http://getpelican.com) for a more solid static generator back-end
