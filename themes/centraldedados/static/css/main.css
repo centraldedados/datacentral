@@ -71,7 +71,7 @@ kbd,
 pre,
 samp {
   font-family: monospace, monospace;
-  font-size: 1rem; }
+  font-size: 1em; }
 
 button,
 input,
@@ -298,6 +298,17 @@ small {
     font-size: 0.75rem;
 }
 
+code,
+pre,
+kbd {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    font-weight: normal;
+    white-space: pre-wrap;
+    word-wrap: normal;
+    word-break: keep-all;
+    background-color: #e6e6e6;
+    padding: 0.125rem 0.3125rem 0.0625rem;
+}
 
 /* Colours
 */
@@ -433,6 +444,7 @@ a:active {
 
 .row .main {
     padding-top: 1rem;
+    margin-bottom: 2.5rem;
 }
 
 .description p,
@@ -500,11 +512,6 @@ a:active {
     padding-top: 1em;
 }
 
-code {
-    font-family: monospace;
-    border-bottom: 1px solid #bbb;
-}
-
 /* homepage dataset list
 */
 
@@ -552,6 +559,10 @@ code {
 
 .datafile-box {
     margin-top: 1rem;
+}
+
+.datafile-box + .datafile-box {
+    margin-top: 0.25rem;
 }
 
 .datafile-fieldlist ul {
