@@ -385,8 +385,8 @@ def generate(offline=False,
                 target = os.path.join(output_dir, os.path.basename(d['path']))
                 shutil.copyfile(os.path.join(dir_name, d['path']), target)
                 # generate JSON version of CSV
-                if target.endswith('.csv'):
-                    csv2json(target, target.replace(".csv", ".json"))
+                # if target.endswith('.csv'):
+                    # csv2json(target, target.replace(".csv", ".json"))
                 # make zip file
                 zipf.write(os.path.join(dir_name, d['path']), d['basename'], compress_type=zipfile.ZIP_DEFLATED)
             if 'readme_path' in pkg_info:
