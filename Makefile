@@ -36,12 +36,12 @@ OUTPUT = "_output"
 all: build
 
 build:
-	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi
-	python $(MAIN_SCRIPT)
+	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi; \
+	  python $(MAIN_SCRIPT)
 
 build-offline:
-	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi
-	python $(MAIN_SCRIPT) $(OFFLINE_FLAG)
+	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi; \
+	  python $(MAIN_SCRIPT) $(OFFLINE_FLAG)
 
 install:
 	if ! [ -x "$(pyvenv -h)" ]; then virtualenv .env --no-site-packages --distribute --prompt=\(datacentral\); else pyvenv .env; fi
@@ -49,7 +49,7 @@ install:
 	if [ ! -f settings.conf ]; then cp settings.conf.sample settings.conf; fi
 
 serve:
-	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi
+	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi; \
 	livereload -p $(SERVER_PORT) $(OUTPUT)
 
 deploy:
@@ -62,5 +62,5 @@ clean:
 	rm -fr repos $(OUTPUT)
 
 test:
-	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi
+	if [ -d .env ]; then . `pwd`/.env/bin/activate; fi; \
 	nosetests tests.py
